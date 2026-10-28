@@ -1,0 +1,61 @@
+name: Website
+
+# Mirrors the original website without Pricing, "Launch App" and community links, adds German,
+# and publishes it together with the launcher feed (release_info.json) on the gh-pages branch,
+# which GitHub Pages serves at https://labtoso.github.io/Artcraft/.
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: "41 3 * * *"
+  push:
+    branches: [main]
+    paths: ["tools/site.py", "site/**", ".github/workflows/site.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+env:
+  UPSTREAM: storytold
+  ARTCRAFT_REPO: ${{ github.repository }}
+  ARTCRAFT_SITE: https://labtoso.github.io/Artcraft
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install beautifulsoup4==4.12.3
+      - name: Mirror and debrand
+        run: python3 tools/site.py --out _site
+      - name: Keep new German texts
+        run: |
+          git config user.name "Labtoso"
+          git config user.email "235880825+Labtoso@users.noreply.github.com"
+          git add site/i18n/de.auto.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Website: German for new texts"
+            git pull --rebase origin main && git push origin HEAD:main
+          fi
+      - name: Publish to gh-pages
+        run: |
+          git fetch origin gh-pages || true
+          git worktree add -B gh-pages _pages origin/gh-pages 2>/dev/null || git worktree add --orphan -b gh-pages _pages
+          find _pages -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a _site/. _pages/
+          cd _pages
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m "Website update $(date -u +%Y-%m-%d)"
+            git push origin gh-pages
+          fi
