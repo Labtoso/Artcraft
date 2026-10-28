@@ -34,6 +34,18 @@ def reset(src):
     run(["git", "clean", "-fdq"], src)
 
 
+def links_only(src, app, out, why) -> int:
+    """Last resort: ship the app with only its links rewritten (it compiles like the original)."""
+    print(f"::warning title={app}::{why}; building with links rewritten only", flush=True)
+    reset(src)
+    run([sys.executable, "-I", os.path.join(HERE, "debrand.py"), src, "--app", app, "--links-only"], ROOT)
+    diff = run(["git", "diff", "--binary"], src, capture=True).stdout
+    for name in (f"{app}.patch", f"{app}.safe.patch"):
+        with open(os.path.join(out, name), "w", encoding="utf-8", newline="") as fh:
+            fh.write(diff)
+    return 0
+
+
 def main() -> int:
     src, app = os.path.abspath(sys.argv[1]), sys.argv[2]
     out = os.path.join(ROOT, "build")
@@ -68,13 +80,23 @@ def main() -> int:
         broken = sorted({os.path.normpath(p) for p in re.findall(r"-->\s+([^\s:]+\.rs):\d+:\d+", res.stderr)} - set(keep))
         broken = [b for b in broken if not os.path.isabs(b) and not b.startswith("..")]
         if not broken:
-            sys.exit(f"{app}: cargo check fails for a reason the debranding can't step back from")
+            return links_only(src, app, out, f"cargo check fails for a reason the debranding can't step back from")
         print(f"{app}: attempt {attempt} broke {broken}; keeping their code, links only", flush=True)
         keep += broken
     else:
-        sys.exit(f"{app}: still not compiling after keeping {keep}")
+        return links_only(src, app, out, f"still not compiling after keeping {keep}")
 
     diff = run(["git", "diff", "--binary"], src, capture=True).stdout
+    if steps is None:
+        # fallback for the build jobs: the same app with only its links rewritten
+        reset(src)
+        run([sys.executable, "-I", os.path.join(HERE, "debrand.py"), src, "--app", app, "--links-only"], ROOT)
+        safe = run(["git", "diff", "--binary"], src, capture=True).stdout
+        with open(os.path.join(out, f"{app}.safe.patch"), "w", encoding="utf-8", newline="") as fh:
+            fh.write(safe)
+    else:
+        with open(os.path.join(out, f"{app}.safe.patch"), "w", encoding="utf-8", newline="") as fh:
+            fh.write(diff)
     with open(os.path.join(out, f"{app}.patch"), "w", encoding="utf-8", newline="") as fh:
         fh.write(diff)
     if os.path.exists(report_path):

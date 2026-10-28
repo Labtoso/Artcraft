@@ -12,6 +12,10 @@ on:
         description: "Rebuild anyway: all, or app ids separated by commas (e.g. wordcraft,gridcraft)"
         type: string
         default: ""
+      retry:
+        description: "Set by the pipeline itself when it retries a failed run"
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths: ["tools/**", "apps/*/debrand.toml", ".github/workflows/update.yml"]
@@ -88,6 +92,7 @@ jobs:
           name: patch-${{ matrix.app.id }}
           path: |
             _artcraft/build/${{ matrix.app.id }}.patch
+            _artcraft/build/${{ matrix.app.id }}.safe.patch
             _artcraft/build/${{ matrix.app.id }}.report.json
 
   build:
@@ -121,7 +126,7 @@ jobs:
         shell: bash
         run: |
           if [ -s "_patch/${{ matrix.app.id }}.patch" ]; then git apply --whitespace=nowarn "_patch/${{ matrix.app.id }}.patch"; fi
-          rm -rf _patch
+          mv _patch "$RUNNER_TEMP/patch"
       - name: Check out craft-fonts
         if: matrix.app.fonts_ref != ''
         uses: actions/checkout@v4
@@ -143,7 +148,9 @@ jobs:
         if: matrix.os.name == 'windows'
         uses: storytold/craft-common-actions/actions/install-wix@main
       - name: Build and package (Windows)
+        id: win
         if: matrix.os.name == 'windows'
+        continue-on-error: true
         shell: bash
         env:
           CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
@@ -151,18 +158,40 @@ jobs:
           pwsh -NoProfile -File packaging/windows/package.ps1 -Arch x64 2>&1 | tee build.log
           exit ${PIPESTATUS[0]}
       - name: Build and package (Linux)
+        id: lin
         if: matrix.os.name == 'linux'
+        continue-on-error: true
         env:
           CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
         run: |
           bash packaging/linux/package.sh 2>&1 | tee build.log
           exit ${PIPESTATUS[0]}
+      # Self-repair: when the debranded build fails, build again with only the links rewritten
+      # (buttons stay, but every link points here), so a new version still ships.
+      - name: Fallback build with links only
+        if: steps.win.outcome == 'failure' || steps.lin.outcome == 'failure'
+        shell: bash
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
+        run: |
+          echo "::warning title=Fallback::debranded build failed, building with links rewritten only"
+          cp build.log build-first.log 2>/dev/null || true
+          git checkout -- .
+          rm -rf dist/release
+          if [ -s "$RUNNER_TEMP/patch/${{ matrix.app.id }}.safe.patch" ]; then git apply --whitespace=nowarn "$RUNNER_TEMP/patch/${{ matrix.app.id }}.safe.patch"; fi
+          if [ "${{ matrix.os.name }}" = windows ]; then
+            pwsh -NoProfile -File packaging/windows/package.ps1 -Arch x64 2>&1 | tee build.log
+          else
+            bash packaging/linux/package.sh 2>&1 | tee build.log
+          fi
+          exit ${PIPESTATUS[0]}
       - name: Show the end of the build log
-        if: failure()
+        if: failure() || steps.win.outcome == 'failure' || steps.lin.outcome == 'failure'
         shell: bash
         run: |
-          [ -f build.log ] || exit 0
-          msg=$(tail -n 60 build.log | sed -e 's/%/%25/g' -e 's/\r//g' | awk '{printf "%s%%0A", $0}')
+          log=build-first.log; [ -f "$log" ] || log=build.log
+          [ -f "$log" ] || exit 0
+          msg=$(tail -n 60 "$log" | sed -e 's/%/%25/g' -e 's/\r//g' | awk '{printf "%s%%0A", $0}')
           echo "::error title=Build log (last 60 lines)::$msg"
       - name: Collect
         shell: bash
@@ -254,9 +283,22 @@ jobs:
 
   # Anything red in this run (discovery, a build, publishing) opens one issue assigned to
   # Labtoso, so GitHub sends a notification by mail and in the app.
+  # Self-repair: a failed run starts one fresh run right away (runners and downloads fail now and
+  # then); only when that one fails too, an issue is opened.
+  retry:
+    needs: [discover, prepare, build, publish]
+    if: failure() && inputs.retry != true
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run update.yml --repo "${{ github.repository }}" --ref main -f retry=true
+
   notify:
     needs: [discover, prepare, build, publish, keepalive]
-    if: failure()
+    if: failure() && inputs.retry == true
     runs-on: ubuntu-latest
     steps:
       - env:

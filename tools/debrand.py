@@ -510,6 +510,7 @@ def main() -> int:
     ap.add_argument("--rules")
     ap.add_argument("--keep", action="append", default=[], help="file (relative to src) that gets no removals")
     ap.add_argument("--report")
+    ap.add_argument("--links-only", action="store_true", help="no removals at all, only link rewrites (fallback build)")
     args = ap.parse_args()
 
     rules = load_rules(args.rules)
@@ -517,7 +518,7 @@ def main() -> int:
     report = {"app": args.app, "files": {}, "replace_missed": [], "leftovers": []}
 
     # exact per-app replacements come first, while the code still looks like upstream
-    for rule in rules.get("replace", []):
+    for rule in ([] if args.links_only else rules.get("replace", [])):
         path = os.path.join(args.src, rule["file"])
         if not os.path.exists(path):
             report["replace_missed"].append(rule)
@@ -544,7 +545,7 @@ def main() -> int:
             original = fh.read()
         text = original
         cuts = []
-        if rel not in keep:
+        if rel not in keep and not args.links_only:
             for needle in drops.get(rel, []):
                 text, ok = drop_statement(text, needle)
                 if ok:
