@@ -1,0 +1,41 @@
+name: Website check
+
+# Screenshots of the original website next to the mirror, to check that both look alike.
+# The pictures land in the draft release "site-check" (not public).
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: [Website]
+    types: [completed]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-check
+  cancel-in-progress: true
+
+jobs:
+  shots:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-save playwright@1.56.1 && npx playwright install --with-deps chromium
+      - name: Screenshots
+        env:
+          ARTCRAFT_SITE: https://labtoso.github.io/Artcraft
+        run: |
+          sleep 60  # give Pages a minute to serve the newest version
+          node tools/compare.js compare
+      - name: Upload
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd compare && zip -q ../site-check.zip *.png && cd ..
+          gh release view site-check >/dev/null 2>&1 || gh release create site-check --draft --title "Website check" --notes "Screenshots: original vs. mirror."
+          gh release upload site-check site-check.zip --clobber
