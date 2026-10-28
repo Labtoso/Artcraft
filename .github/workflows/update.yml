@@ -40,7 +40,10 @@ jobs:
       matrix: ${{ steps.d.outputs.matrix }}
       any: ${{ steps.d.outputs.any }}
     steps:
+      # the newest main: a queued run must see what the run before it published (state/)
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - id: d
         env:
           GITHUB_TOKEN: ${{ github.token }}
