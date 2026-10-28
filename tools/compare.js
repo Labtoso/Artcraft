@@ -29,6 +29,10 @@ const SIZES = [{ name: 'desktop', width: 1440, height: 900 }, { name: 'mobile', 
           });
           await page.waitForTimeout(1500);
           await page.screenshot({ path: file, fullPage: true });
+          if (label === 'original' && size.name === 'desktop') {
+            // the page as the original's scripts left it, to rebuild what they draw
+            fs.writeFileSync(file.replace(/\.png$/, '.html'), await page.content());
+          }
           const h = await page.evaluate(() => document.body.scrollHeight);
           console.log(`${size.name} ${label} ${p} height=${h}`);
         } catch (e) {
