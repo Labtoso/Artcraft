@@ -249,8 +249,7 @@ class Mirror:
                 if href.startswith("#"):
                     continue
                 if re.search(r"\.\w{2,5}$", p.path) and not p.path.endswith(".html"):
-                    self.save_asset(p.path)
-                    a["href"] = self.local(p.path)
+                    a["href"] = self.local(p.path) if self.save_asset(p.path) else absu
                 else:
                     a["href"] = self.local(self.norm_page(p.path)) + (("#" + p.fragment) if p.fragment else "")
                 continue
