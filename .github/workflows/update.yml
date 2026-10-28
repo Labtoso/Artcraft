@@ -219,7 +219,7 @@ jobs:
           $(sed 's/^/- /' build/failed.txt)
 
           Log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
-          gh issue create --title "Build failed: $(paste -sd, build/failed.txt)" --body "$body" || true
+          gh issue create --assignee Labtoso --title "Build failed: $(paste -sd, build/failed.txt)" --body "$body" || gh issue create --title "Build failed: $(paste -sd, build/failed.txt)" --body "$body" || true
 
   # GitHub pauses scheduled workflows in repos without activity for 60 days; a tiny commit
   # every 40 quiet days keeps the schedule alive.
@@ -234,11 +234,30 @@ jobs:
           if [ $(( $(date +%s) - last )) -gt $(( 40 * 86400 )) ]; then
             git config user.name "Labtoso"
             git config user.email "235880825+Labtoso@users.noreply.github.com"
+            mkdir -p state
             date -u +%Y-%m-%dT%H:%M:%SZ > state/last-check.txt
             git add state/last-check.txt
             git commit -m "Keep the update schedule active"
             git push
           fi
+
+  # Anything red in this run (discovery, a build, publishing) opens one issue assigned to
+  # Labtoso, so GitHub sends a notification by mail and in the app.
+  notify:
+    needs: [discover, prepare, build, publish, keepalive]
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Update run failed $(date -u +%Y-%m-%d)"
+          body="Something in the automatic update did not work. The previous versions stay online; the next run (every 6 hours) tries again.
+
+          Run: $RUN"
+          gh issue create --assignee Labtoso --title "$title" --body "$body" || gh issue create --title "$title" --body "$body"
 
   site:
     needs: [publish]
@@ -246,3 +265,4 @@ jobs:
     uses: ./.github/workflows/site.yml
     permissions:
       contents: write
+      issues: write

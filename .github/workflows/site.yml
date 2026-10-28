@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: pages
@@ -59,3 +60,19 @@ jobs:
             git commit -m "Website update $(date -u +%Y-%m-%d)"
             git push origin gh-pages
           fi
+
+  notify:
+    needs: build
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          title="Website update failed $(date -u +%Y-%m-%d)"
+          body="The website mirror could not be updated. The last published version stays online; it is retried daily.
+
+          Run: $RUN"
+          gh issue create --assignee Labtoso --title "$title" --body "$body" || gh issue create --title "$title" --body "$body"
