@@ -191,6 +191,8 @@ class Mirror:
         if mapped:
             return mapped
         app_id = repo.lower()
+        if rest.startswith("/releases"):
+            return f"{REPO_URL}/releases/tag/suite"
         if rest.startswith("/issues"):
             return f"{REPO_URL}/issues"
         if app_id in self.state and app_id != "artcraft-launcher":
@@ -291,6 +293,10 @@ class Mirror:
         for st in soup.find_all("style"):
             if st.string:
                 st.string = self.fix_css(st.string, path)
+
+        # page descriptions that still mention Discord
+        for m in soup.find_all("meta", content=re.compile("discord", re.I)):
+            m["content"] = re.sub(r",?\s*(join )?(our )?discord( community)?,?", "", m["content"], flags=re.I).replace(" , ", ", ").replace(",  or", " or")
 
         # text that still sends people to Discord
         for t in list(soup.find_all(string=re.compile(r"discord|\(\d{3}\)\s*\d{3}-\d{4}", re.I))):
