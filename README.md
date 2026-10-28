@@ -26,20 +26,20 @@ In den Original-Apps sind an vielen Stellen Buttons und Links zu Discord und soz
 <!-- apps:start -->
 | App | Wofür | Version | Quelle |
 |---|---|---|---|
-| [ArtCraft Launcher](apps/artcraft-launcher/README.md) | Installiert, aktualisiert und startet alle Craft-Apps | kommt | [Original](https://github.com/storytold/craft-launcher) |
-| [CADCraft](apps/cadcraft/README.md) | CAD und technisches Zeichnen | kommt | [Original](https://github.com/storytold/cadcraft) |
-| [DeckCraft](apps/deckcraft/README.md) | Präsentationen | kommt | [Original](https://github.com/storytold/deckcraft) |
-| [DesignCraft](apps/designcraft/README.md) | Seitenlayout und Publishing | kommt | [Original](https://github.com/storytold/designcraft) |
-| [EffectCraft](apps/effectcraft/README.md) | Motion Graphics und VFX | kommt | [Original](https://github.com/storytold/effectcraft) |
-| [FigCraft](apps/figcraft/README.md) | Interface-Design | kommt | [Original](https://github.com/storytold/figcraft) |
-| [FilmCraft](apps/filmcraft/README.md) | Videoschnitt | kommt | [Original](https://github.com/storytold/filmcraft) |
-| [GridCraft](apps/gridcraft/README.md) | Tabellenkalkulation | kommt | [Original](https://github.com/storytold/gridcraft) |
-| [LightCraft](apps/lightcraft/README.md) | Fotobibliothek und RAW-Entwickler | kommt | [Original](https://github.com/storytold/lightcraft) |
-| [PdfCraft](apps/pdfcraft/README.md) | PDF-Werkbank | kommt | [Original](https://github.com/storytold/pdfcraft) |
-| [PhotoCraft](apps/photocraft/README.md) | Bildbearbeitung | kommt | [Original](https://github.com/storytold/photocraft) |
-| [SoundCraft](apps/soundcraft/README.md) | Digitale Audio-Workstation | kommt | [Original](https://github.com/storytold/soundcraft) |
-| [VectorCraft](apps/vectorcraft/README.md) | Vektorillustration | kommt | [Original](https://github.com/storytold/vectorcraft) |
-| [WordCraft](apps/wordcraft/README.md) | Textverarbeitung | kommt | [Original](https://github.com/storytold/wordcraft) |
+| [ArtCraft Launcher](apps/artcraft-launcher/README.md) | Installiert, aktualisiert und startet alle Craft-Apps | [0.9.0](https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.9.0) | [Original](https://github.com/storytold/craft-launcher) |
+| [CADCraft](apps/cadcraft/README.md) | CAD und technisches Zeichnen | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/cadcraft-v0.14.0) | [Original](https://github.com/storytold/cadcraft) |
+| [DeckCraft](apps/deckcraft/README.md) | Präsentationen | [0.12.0](https://github.com/Labtoso/Artcraft/releases/tag/deckcraft-v0.12.0) | [Original](https://github.com/storytold/deckcraft) |
+| [DesignCraft](apps/designcraft/README.md) | Seitenlayout und Publishing | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/designcraft-v0.14.0) | [Original](https://github.com/storytold/designcraft) |
+| [EffectCraft](apps/effectcraft/README.md) | Motion Graphics und VFX | [0.18.0](https://github.com/Labtoso/Artcraft/releases/tag/effectcraft-v0.18.0) | [Original](https://github.com/storytold/effectcraft) |
+| [FigCraft](apps/figcraft/README.md) | Interface-Design | [0.12.1](https://github.com/Labtoso/Artcraft/releases/tag/figcraft-v0.12.1) | [Original](https://github.com/storytold/figcraft) |
+| [FilmCraft](apps/filmcraft/README.md) | Videoschnitt | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/filmcraft-v0.14.0) | [Original](https://github.com/storytold/filmcraft) |
+| [GridCraft](apps/gridcraft/README.md) | Tabellenkalkulation | [0.13.0](https://github.com/Labtoso/Artcraft/releases/tag/gridcraft-v0.13.0) | [Original](https://github.com/storytold/gridcraft) |
+| [LightCraft](apps/lightcraft/README.md) | Fotobibliothek und RAW-Entwickler | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/lightcraft-v0.15.0) | [Original](https://github.com/storytold/lightcraft) |
+| [PdfCraft](apps/pdfcraft/README.md) | PDF-Werkbank | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/pdfcraft-v0.15.0) | [Original](https://github.com/storytold/pdfcraft) |
+| [PhotoCraft](apps/photocraft/README.md) | Bildbearbeitung | [0.17.0](https://github.com/Labtoso/Artcraft/releases/tag/photocraft-v0.17.0) | [Original](https://github.com/storytold/photocraft) |
+| [SoundCraft](apps/soundcraft/README.md) | Digitale Audio-Workstation | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/soundcraft-v0.14.0) | [Original](https://github.com/storytold/soundcraft) |
+| [VectorCraft](apps/vectorcraft/README.md) | Vektorillustration | [0.18.0](https://github.com/Labtoso/Artcraft/releases/tag/vectorcraft-v0.18.0) | [Original](https://github.com/storytold/vectorcraft) |
+| [WordCraft](apps/wordcraft/README.md) | Textverarbeitung | [0.12.0](https://github.com/Labtoso/Artcraft/releases/tag/wordcraft-v0.12.0) | [Original](https://github.com/storytold/wordcraft) |
 <!-- apps:end -->
 
 Jede App hat einen eigenen Ordner unter [`apps/`](apps/) mit Beschreibung, aktueller Version, Downloads und eventuellen Zusatzregeln.
