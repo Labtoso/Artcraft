@@ -154,6 +154,7 @@ def main() -> int:
             "notes": app_notes(app, upstream_url),
             "assets": assets,
         }
+        os.makedirs(os.path.dirname(STATE), exist_ok=True)
         with open(STATE, "w", encoding="utf-8") as fh:
             json.dump(state, fh, indent=2, ensure_ascii=False)
             fh.write("\n")
