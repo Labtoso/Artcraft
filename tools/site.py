@@ -524,23 +524,53 @@ KEEP_ENGLISH = re.compile(r"^(ArtCraft|[A-Z][a-z]+Craft|CADCraft|PdfCraft|macOS|
 GTX_ERRORS = []
 
 
-def gtx(text: str) -> str | None:
-    """One request to the free Google endpoint; None when it doesn't answer quickly.
-    POST keeps long batches out of the URL."""
+def _gtx_single(text: str) -> str:
     body = urllib.parse.urlencode({"q": text}).encode("utf-8")
-    try:
-        req = urllib.request.Request(
-            "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=de&dt=t",
-            data=body, headers={"User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"})
-        with urllib.request.urlopen(req, timeout=20) as r:
-            data = json.loads(r.read().decode("utf-8"))
-        return "".join(part[0] for part in data[0] if part and part[0])
-    except Exception as e:
-        if len(GTX_ERRORS) < 3:
-            GTX_ERRORS.append(repr(e))
-            print(f"translation request failed: {e!r}", flush=True)
-        time.sleep(2)
-        return None
+    req = urllib.request.Request(
+        "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=de&dt=t",
+        data=body, headers={"User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        data = json.loads(r.read().decode("utf-8"))
+    return "".join(part[0] for part in data[0] if part and part[0])
+
+
+def _gtx_chrome(text: str) -> str:
+    body = urllib.parse.urlencode({"q": text}).encode("utf-8")
+    req = urllib.request.Request(
+        "https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl=en&tl=de",
+        data=body, headers={"User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"})
+    with urllib.request.urlopen(req, timeout=20) as r:
+        data = json.loads(r.read().decode("utf-8"))
+    first = data[0] if isinstance(data, list) else data
+    if isinstance(first, list):
+        first = first[0]
+    if isinstance(first, dict):
+        first = first.get("trans") or ""
+    return str(first)
+
+
+GTX_ERRORS = []
+GTX_WAIT = [0.0]
+
+
+def gtx(text: str) -> str | None:
+    """Free Google endpoints, one after the other; None when none answers.
+    A 429 (too many requests) makes the next calls wait longer."""
+    for fn in (_gtx_single, _gtx_chrome):
+        if GTX_WAIT[0]:
+            time.sleep(GTX_WAIT[0])
+        try:
+            out = fn(text)
+            if out:
+                GTX_WAIT[0] = max(0.3, GTX_WAIT[0] / 2)
+                return out
+        except Exception as e:
+            if getattr(e, "code", None) == 429:
+                GTX_WAIT[0] = min(30.0, max(2.0, GTX_WAIT[0] * 2))
+            if len(GTX_ERRORS) < 4:
+                GTX_ERRORS.append(repr(e))
+                print(f"translation request failed ({fn.__name__}): {e!r}", flush=True)
+    return None
 
 
 def translate_missing(missing: list[str]) -> dict:
@@ -556,7 +586,7 @@ def translate_missing(missing: list[str]) -> dict:
     fails = done = 0
     i = 0
     per = 40
-    while i < len(todo) and time.time() < deadline and fails < 5:
+    while i < len(todo) and time.time() < deadline and fails < 8:
         batch, size = [], 0
         while i < len(todo) and size + len(todo[i]) < 3000 and len(batch) < per:
             batch.append(todo[i])
