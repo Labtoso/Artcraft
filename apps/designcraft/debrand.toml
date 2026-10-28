@@ -1,0 +1,4 @@
+# Start screen: the whole "Join the ArtCraft community" card was about Discord.
+[[drop]]
+file = "crates/ui-egui/src/chrome/start_screen.rs"
+at = "community_card(app, ui);"

@@ -1,0 +1,5 @@
+# Discord was the first community link and drawn as the big pill; the rest keep their own labels.
+[[replace]]
+file = "crates/ui-egui/src/widgets.rs"
+find = 'let resp = if i == 0 { icon_pill(ui, l.icon, tl!("Join our Discord"), true) } else { icon_pill(ui, l.icon, tl!(l.label), false) };'
+with = 'let resp = icon_pill(ui, l.icon, tl!(l.label), false);'
