@@ -1,8 +1,9 @@
 name: Website
 
-# Mirrors the original website without Pricing, "Launch App" and community links, adds German,
-# and publishes it together with the launcher feed (release_info.json) on the gh-pages branch,
-# which GitHub Pages serves at https://labtoso.github.io/Artcraft/.
+# Copies the original website with all its scripts (animations, 3D, menus), debrands it
+# (tools/site_runtime.js), adds German and publishes it together with the launcher feed
+# (release_info.json) on the gh-pages branch, which GitHub Pages serves at
+# https://labtoso.github.io/Artcraft/.
 
 on:
   workflow_call:
@@ -11,7 +12,7 @@ on:
     - cron: "41 3 * * *"
   push:
     branches: [main]
-    paths: ["tools/site.py", "site/**", ".github/workflows/site.yml"]
+    paths: ["tools/site.py", "tools/site_runtime.js", "tools/capture.js", "tools/collect.js", "site/**", ".github/workflows/site.yml"]
 
 permissions:
   contents: write
@@ -28,8 +29,8 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
-    timeout-minutes: 45
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -37,10 +38,22 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install beautifulsoup4==4.12.3
-      - name: Mirror and debrand
-        timeout-minutes: 30
-        run: python3 -u tools/site.py --out _site
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-save playwright@1.56.1 && npx playwright install --with-deps chromium
+      - name: Copy the original website
+        timeout-minutes: 20
+        run: node tools/capture.js raw
+      - name: Debrand
+        run: python3 -u tools/site.py build --raw raw --out _site
+      - name: German
+        timeout-minutes: 25
+        run: |
+          python3 -m http.server 8000 --directory _site >/dev/null 2>&1 &
+          sleep 2
+          node tools/collect.js _site http://localhost:8000/Artcraft texts.json
+          python3 -u tools/site.py translate --texts texts.json --out _site
       - name: Keep new German texts
         run: |
           git config user.name "Labtoso"
@@ -55,7 +68,7 @@ jobs:
           git fetch origin gh-pages || true
           git worktree add -B gh-pages _pages origin/gh-pages 2>/dev/null || git worktree add --orphan -b gh-pages _pages
           find _pages -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -a _site/. _pages/
+          cp -a _site/Artcraft/. _pages/
           cd _pages
           git add -A
           if ! git diff --cached --quiet; then
