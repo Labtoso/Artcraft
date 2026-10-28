@@ -51,7 +51,7 @@ def fetch(url: str) -> tuple[bytes, str] | None:
     for attempt in range(3):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en"})
-            with urllib.request.urlopen(req, timeout=60) as r:
+            with urllib.request.urlopen(req, timeout=30) as r:
                 length = int(r.headers.get("Content-Length") or 0)
                 if length > MAX_ASSET:
                     return None
@@ -115,11 +115,14 @@ class Mirror:
                 if np_ not in seen:
                     seen.add(np_)
                     queue.append(np_)
-            print(f"page {path}", flush=True)
+            print(f"page {len(self.pages)}: {path}", flush=True)
 
     def save_asset(self, path: str) -> bool:
-        """Download an internal asset to the mirror; CSS gets its url(...) followed too."""
+        """Download an internal asset to the mirror; CSS gets its url(...) followed too.
+        Videos and archives stay on the original server (False: link to it directly)."""
         path = urllib.parse.urlparse(path).path
+        if re.search(r"\.(mp4|webm|mov|m4v|zip|dmg|exe|msi)$", path, re.I):
+            return False
         if path in self.assets:
             return True
         target = os.path.join(self.out, path.lstrip("/"))
