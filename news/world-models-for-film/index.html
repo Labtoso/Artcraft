@@ -171,8 +171,19 @@
       });
     });
   }
+  // videos that the site's own script started once they scrolled into view
+  function videos() {
+    var vids = document.querySelectorAll('video');
+    if (!vids.length) return;
+    var play = function (v) { v.muted = true; v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); };
+    if (!('IntersectionObserver' in window)) { vids.forEach(play); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) play(e.target); else if (!e.target.paused) e.target.pause(); });
+    }, { rootMargin: '200px' });
+    vids.forEach(function (v) { if (v.hasAttribute('controls')) return; v.setAttribute('playsinline', ''); io.observe(v); });
+  }
   document.addEventListener('DOMContentLoaded', function () {
-    switcher(); menus(); translate(pref());
+    switcher(); menus(); videos(); translate(pref());
   });
 })();
 </script></body></html>
