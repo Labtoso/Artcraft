@@ -452,8 +452,8 @@ def rewrite_links(text: str, app: str) -> str:
     site_app = f"{SITE}/apps/{app}/"
     rules = [
         # repo pages
-        (r"https://github\.com/storytold/" + re.escape(app) + r"/issues[^\s\"')>`]*", f"{REPO_URL}/issues"),
-        (r"https://github\.com/storytold/" + re.escape(app) + r"/releases/tag/[^\s\"')>`]*", f"{REPO_URL}/releases"),
+        (r"https://github\.com/storytold/" + re.escape(app) + r"/issues[^\s\"')<>`]*", f"{REPO_URL}/issues"),
+        (r"https://github\.com/storytold/" + re.escape(app) + r"/releases/tag/[^\s\"')<>`]*", f"{REPO_URL}/releases"),
         (r"https://github\.com/storytold/" + re.escape(app) + r"/releases(?![/\w])", f"{REPO_URL}/releases"),
         (r"https://github\.com/storytold/" + re.escape(app) + r"(?![\w/-])", f"{REPO_URL}/tree/main/apps/{app}"),
         (r"https://github\.com/storytold/\{", f"{REPO_URL}/tree/main/apps/{{"),

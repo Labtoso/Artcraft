@@ -55,7 +55,7 @@ jobs:
     timeout-minutes: 120
     strategy:
       fail-fast: false
-      max-parallel: 8
+      max-parallel: 14
       matrix:
         app: ${{ fromJson(needs.discover.outputs.matrix) }}
     steps:
@@ -97,7 +97,7 @@ jobs:
     timeout-minutes: 120
     strategy:
       fail-fast: false
-      max-parallel: 12
+      max-parallel: 20
       matrix:
         app: ${{ fromJson(needs.discover.outputs.matrix) }}
         os:
@@ -144,15 +144,26 @@ jobs:
         uses: storytold/craft-common-actions/actions/install-wix@main
       - name: Build and package (Windows)
         if: matrix.os.name == 'windows'
-        shell: pwsh
+        shell: bash
         env:
           CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
-        run: ./packaging/windows/package.ps1 -Arch x64
+        run: |
+          pwsh -NoProfile -File packaging/windows/package.ps1 -Arch x64 2>&1 | tee build.log
+          exit ${PIPESTATUS[0]}
       - name: Build and package (Linux)
         if: matrix.os.name == 'linux'
         env:
           CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
-        run: bash packaging/linux/package.sh
+        run: |
+          bash packaging/linux/package.sh 2>&1 | tee build.log
+          exit ${PIPESTATUS[0]}
+      - name: Show the end of the build log
+        if: failure()
+        shell: bash
+        run: |
+          [ -f build.log ] || exit 0
+          msg=$(tail -n 60 build.log | sed -e 's/%/%25/g' -e 's/\r//g' | awk '{printf "%s%%0A", $0}')
+          echo "::error title=Build log (last 60 lines)::$msg"
       - name: Collect
         shell: bash
         run: |
