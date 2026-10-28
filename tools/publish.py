@@ -18,6 +18,7 @@ import datetime as dt
 import hashlib
 import json
 import os
+import shutil
 import re
 import subprocess
 import sys
@@ -104,7 +105,7 @@ def main() -> int:
         app = discovered[app_id]
         folder = os.path.join(ROOT, "dist", app_id)
         files = sorted(os.path.join(folder, f) for f in os.listdir(folder)) if os.path.isdir(folder) else []
-        files = [f for f in files if os.path.isfile(f) and not f.endswith("SHA256SUMS")]
+        files = [f for f in files if os.path.isfile(f) and not re.search(r"SHA256SUMS(\.txt)?$", f)]
         if not files:
             failed.append(f"{app_id} {app['version']}")
             continue
@@ -125,7 +126,10 @@ def main() -> int:
             gh("release", "edit", tag, "--repo", REPO, "--title", title, "--notes-file", notes, "--latest=false")
         else:
             gh("release", "create", tag, "--repo", REPO, "--title", title, "--notes-file", notes, "--latest=false")
-        gh("release", "upload", tag, "--repo", REPO, "--clobber", *files, sums)
+        # the launcher's fallback (when the feed can't be read) looks for SHA256SUMS.txt
+        sums_txt = sums + ".txt"
+        shutil.copyfile(sums, sums_txt)
+        gh("release", "upload", tag, "--repo", REPO, "--clobber", *files, sums, sums_txt)
         for a in assets:
             a["download_url"] = f"https://github.com/{REPO}/releases/download/{tag}/{a['name']}"
 
@@ -161,7 +165,8 @@ def main() -> int:
     suite_sums = os.path.join(ROOT, "build", "SHA256SUMS")
     with open(suite_sums, "w", encoding="utf-8", newline="\n") as fh:
         fh.write("\n".join(lines) + "\n")
-    gh("release", "upload", SUITE_TAG, "--repo", REPO, "--clobber", suite_sums)
+    shutil.copyfile(suite_sums, suite_sums + ".txt")
+    gh("release", "upload", SUITE_TAG, "--repo", REPO, "--clobber", suite_sums, suite_sums + ".txt")
     notes = os.path.join(ROOT, "build", "suite.notes.md")
     with open(notes, "w", encoding="utf-8") as fh:
         fh.write(suite_notes(state))
