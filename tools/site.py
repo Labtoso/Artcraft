@@ -41,7 +41,8 @@ ORIGINAL_GITHUB = f"https://github.com/{UPSTREAM}"
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36"
 
 SOCIAL = re.compile(r"discord\.(gg|com)|bsky\.app|bluesky|twitter\.com|(^|//|\.)x\.com/|linkedin\.com|youtube\.com/@|instagram\.com|tiktok\.com|reddit\.com/(submit|r/)|facebook\.com/sharer|t\.me/share", re.I)
-SKIP_PATHS = re.compile(r"^/pricing(/|$)", re.I)
+# pages that are only about the original's AI studio or its pricing
+SKIP_PATHS = re.compile(r"^/(pricing|tutorials|news|faq)(/|$)", re.I)
 LAUNCH_APP = re.compile(r"^\s*launch app\s*$", re.I)
 SHARE_LABELS = {"x", "reddit", "bluesky", "linkedin", "copy link", "share", "facebook"}
 MAX_ASSET = 90 * 1024 * 1024
@@ -226,23 +227,28 @@ class Mirror:
                 if node.find("a", href=SOCIAL):
                     node.decompose()
 
+        remove_studio(soup, path)
+        fix_nav(soup)
+        if path.rstrip("/") == "/download":
+            self.launcher_download_page(soup)
+
         header = soup.find("header") or soup.find("nav")
         original_btn_done = False
 
         for a in list(soup.find_all("a")):
             if a.parent is None:
                 continue
+            if a.get("data-artcraft"):
+                continue  # links this script put in
             href = (a.get("href") or "").strip()
             text = a.get_text(" ", strip=True)
             absu = urllib.parse.urljoin(self.origin + path, href) if href else ""
             # top-right "Launch App" becomes "Original on GitHub" with the same look
             if LAUNCH_APP.match(text):
                 if header is not None and a in header.find_all("a") and not original_btn_done:
-                    replace_text(a, "Original on GitHub")
-                    a["href"] = ORIGINAL_GITHUB
-                    a["target"] = "_blank"
-                    a["rel"] = "noopener"
-                    a["data-artcraft"] = "original"
+                    replace_text(a, "Download")
+                    a["href"] = self.local("/download/")
+                    a["data-artcraft"] = "download"
                     original_btn_done = True
                 else:
                     remove_link(a)
@@ -265,8 +271,9 @@ class Mirror:
             if absu.startswith("https://github.com/"):
                 a["href"] = self.map_github(absu)
                 continue
-            if "app.getartcraft.com" in absu:
-                continue  # the AI studio's own web app stays as it is
+            if "app.getartcraft.com" in absu or absu.startswith("mailto:"):
+                remove_link(a)
+                continue
 
         # share widgets: buttons without a link
         for b in list(soup.find_all("button")):
@@ -310,6 +317,7 @@ class Mirror:
                     parent.decompose()
 
         add_credits(soup)
+        renumber_labels(soup)
         html_tag = soup.find("html")
         if html_tag is not None:
             html_tag["lang"] = "en"
@@ -342,6 +350,87 @@ class Mirror:
             return self.local(page_path)
         return absu
 
+    def launcher_file(self, pattern: str) -> str:
+        st = self.state.get("artcraft-launcher") or {}
+        for a in st.get("assets", []):
+            if re.search(pattern, a["name"], re.I):
+                return a["download_url"]
+        return f"{REPO_URL}/releases/tag/suite"
+
+    def launcher_download_page(self, soup):
+        """The original page offers the AI studio; ours offers ArtCraft Launcher, same layout."""
+        st = self.state.get("artcraft-launcher") or {}
+        win = self.launcher_file(r"x64.*\.msi$|\.msi$")
+        lin = self.launcher_file(r"\.AppImage$")
+        main = soup.find("main") or soup.body
+        if main is None:
+            return
+        sections = main.find_all(recursive=False)
+        for sec in sections:
+            label = section_label(sec)
+            if label == "download":
+                h1 = sec.find("h1")
+                if h1:
+                    em = h1.find("span")
+                    for t in [x for x in h1.find_all(string=True) if x.strip()]:
+                        if em is None or t.parent is not em:
+                            t.replace_with(re.sub(r"ArtCraft Studio|Studio", "ArtCraft ", str(t)))
+                    if em is not None:
+                        em.string = "Launcher"
+                    for t in h1.find_all(string=True):
+                        if "ArtCraft" in t and "  " in t:
+                            t.replace_with(str(t).replace("  ", " "))
+                set_text(sec.find("p", class_="text-lg"), "One installer for every Crafting App. It installs the apps you pick and keeps them all up to date.")
+                for p in sec.find_all("p", class_="hud-label"):
+                    if "Studio" in p.get_text():
+                        set_text(p, "ArtCraft Launcher · Windows · Linux")
+                    elif re.search(r"v\d", p.get_text()):
+                        set_text(p, "Free · Open source" + (f" · v{st['version']}" if st.get("version") else ""))
+                for a in sec.find_all("a"):
+                    t = a.get_text(" ", strip=True)
+                    if re.search(r"windows", t, re.I):
+                        a["href"] = win
+                        a["data-artcraft"] = "download-win"
+                    elif re.search(r"use on web", t, re.I):
+                        replace_text(a, "Download for Linux")
+                        a["href"] = lin
+                        a["data-artcraft"] = "download-linux"
+            elif label == "platforms":
+                for p in sec.find_all("p", class_="hud-label"):
+                    if "macOS" in p.get_text():
+                        set_text(p, "x64 Windows · x64 Linux")
+                for art in sec.find_all("article"):
+                    h2 = art.find("h2")
+                    name = h2.get_text(strip=True) if h2 else ""
+                    items = art.find_all("li")
+                    if name == "macOS":
+                        set_text(h2, "Linux")
+                        if items:
+                            set_text(items[0], "AppImage, deb, rpm or tar (x86_64)")
+                        apple = art.find("svg", class_=re.compile("apple"))
+                        mon = sec.find("svg", class_=re.compile("monitor"))
+                        if apple is not None and mon is not None:
+                            apple.replace_with(BeautifulSoup(str(mon), "html.parser"))
+                    for li, text in zip(items[1:], ["Installs and updates every Craft App", "Free, no account needed"]):
+                        set_text(li, text)
+                    for a in art.find_all("a"):
+                        if name == "macOS":
+                            replace_text(a, "Download for Linux")
+                            a["href"] = lin
+                        else:
+                            a["href"] = win
+                        a["data-artcraft"] = "download"
+            elif label == "quick start":
+                steps = sec.find_all("li")
+                texts = [("Download", "Grab the installer for your platform."),
+                         ("Install", "Run the installer. No account, no sign-in."),
+                         ("Pick your apps", "The launcher installs the Craft Apps you choose and keeps them up to date.")]
+                for li, (h, t) in zip(steps, texts):
+                    set_text(li.find("h3"), h)
+                    set_text(li.find("p", class_=re.compile("text-muted")), t)
+            elif sec.find("figure") and "Viewport" in sec.get_text():
+                sec.decompose()
+
     def render(self) -> dict:
         """Every page after the debrand transform (without the language script yet)."""
         out = {path: self.transform(path, html, {}) for path, html in self.pages.items()}
@@ -357,6 +446,148 @@ class Mirror:
             html = html.replace("</body>", script + "</body>", 1) if "</body>" in html else html + script
             with open(target, "w", encoding="utf-8") as fh:
                 fh.write(html)
+
+
+def set_text(el, text: str):
+    if el is not None:
+        el.clear()
+        el.append(text)
+
+
+def section_label(sec) -> str:
+    """'01 / Crafting Apps' -> 'crafting apps' (the label of a page section)."""
+    p = sec.find("p", class_="hud-label")
+    if p is None:
+        return ""
+    m = re.match(r"^\s*\d+\s*/\s*(.+?)\s*$", " ".join(p.get_text(" ").split()))
+    return m.group(1).lower() if m else ""
+
+
+def top_section(el):
+    while el.parent is not None and el.parent.name not in ("main", "body"):
+        el = el.parent
+    return el
+
+
+STUDIO_SECTIONS = {"artcraft studio", "studio features", "ownership", "proof", "promotional videos"}
+
+
+def remove_studio(soup, path: str):
+    """Everything about the original's AI studio goes; the Craft Apps stay."""
+    main = soup.find("main") or soup.body
+    if main is None:
+        return
+    for sec in list(main.find_all(recursive=False)):
+        if section_label(sec) in STUDIO_SECTIONS:
+            sec.decompose()
+    for mq in soup.find_all(class_="marquee"):
+        mq.decompose()
+    for p in soup.find_all("p"):
+        if p.parent is not None and re.search(r"Looking for ArtCraft Studio", p.get_text(" ")):
+            p.decompose()
+    # "Talk to a human" (press kit)
+    for h in soup.find_all(re.compile(r"^h[1-6]$")):
+        if h.parent is not None and re.search(r"talk to a human", h.get_text(" "), re.I):
+            top_section(h).decompose()
+    # cards and footer columns about the studio
+    for el in soup.find_all(["article", "nav"]):
+        if el.parent is None:
+            continue
+        first = el.find("p", class_="hud-label")
+        if first is not None and first.get_text(" ", strip=True) == "ArtCraft Studio":
+            grid = el.parent
+            footer_column = el.name == "nav"
+            el.decompose()
+            if grid is None or not grid.get("class"):
+                continue
+            if footer_column:
+                # one column fewer; the site's CSS only has the classes it used, so say it here
+                grid["data-artcraft"] = "footer-grid"
+                style = soup.new_tag("style")
+                style.string = ("@media (min-width:768px){[data-artcraft=footer-grid]{grid-template-columns:repeat(3,minmax(0,1fr))}"
+                                "[data-artcraft=footer-grid]>:first-child{grid-column:span 3/span 3}}"
+                                "@media (min-width:1024px){[data-artcraft=footer-grid]{grid-template-columns:2fr 1fr 1fr 1fr}"
+                                "[data-artcraft=footer-grid]>:first-child{grid-column:span 1/span 1}}")
+                (soup.head or soup).append(style)
+            else:
+                grid["class"] = [c for c in grid["class"] if not re.match(r"^md:grid-cols-\d$", c)]
+    for p in soup.find_all("p"):
+        t = " ".join(p.get_text(" ").split())
+        if t.startswith("ArtCraft makes two things"):
+            set_text(p, "Thirteen native, open-source desktop apps. ArtCraft Launcher installs them all and keeps them up to date.")
+        elif t.startswith("Open-source tools for artists: the Craft Apps and ArtCraft Studio"):
+            set_text(p, "Open-source tools for artists: the Craft Apps.")
+        elif t.startswith("Find answers, join the community"):
+            set_text(p, "Report a problem or ask a question on GitHub.")
+        elif "the world's only open source precision AI tool for artists" in t:
+            set_text(p, t.replace("the world's only open source precision AI tool for artists", "the Crafting Apps"))
+    # support: the mail card becomes the GitHub issues card
+    for a in soup.find_all("a", href=re.compile(r"^mailto:")):
+        h2 = a.find("h2")
+        if h2 is not None:
+            set_text(h2, "Report a problem")
+            mail = a.find("p", class_=re.compile("text-muted"))
+            set_text(mail, "Open an issue on GitHub.")
+            for sp in a.find_all("span", class_="hud-label"):
+                replace_text(sp, "Open an issue")
+            a["href"] = f"{REPO_URL}/issues"
+            a["target"] = "_blank"
+            a["rel"] = "noopener"
+            a["data-artcraft"] = "issues"
+    # copyright
+    for t in soup.find_all(string=re.compile(r"©\s*\d{4}\s*ArtCraft")):
+        t.replace_with(re.sub(r"©\s*(\d{4})\s*ArtCraft", r"© \1 LabtosoStudios", str(t)))
+
+
+def fix_nav(soup):
+    """Top bar: no web-editor items, Resources becomes Press Kit, Original on GitHub on the left."""
+    nav = soup.find("nav")
+    if nav is None:
+        return
+    ul = nav.find("ul")
+    if ul is None:
+        return
+    # a plain (not highlighted) entry to copy the look from
+    model = None
+    for li in ul.find_all("li", recursive=False):
+        a, sp = li.find("a"), li.find("span")
+        if a is None or li.find("button") is not None or "app.getartcraft.com" in (a.get("href") or ""):
+            continue
+        if sp is not None and "bg-invert-bg" in (sp.get("class") or []):
+            continue
+        if "border-l" in (li.get("class") or []):
+            continue
+        model = li
+        break
+    if model is None:
+        return
+    for li in list(ul.find_all("li", recursive=False)):
+        if li.find("button") is not None and "Resources" in li.get_text():
+            new = BeautifulSoup(str(model), "html.parser").li
+            a = new.find("a")
+            a["href"] = "/press-kit/"
+            replace_text(a.find("span") or a, "Press Kit")
+            li.replace_with(new)
+    if not ul.find("a", attrs={"data-artcraft": "original"}):
+        new = BeautifulSoup(str(model), "html.parser").li
+        new["class"] = (new.get("class") or []) + ["ml-1.5", "border-l", "border-line", "pl-1.5"]
+        a = new.find("a")
+        a["href"] = ORIGINAL_GITHUB
+        a["target"] = "_blank"
+        a["rel"] = "noopener"
+        a["data-artcraft"] = "original"
+        replace_text(a.find("span") or a, "Original on GitHub")
+        ul.append(new)
+
+
+def renumber_labels(soup):
+    """Section labels count 01, 02, ... again after sections were taken out."""
+    n = 0
+    for p in soup.find_all("p", class_="hud-label"):
+        spans = p.find_all("span", recursive=False)
+        if len(spans) >= 2 and re.fullmatch(r"\d{2}", spans[0].get_text(strip=True)) and spans[1].get_text(strip=True) == "/":
+            n += 1
+            spans[0].string = f"{n:02d}"
 
 
 def replace_text(el, text: str):
@@ -501,7 +732,7 @@ RUNTIME_JS = r"""
     sw.forEach(function (b) { b.setAttribute('aria-pressed', b.getAttribute('data-artcraft-lang') === lang ? 'true' : 'false'); b.style.opacity = b.getAttribute('data-artcraft-lang') === lang ? '1' : '.55'; });
   }
   function switcher() {
-    var host = document.querySelector('[data-artcraft="original"]');
+    var host = document.querySelector('[data-artcraft="download"]') || document.querySelector('[data-artcraft="original"]');
     var box = document.createElement('span');
     box.setAttribute('data-artcraft', 'lang');
     box.style.cssText = 'display:inline-flex;gap:.25rem;align-items:center;margin:0 .5rem;font-size:.8rem;font-weight:600';
@@ -518,6 +749,7 @@ RUNTIME_JS = r"""
   // menus that used to open with the site's own script
   function menus() {
     document.querySelectorAll('button[aria-expanded], [aria-haspopup]').forEach(function (btn) {
+      if (/main menu/i.test(btn.textContent)) return;
       var id = btn.getAttribute('aria-controls');
       var panel = id ? document.getElementById(id) : (btn.nextElementSibling || null);
       if (!panel) return;
@@ -542,8 +774,59 @@ RUNTIME_JS = r"""
     }, { rootMargin: '200px' });
     vids.forEach(function (v) { if (v.hasAttribute('controls')) return; v.setAttribute('playsinline', ''); io.observe(v); });
   }
+  // light/dark switch (the moon button), remembered like on the original
+  var TKEY = 'artcraft-theme';
+  function currentTheme() {
+    var t = document.documentElement.getAttribute('data-theme');
+    if (t) return t;
+    return window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  try { var saved = localStorage.getItem(TKEY); if (saved) document.documentElement.setAttribute('data-theme', saved); } catch (e) {}
+  function theme() {
+    document.querySelectorAll('button[aria-label*="theme" i]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var next = currentTheme() === 'dark' ? 'light' : 'dark';
+        var html = document.documentElement;
+        html.classList.add('theme-anim');
+        html.setAttribute('data-theme', next);
+        try { localStorage.setItem(TKEY, next); } catch (e) {}
+        setTimeout(function () { html.classList.remove('theme-anim'); }, 450);
+      });
+    });
+  }
+  // the phone menu: the same links as the top bar, in a panel under it
+  function phoneMenu() {
+    var btn = [].slice.call(document.querySelectorAll('button')).filter(function (b) { return /main menu/i.test(b.textContent); })[0];
+    var list = document.querySelector('nav ul');
+    var bar = btn && btn.closest('nav, header');
+    if (!btn || !list || !bar) return;
+    var panel = document.createElement('div');
+    panel.setAttribute('data-artcraft', 'phone-menu');
+    panel.className = 'border-b border-line bg-bg';
+    panel.style.cssText = 'display:none;position:absolute;left:0;right:0;top:100%;z-index:60';
+    list.querySelectorAll('a').forEach(function (a) {
+      var c = a.cloneNode(true);
+      c.className = 'hud-label block px-6 py-4 border-t border-line text-muted hover:text-ink';
+      panel.appendChild(c);
+    });
+    var langs = document.createElement('div');
+    langs.className = 'hud-label flex gap-4 px-6 py-4 border-t border-line';
+    document.querySelectorAll('[data-artcraft-lang]').forEach(function (b) {
+      var c = document.createElement('button'); c.type = 'button'; c.textContent = b.textContent;
+      c.addEventListener('click', function () { b.click(); });
+      langs.appendChild(c);
+    });
+    panel.appendChild(langs);
+    if (getComputedStyle(bar).position === 'static') bar.style.position = 'relative';
+    bar.appendChild(panel);
+    btn.addEventListener('click', function () {
+      var open = panel.style.display !== 'none';
+      panel.style.display = open ? 'none' : 'block';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
+  }
   document.addEventListener('DOMContentLoaded', function () {
-    switcher(); menus(); videos(); translate(pref());
+    switcher(); menus(); videos(); theme(); phoneMenu(); translate(pref());
   });
 })();
 """
@@ -770,7 +1053,7 @@ def main() -> int:
 
     os.makedirs(args.out, exist_ok=True)
     m = Mirror(args.origin, args.out)
-    m.crawl(["/", "/apps", "/download", "/support", "/tutorials", "/news", "/faq", "/press-kit"])
+    m.crawl(["/", "/apps", "/download", "/support", "/press-kit"])
     if not m.pages:
         print("original site unreachable; keeping the previous mirror", file=sys.stderr)
         return 1
