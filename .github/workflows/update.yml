@@ -1,0 +1,229 @@
+name: Update apps
+
+# Every six hours: find new Craft apps and new versions upstream, debrand, build, publish,
+# then refresh the website and the launcher feed. Runs on its own; nothing to do by hand.
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild anyway: all, or app ids separated by commas (e.g. wordcraft,gridcraft)"
+        type: string
+        default: ""
+  push:
+    branches: [main]
+    paths: ["tools/**", "apps/*/debrand.toml", ".github/workflows/update.yml"]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+env:
+  UPSTREAM: storytold
+  ARTCRAFT_REPO: ${{ github.repository }}
+  ARTCRAFT_SITE: https://labtoso.github.io/Artcraft
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.d.outputs.matrix }}
+      any: ${{ steps.d.outputs.any }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: d
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          FORCE: ${{ inputs.force }}
+        run: python3 tools/discover.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: discovered
+          path: build/discovered.json
+
+  # Debrand on Linux and prove it compiles; the result is a patch the build jobs apply.
+  prepare:
+    needs: discover
+    if: needs.discover.outputs.any == 'true'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        app: ${{ fromJson(needs.discover.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: _artcraft
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.UPSTREAM }}/${{ matrix.app.repo }}
+          ref: ${{ matrix.app.tag }}
+          path: src
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Linux build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev \
+            libxi-dev libgl1-mesa-dev libasound2-dev pkg-config libssl-dev libdbus-1-dev
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: src
+          key: prepare-${{ matrix.app.id }}
+      - name: Debrand and check
+        run: python3 _artcraft/tools/prepare.py src ${{ matrix.app.id }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: patch-${{ matrix.app.id }}
+          path: |
+            _artcraft/build/${{ matrix.app.id }}.patch
+            _artcraft/build/${{ matrix.app.id }}.report.json
+
+  build:
+    needs: [discover, prepare]
+    if: always() && needs.discover.outputs.any == 'true'
+    runs-on: ${{ matrix.os.runner }}
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        app: ${{ fromJson(needs.discover.outputs.matrix) }}
+        os:
+          - { name: windows, runner: windows-latest }
+          - { name: linux, runner: ubuntu-22.04 }
+    env:
+      CARGO_TERM_COLOR: always
+      CARGO_INCREMENTAL: 0
+      RUSTFLAGS: --cap-lints=warn
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ env.UPSTREAM }}/${{ matrix.app.repo }}
+          ref: ${{ matrix.app.tag }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: patch-${{ matrix.app.id }}
+          path: _patch
+      - name: Apply debranding
+        shell: bash
+        run: |
+          if [ -s "_patch/${{ matrix.app.id }}.patch" ]; then git apply --whitespace=nowarn "_patch/${{ matrix.app.id }}.patch"; fi
+          rm -rf _patch
+      - name: Check out craft-fonts
+        if: matrix.app.fonts_ref != ''
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.UPSTREAM }}/craft-fonts
+          ref: ${{ matrix.app.fonts_ref }}
+          path: craft-fonts
+          persist-credentials: false
+      - name: Check out craft-i18n
+        uses: storytold/craft-common-actions/actions/checkout-craft-i18n@main
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: build-${{ matrix.os.name }}-${{ matrix.app.id }}
+      - name: Linux packaging tools
+        if: matrix.os.name == 'linux'
+        uses: storytold/craft-common-actions/actions/install-linux-deps@main
+      - name: WiX
+        if: matrix.os.name == 'windows'
+        uses: storytold/craft-common-actions/actions/install-wix@main
+      - name: Build and package (Windows)
+        if: matrix.os.name == 'windows'
+        shell: pwsh
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
+        run: ./packaging/windows/package.ps1 -Arch x64
+      - name: Build and package (Linux)
+        if: matrix.os.name == 'linux'
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
+        run: bash packaging/linux/package.sh
+      - name: Collect
+        shell: bash
+        run: |
+          mkdir -p out
+          find dist/release -maxdepth 1 -type f ! -name 'SHA256SUMS*' ! -name '*.sha256' -exec cp {} out/ \;
+          ls -la out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist-${{ matrix.app.id }}-${{ matrix.os.name }}
+          path: out/*
+          if-no-files-found: error
+
+  publish:
+    needs: [discover, build]
+    if: always() && needs.discover.outputs.any == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: discovered
+          path: build
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: dist-*
+          path: _dist
+      - name: Sort files per app
+        run: |
+          mkdir -p dist
+          for d in _dist/dist-*; do
+            [ -d "$d" ] || continue
+            name="${d#_dist/dist-}"; app="${name%-*}"
+            mkdir -p "dist/$app"; cp "$d"/* "dist/$app/"
+          done
+          # an app counts only when every platform built
+          for app in $(ls dist); do
+            n=$(ls -d _dist/dist-"$app"-* 2>/dev/null | wc -l)
+            if [ "$n" -lt 2 ]; then echo "$app: not every platform built, keeping the previous version"; rm -rf "dist/$app"; fi
+          done
+      - name: Publish releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MATRIX: ${{ needs.discover.outputs.matrix }}
+        run: python3 tools/publish.py
+      - name: Save state and app pages
+        run: |
+          python3 tools/readmes.py
+          git config user.name "Labtoso"
+          git config user.email "235880825+Labtoso@users.noreply.github.com"
+          git add state apps README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "Update apps: $(python3 -c 'import json,os;print(", ".join(f"{m["id"]} {m["version"]}" for m in json.loads(os.environ["MATRIX"]) if os.path.isdir("dist/"+m["id"])))')"
+            git push
+          fi
+        env:
+          MATRIX: ${{ needs.discover.outputs.matrix }}
+      - name: Report failed builds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          [ -s build/failed.txt ] || exit 0
+          body="These apps could not be built this time, so the previous version stays online:
+
+          $(sed 's/^/- /' build/failed.txt)
+
+          Log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          gh issue create --title "Build failed: $(paste -sd, build/failed.txt)" --body "$body" || true
+
+  site:
+    needs: [publish]
+    if: always()
+    uses: ./.github/workflows/site.yml
+    permissions:
+      contents: write
