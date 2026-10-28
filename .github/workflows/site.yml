@@ -39,7 +39,8 @@ jobs:
           python-version: "3.12"
       - run: pip install beautifulsoup4==4.12.3
       - name: Mirror and debrand
-        run: python3 tools/site.py --out _site
+        timeout-minutes: 30
+        run: python3 -u tools/site.py --out _site
       - name: Keep new German texts
         run: |
           git config user.name "Labtoso"

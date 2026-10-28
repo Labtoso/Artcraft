@@ -48,7 +48,7 @@ MAX_ASSET = 90 * 1024 * 1024
 
 
 def fetch(url: str) -> tuple[bytes, str] | None:
-    for attempt in range(3):
+    for attempt in range(2):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept-Language": "en"})
             with urllib.request.urlopen(req, timeout=30) as r:
@@ -61,7 +61,7 @@ def fetch(url: str) -> tuple[bytes, str] | None:
                 return None
         except Exception:
             pass
-        time.sleep(2 * (attempt + 1))
+        time.sleep(1)
     return None
 
 
@@ -505,34 +505,60 @@ AUTO = os.path.join(ROOT, "site", "i18n", "de.auto.json")
 KEEP_ENGLISH = re.compile(r"^(ArtCraft|[A-Z][a-z]+Craft|CADCraft|PdfCraft|macOS|Windows|Linux|Web|GitHub|Rust|MCP|v?\d[\d.]*|[\w.+-]+@[\w.-]+|https?://\S+|©.*)$")
 
 
+def gtx(text: str) -> str | None:
+    """One request to the free Google endpoint; None when it doesn't answer quickly."""
+    q = urllib.parse.urlencode({"client": "gtx", "sl": "en", "tl": "de", "dt": "t", "q": text})
+    try:
+        req = urllib.request.Request("https://translate.googleapis.com/translate_a/single?" + q, headers={"User-Agent": UA})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            data = json.loads(r.read().decode("utf-8"))
+        return "".join(part[0] for part in data[0] if part and part[0])
+    except Exception:
+        return None
+
+
 def translate_missing(missing: list[str]) -> dict:
-    """German for texts nobody translated by hand yet; cached in site/i18n/de.auto.json."""
+    """German for texts nobody translated by hand yet; cached in site/i18n/de.auto.json.
+    Texts go in batches of lines; the whole step stops after 10 minutes or 5 failures in a row
+    (whatever is left stays English until the next run)."""
     cache = {}
     if os.path.exists(AUTO):
         with open(AUTO, encoding="utf-8") as fh:
             cache = json.load(fh)
-    todo = [t for t in missing if t not in cache and not KEEP_ENGLISH.match(t)]
-    for i, text in enumerate(todo):
-        q = urllib.parse.urlencode({"client": "gtx", "sl": "en", "tl": "de", "dt": "t", "q": text})
-        got = fetch("https://translate.googleapis.com/translate_a/single?" + q)
-        if not got:
+    todo = [t for t in missing if t not in cache and not KEEP_ENGLISH.match(t) and "\n" not in t]
+    deadline = time.time() + 600
+    fails = done = 0
+    i = 0
+    while i < len(todo) and time.time() < deadline and fails < 5:
+        batch, size = [], 0
+        while i < len(todo) and size + len(todo[i]) < 3000 and len(batch) < 40:
+            batch.append(todo[i])
+            size += len(todo[i]) + 1
+            i += 1
+        if not batch:
+            batch = [todo[i]]
+            i += 1
+        out = gtx("\n".join(batch))
+        lines = out.split("\n") if out is not None else None
+        if lines is None:
+            fails += 1
             continue
-        try:
-            data = json.loads(got[0].decode("utf-8"))
-            de_text = "".join(part[0] for part in data[0] if part and part[0])
-        except (ValueError, IndexError, TypeError):
-            continue
-        # product names stay as they are
-        for name in re.findall(r"\b(?:ArtCraft|[A-Z][a-z]+Craft|CADCraft|PdfCraft)\b", text):
-            de_text = re.sub(re.escape(name), name, de_text, flags=re.I)
-        cache[text] = de_text
-        if i % 25 == 0:
-            time.sleep(1)
+        fails = 0
+        if len(lines) != len(batch):
+            lines = [gtx(t) for t in batch]
+        for en, de_text in zip(batch, lines):
+            if not de_text:
+                continue
+            de_text = de_text.strip()
+            for name in re.findall(r"\b(?:ArtCraft|[A-Z][a-z]+Craft|CADCraft|PdfCraft)\b", en):
+                de_text = re.sub(re.escape(name), name, de_text, flags=re.I)
+            cache[en] = de_text
+            done += 1
     os.makedirs(os.path.dirname(AUTO), exist_ok=True)
     with open(AUTO, "w", encoding="utf-8") as fh:
         json.dump(dict(sorted(cache.items())), fh, indent=1, ensure_ascii=False)
         fh.write("\n")
-    print(f"German: {len(todo)} new machine translations, {len(cache)} cached")
+    print(f"German: {done} new machine translations, {len(cache)} cached, {len(todo) - done} left for next time", flush=True)
     return cache
 
 
@@ -584,6 +610,7 @@ def main() -> int:
             with open(os.path.join(args.snapshot, name + ".html"), "w", encoding="utf-8") as fh:
                 fh.write(html)
     print(f"{len(m.pages)} pages, {len(m.assets)} files")
+    print(f"::notice title=Website::{len(m.pages)} pages, {len(m.assets)} files, {len(de)} German texts")
     return 0
 
 
