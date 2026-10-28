@@ -65,6 +65,8 @@ html[data-ac-page="/download/"] main>section:nth-of-type(2){display:none!importa
 footer .grid:has(>nav[data-ac-hide]){grid-template-columns:repeat(auto-fit,minmax(10rem,1fr))!important}
 footer .grid:has(>nav[data-ac-hide])>:first-child{grid-column:1/-1!important}
 @media (min-width:1024px){footer .grid:has(>nav[data-ac-hide]){grid-template-columns:2fr 1fr 1fr!important}footer .grid:has(>nav[data-ac-hide])>:first-child{grid-column:auto!important}}
+/* without the studio and community columns the app list is the footer's tallest part: two columns */
+@media (min-width:768px){footer nav ul:has(>li:nth-child(9)){display:grid!important;grid-template-columns:repeat(2,minmax(0,max-content));column-gap:2.5rem}}
 html.ac-wait body{opacity:0!important}
 """
 
