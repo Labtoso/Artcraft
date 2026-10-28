@@ -310,7 +310,6 @@ class Mirror:
                     parent.decompose()
 
         add_credits(soup)
-        add_runtime(soup, de)
         html_tag = soup.find("html")
         if html_tag is not None:
             html_tag["lang"] = "en"
@@ -343,16 +342,21 @@ class Mirror:
             return self.local(page_path)
         return absu
 
-    def write(self, de: dict):
-        for path, html in self.pages.items():
-            target = os.path.join(self.out, path.lstrip("/"), "index.html")
+    def render(self) -> dict:
+        """Every page after the debrand transform (without the language script yet)."""
+        out = {path: self.transform(path, html, {}) for path, html in self.pages.items()}
+        if "/" in out:
+            out["/404"] = out["/"]
+        return out
+
+    def write(self, rendered: dict, de: dict):
+        script = "<script>" + RUNTIME_JS.replace("__DE__", json.dumps(de, ensure_ascii=False).replace("</", "<\\/")) + "</script>"
+        for path, html in rendered.items():
+            target = os.path.join(self.out, "404.html") if path == "/404" else os.path.join(self.out, path.lstrip("/"), "index.html")
             os.makedirs(os.path.dirname(target), exist_ok=True)
+            html = html.replace("</body>", script + "</body>", 1) if "</body>" in html else html + script
             with open(target, "w", encoding="utf-8") as fh:
-                fh.write(self.transform(path, html, de))
-        # 404 page: the home page
-        if "/" in self.pages:
-            with open(os.path.join(self.out, "404.html"), "w", encoding="utf-8") as fh:
-                fh.write(self.transform("/", self.pages["/"], de))
+                fh.write(html)
 
 
 def replace_text(el, text: str):
@@ -406,20 +410,82 @@ RUNTIME_JS = r"""
   }
   var originals = new Map();
   function norm(s) { return s.replace(/\s+/g, ' ').trim(); }
+  var BLOCKS = 'p,h1,h2,h3,h4,h5,h6,li,a,button,figcaption,dt,dd,label,td,th,span,strong';
+  var INLINE = /^(SPAN|A|EM|STRONG|B|I|CODE|SMALL|MARK|U)$/;
+  var SKIP_IN = /^(svg|path|rect|line|circle|polyline|polygon|g|img)$/i;
+  function textNodes(el) {
+    var out = [], w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = w.nextNode())) if (n.nodeValue.trim()) out.push(n);
+    return out;
+  }
+  // 'One [[craft]].' for text mixed with simple inline elements (same rule as the build script)
+  function blockKey(el) {
+    var parts = [], slots = [], inline = 0, plain = false;
+    for (var c = el.firstChild; c; c = c.nextSibling) {
+      if (c.nodeType === 3) { if (c.nodeValue.trim()) plain = true; parts.push(originals.has(c) ? originals.get(c) : c.nodeValue); slots.push({ text: c }); continue; }
+      if (c.nodeType !== 1) continue;
+      if (/^(svg|img|br)$/i.test(c.tagName)) continue;
+      if (!INLINE.test(c.tagName)) return null;
+      var tn = textNodes(c);
+      if (tn.length !== 1) return null;
+      var bad = false;
+      c.querySelectorAll('*').forEach(function (e) { if (!SKIP_IN.test(e.tagName)) bad = true; });
+      if (bad) return null;
+      parts.push('[[' + norm(originals.has(tn[0]) ? originals.get(tn[0]) : tn[0].nodeValue) + ']]');
+      slots.push({ inline: tn[0] });
+      inline++;
+    }
+    if (!plain || !inline) return null;
+    return { key: norm(parts.join('')), slots: slots };
+  }
+  function remember(n) { if (!originals.has(n)) originals.set(n, n.nodeValue); }
+  function blocks(done) {
+    document.querySelectorAll(BLOCKS).forEach(function (el) {
+      var b = blockKey(el);
+      if (!b || !DE[b.key]) return;
+      var pieces = DE[b.key].split(/\[\[([\s\S]*?)\]\]/);
+      var inlineCount = b.slots.filter(function (s) { return s.inline; }).length;
+      if ((pieces.length - 1) / 2 !== inlineCount) return;
+      var i = 0, firstText = true;
+      b.slots.forEach(function (s) {
+        if (s.inline) {
+          remember(s.inline);
+          var o = originals.get(s.inline);
+          s.inline.nodeValue = o.match(/^\s*/)[0] + pieces[i + 1].trim() + o.match(/\s*$/)[0];
+          done.add(s.inline);
+          i += 2; firstText = true;
+        } else {
+          remember(s.text);
+          var orig = originals.get(s.text);
+          if (firstText) {
+            var piece = pieces[i];
+            var lead = /^\s/.test(orig) || (i > 0 && /^\s/.test(piece)) ? ' ' : '';
+            var trail = /\s$/.test(orig) || (i + 1 < pieces.length && /\s$/.test(piece)) ? ' ' : '';
+            s.text.nodeValue = lead + piece.trim() + trail;
+            firstText = false;
+          } else {
+            s.text.nodeValue = '';
+          }
+          done.add(s.text);
+        }
+      });
+    });
+  }
   function translate(lang) {
     var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null);
-    var n;
-    while ((n = walker.nextNode())) {
-      if (!originals.has(n)) originals.set(n, n.nodeValue);
+    var n, all = [];
+    while ((n = walker.nextNode())) { remember(n); n.nodeValue = originals.get(n); all.push(n); }
+    var done = new Set();
+    if (lang === 'de') blocks(done);
+    all.forEach(function (n) {
+      if (done.has(n)) return;
       var orig = originals.get(n), key = norm(orig);
-      if (!key) continue;
+      if (!key) return;
       if (lang === 'de' && DE[key]) {
         var lead = orig.match(/^\s*/)[0], trail = orig.match(/\s*$/)[0];
         n.nodeValue = lead + DE[key] + trail;
-      } else {
-        n.nodeValue = orig;
       }
-    }
+    });
     ['placeholder', 'title', 'aria-label', 'alt'].forEach(function (attr) {
       document.querySelectorAll('[' + attr + ']').forEach(function (el) {
         var o = el.getAttribute('data-en-' + attr);
@@ -528,6 +594,51 @@ def write_feed(out: str, state: dict):
         json.dump(feed, fh, indent=1, ensure_ascii=False)
 
 
+BLOCKS = ["p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "a", "button", "figcaption", "dt", "dd", "label", "td", "th", "span", "strong"]
+INLINE = {"span", "a", "em", "strong", "b", "i", "code", "small", "mark", "u"}
+
+
+def norm_text(t: str) -> str:
+    return re.sub(r"\s+", " ", t).strip()
+
+
+def block_key(el) -> str:
+    """'One [[craft]].' for an element mixing text with simple inline elements, else ''.
+    The page script builds the same key in the browser."""
+    parts, inline, plain = [], 0, False
+    for c in el.children:
+        if isinstance(c, Comment):
+            continue
+        if isinstance(c, str):
+            if c.strip():
+                plain = True
+            parts.append(str(c))
+            continue
+        if c.name in ("svg", "img", "br"):
+            continue
+        if c.name not in INLINE:
+            return ""
+        strings = [x for x in c.find_all(string=True) if x.strip() and not isinstance(x, Comment)]
+        if len(strings) != 1 or c.find(lambda e: e.name not in ("svg", "path", "rect", "line", "circle", "polyline", "polygon", "g", "img")):
+            return ""
+        parts.append("[[" + norm_text(strings[0]) + "]]")
+        inline += 1
+    if not (plain and inline):
+        return ""
+    return norm_text("".join(parts))
+
+
+# names that stay as they are in German
+KEEP_NAMES = re.compile(r"\b(ArtCraft Launcher|ArtCraft Studio|ArtCraft|Crafting Apps?|Craft Apps?|[A-Z][A-Za-z]*Craft|LabtosoStudios|GitHub|Rust|WebAssembly|macOS|Windows|Linux)\b")
+
+
+def fix_names(de_text: str) -> str:
+    """Undo what translation does to names: 'Crafting-Apps' -> 'Crafting Apps', 'Pdf Craft' -> 'PdfCraft'."""
+    t = re.sub(r"\b(Crafting|Craft)-(Apps?)\b", r"\1 \2", de_text)
+    t = re.sub(r"\b(Photo|Vector|Film|Light|Pdf|Effect|Design|Fig|Word|Sound|Deck|CAD|Grid|Art)\s+Craft\b", r"\1Craft", t)
+    return t
+
+
 AUTO = os.path.join(ROOT, "site", "i18n", "de.auto.json")
 KEEP_ENGLISH = re.compile(r"^(ArtCraft|[A-Z][a-z]+Craft|CADCraft|PdfCraft|macOS|Windows|Linux|Web|GitHub|Rust|MCP|v?\d[\d.]*|[\w.+-]+@[\w.-]+|https?://\S+|©.*)$")
 
@@ -584,6 +695,19 @@ def gtx(text: str) -> str | None:
     return None
 
 
+def gtx_protected(text: str) -> str | None:
+    """Translate with names swapped for tokens Google leaves alone, then put them back."""
+    names = []
+    def keep(m):
+        names.append(m.group(0))
+        return f"QX{len(names) - 1}Q"
+    out = gtx(KEEP_NAMES.sub(keep, text))
+    if out is None:
+        return None
+    out = re.sub(r"QX\s*(\d+)\s*Q", lambda m: names[int(m.group(1))] if int(m.group(1)) < len(names) else m.group(0), out)
+    return fix_names(out)
+
+
 def translate_missing(missing: list[str]) -> dict:
     """German for texts nobody translated by hand yet; cached in site/i18n/de.auto.json.
     Texts go in batches of lines; the whole step stops after 10 minutes or 5 failures in a row
@@ -606,7 +730,7 @@ def translate_missing(missing: list[str]) -> dict:
         if not batch:
             batch = [todo[i]]
             i += 1
-        out = gtx("\n".join(batch))
+        out = gtx_protected("\n".join(batch))
         lines = out.split("\n") if out is not None else None
         if lines is None:
             fails += 1
@@ -617,7 +741,7 @@ def translate_missing(missing: list[str]) -> dict:
             continue
         fails = 0
         if len(lines) != len(batch):
-            lines = [gtx(t) for t in batch]
+            lines = [gtx_protected(t) for t in batch]
         for en, de_text in zip(batch, lines):
             if not de_text:
                 continue
@@ -651,27 +775,35 @@ def main() -> int:
         print("original site unreachable; keeping the previous mirror", file=sys.stderr)
         return 1
 
-    # every visible text; whatever has no hand-made German gets a machine translation (cached)
+    # every visible text of the finished pages; whatever has no hand-made German gets a
+    # machine translation (cached). Sentences with an italic word or a link inside also go as a
+    # whole, the inline parts marked [[like this]], so the German keeps its words in order.
+    rendered = m.render()
     texts = set()
-    for path, html in m.pages.items():
+    for path, html in rendered.items():
         soup = BeautifulSoup(html, "html.parser")
-        for s in soup(["script", "style", "noscript", "svg"]):
-            s.decompose()
+        for x in soup(["script", "style", "noscript", "svg"]):
+            x.decompose()
         for t in soup.find_all(string=True):
             if isinstance(t, Comment):
                 continue
-            k = re.sub(r"\s+", " ", str(t)).strip()
+            k = norm_text(str(t))
             if k and re.search(r"[A-Za-z]{2}", k) and len(k) < 2000:
                 texts.add(k)
-        for el in soup.find_all(attrs={"alt": True}):
-            texts.add(re.sub(r"\s+", " ", el["alt"]).strip())
+        for el in soup.find_all(BLOCKS):
+            k = block_key(el)
+            if k:
+                texts.add(k)
+        for attr in ("alt", "title", "aria-label", "placeholder"):
+            for el in soup.find_all(attrs={attr: True}):
+                texts.add(norm_text(el[attr]))
         if soup.title and soup.title.string:
-            texts.add(re.sub(r"\s+", " ", soup.title.string).strip())
+            texts.add(norm_text(soup.title.string))
     texts.discard("")
     auto = translate_missing(sorted(t for t in texts if t not in de))
-    de = {**auto, **de}
+    de = {k: fix_names(v) for k, v in {**auto, **de}.items() if k in texts}
 
-    m.write(de)
+    m.write(rendered, de)
     write_feed(args.out, m.state)
     with open(os.path.join(args.out, ".nojekyll"), "w") as fh:
         fh.write("")
