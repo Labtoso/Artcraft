@@ -46,7 +46,11 @@ SKIP_PATHS = re.compile(r"^/(pricing|tutorials|news|faq)(/|$)", re.I)
 # the section index on the home page (drawn by the original's 3D script) without the studio parts
 JS_PATCHES = [
     (re.compile(r'\{id:"(?:studio|features|ownership|made-with|pricing)",label:"[^"]*"\},?'), ""),
+    # the videos (the moving pictures in the 3D hero, the app demos) come from this site, not the
+    # original's video server: a browser only lets the 3D script draw videos from the same site
+    (re.compile(r'`https://cdn-w\.storyteller\.ai\$\{'), "`${"),
 ]
+VIDEO_CDN = "https://cdn-w.storyteller.ai"
 # files that stay on the original server (large media)
 REMOTE = re.compile(r"\.(mp4|webm|mov|m4v|zip|dmg|exe|msi)$", re.I)
 
@@ -313,10 +317,37 @@ class Builder:
         for d in sorted(self.top, key=len, reverse=True):
             pat = re.escape("/" + d)
             text = re.sub(r'(?<=["\'`(=])' + pat + r'(?=[/"\'`)?\\\s])', BASE + "/" + d, text)
-        for d in ("videos",):
-            text = re.sub(r'(?<=["\'`(=])/' + d + r'/', ORIGIN + "/" + d + "/", text)
-            text = re.sub(r'(?<=\\")/' + d + r'/', ORIGIN + "/" + d + "/", text)
+        text = text.replace(VIDEO_CDN + "/videos/", BASE + "/videos/")
+        # the original's own address (canonical, share and copy links) -> this site
+        text = re.sub(r"(?<![\w.-])https://(?:www\.)?getartcraft\.com(?![\w.-])", SITE, text)
+        text = re.sub(r"https%3A%2F%2F(?:www\.)?getartcraft\.com(?![\w.-])",
+                      urllib.parse.quote(SITE, safe=""), text, flags=re.I)
         return text
+
+    def fetch_videos(self) -> int:
+        """The videos the original loads from its video server, saved under videos/."""
+        names = set()
+        for rel, full in self.files():
+            if not rel.endswith((".js", ".html")):
+                continue
+            text = open(full, encoding="utf-8", errors="replace").read()
+            names |= set(re.findall(r'cdnMediaUrl\)\("/videos/([\w./-]+\.(?:mp4|webm))"', text))
+            names |= set(re.findall(re.escape(VIDEO_CDN) + r'/videos/([\w./-]+\.(?:mp4|webm))', text))
+            # the 3D hero: Array.from({length:35},...cdnMediaUrl)(`/videos/${String(t+1).padStart(3,"0")}.mp4`)
+            for n in re.findall(r'length:(\d+)\}[^;]{0,120}cdnMediaUrl\)\(`/videos/\$\{String\(t\+1\)\.padStart\(3,"0"\)\}\.mp4`', text):
+                names |= {f"{i:03d}.mp4" for i in range(1, int(n) + 1)}
+        got = 0
+        for name in sorted(names):
+            target = os.path.join(self.dst, "videos", name)
+            res = fetch(f"{VIDEO_CDN}/videos/{name}") or fetch(f"{ORIGIN}/videos/{name}")
+            if not res:
+                print(f"::warning title=Website::video {name} could not be loaded")
+                continue
+            os.makedirs(os.path.dirname(target), exist_ok=True)
+            with open(target, "wb") as fh:
+                fh.write(res[0])
+            got += 1
+        return got
 
     def fetch_missing_chunks(self):
         """Scripts the page loads only later (named inside other scripts) that the capture missed."""
@@ -358,7 +389,7 @@ class Builder:
         # only file folders: page links stay as the original scripts expect them (the runtime
         # fixes them on the page), so the scripts' own path checks keep working
         pages = {rel.split("/")[0] for rel, _ in self.files() if rel.endswith("index.html") and "/" in rel}
-        self.top = {t for t in self.top if t != "index.html" and t not in pages}
+        self.top = {t for t in self.top if t != "index.html" and t not in pages} | {"videos"}
         shutil.rmtree(self.dst, ignore_errors=True)
         head = head_block(runtime_config(self.state))
         pages = 0
@@ -388,6 +419,7 @@ class Builder:
             shutil.copyfile(home, os.path.join(self.dst, "404.html"))
         with open(os.path.join(self.dst, ".nojekyll"), "w") as fh:
             fh.write("")
+        print(f"{self.fetch_videos()} videos")
         write_feed(self.dst, self.state)
         write_german(self.dst, {})
         print(f"{pages} pages")
