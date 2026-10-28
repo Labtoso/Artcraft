@@ -129,10 +129,12 @@ def main() -> int:
         for a in assets:
             a["download_url"] = f"https://github.com/{REPO}/releases/download/{tag}/{a['name']}"
 
-        # the suite release: this app's old files out, the new ones in
+        # the suite release: this app's old files out, the new ones in; every other app keeps its files
         listing = gh("release", "view", SUITE_TAG, "--repo", REPO, "--json", "assets", "--jq", ".assets[].name", capture=True).stdout.split()
+        old = {a["name"] for a in state.get(app_id, {}).get("assets", [])}
+        new = {a["name"] for a in assets}
         for name in listing:
-            if name.startswith(app_id + "-") and name not in {a["name"] for a in assets}:
+            if (name in old or name.startswith(app_id + "-")) and name not in new:
                 gh("release", "delete-asset", SUITE_TAG, name, "--repo", REPO, "--yes")
         gh("release", "upload", SUITE_TAG, "--repo", REPO, "--clobber", *files)
 
