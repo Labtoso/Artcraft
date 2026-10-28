@@ -1,0 +1,16 @@
+Artcraft
+Copyright (c) 2026 Labtoso.
+The tools and workflows in this repository are licensed under the MIT License or the Apache
+License, Version 2.0, at your option (LICENSE-MIT, LICENSE-APACHE).
+
+This repository builds and redistributes the Craft App Suite and the ArtCraft Launcher, created by
+the ArtCraft Team and their contributors (https://github.com/storytold), licensed under the MIT
+License or the Apache License, Version 2.0. Every build contains the original LICENSE-MIT,
+LICENSE-APACHE, NOTICE and ATTRIBUTION files of the app it was built from. The builds are
+modified: community links (Discord, social networks) are removed and links to the original
+repository and website point to this repository and its mirrored website. The exact changes of
+each build are in the build log of the release.
+
+The mirrored website is the work of the ArtCraft Team, changed in the same way.
+The ArtCraft name, wordmark and logos are trademarks of the ArtCraft Team and are not covered by
+the licenses above. This project is not affiliated with the ArtCraft Team.
