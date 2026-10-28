@@ -292,6 +292,13 @@ def find_cut(tree: Tree, pos: int):
                             if name.search(later):
                                 if not MARKER.search(later):
                                     return None
+                                # a user that binds its own variable must be unused elsewhere too
+                                um = re.match(r"\s*let\s+(mut\s+)?([a-z_][a-z0-9_]*)\s*(:|=)", later)
+                                if um and um.group(2) != m.group(2):
+                                    uname = re.compile(r"\b" + um.group(2) + r"\b")
+                                    for a3, b3, _t3 in stmts:
+                                        if a3 > b2 and uname.search(text[a3:b3 + 1]) and not MARKER.search(text[a3:b3 + 1]):
+                                            return None
                                 users.append((a2, b2))
                         return ("let", a, b, users)
                     if word in ITEM_KEYWORDS:
