@@ -125,12 +125,19 @@ class Mirror:
             return False
         if path in self.assets:
             return True
+        # a page or folder (e.g. /apps or /apps/) is no file; leave such links to the page logic
+        if path.endswith("/") or not os.path.splitext(path)[1]:
+            return False
         target = os.path.join(self.out, path.lstrip("/"))
+        if os.path.isdir(target):
+            return False
         got = fetch(self.origin + urllib.parse.quote(path))
         if not got:
             return False
-        self.assets.add(path)
         data, ctype = got
+        if "text/html" in ctype:
+            return False
+        self.assets.add(path)
         os.makedirs(os.path.dirname(target), exist_ok=True)
         if path.endswith(".css") or "text/css" in ctype:
             css = data.decode("utf-8", "replace")
@@ -325,6 +332,9 @@ class Mirror:
             return val
         if self.save_asset(p.path):
             return self.local(p.path)
+        page_path = self.norm_page(p.path)
+        if page_path in self.pages:
+            return self.local(page_path)
         return absu
 
     def write(self, de: dict):
@@ -505,15 +515,25 @@ AUTO = os.path.join(ROOT, "site", "i18n", "de.auto.json")
 KEEP_ENGLISH = re.compile(r"^(ArtCraft|[A-Z][a-z]+Craft|CADCraft|PdfCraft|macOS|Windows|Linux|Web|GitHub|Rust|MCP|v?\d[\d.]*|[\w.+-]+@[\w.-]+|https?://\S+|©.*)$")
 
 
+GTX_ERRORS = []
+
+
 def gtx(text: str) -> str | None:
-    """One request to the free Google endpoint; None when it doesn't answer quickly."""
-    q = urllib.parse.urlencode({"client": "gtx", "sl": "en", "tl": "de", "dt": "t", "q": text})
+    """One request to the free Google endpoint; None when it doesn't answer quickly.
+    POST keeps long batches out of the URL."""
+    body = urllib.parse.urlencode({"q": text}).encode("utf-8")
     try:
-        req = urllib.request.Request("https://translate.googleapis.com/translate_a/single?" + q, headers={"User-Agent": UA})
-        with urllib.request.urlopen(req, timeout=15) as r:
+        req = urllib.request.Request(
+            "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=de&dt=t",
+            data=body, headers={"User-Agent": UA, "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"})
+        with urllib.request.urlopen(req, timeout=20) as r:
             data = json.loads(r.read().decode("utf-8"))
         return "".join(part[0] for part in data[0] if part and part[0])
-    except Exception:
+    except Exception as e:
+        if len(GTX_ERRORS) < 3:
+            GTX_ERRORS.append(repr(e))
+            print(f"translation request failed: {e!r}", flush=True)
+        time.sleep(2)
         return None
 
 
@@ -529,9 +549,10 @@ def translate_missing(missing: list[str]) -> dict:
     deadline = time.time() + 600
     fails = done = 0
     i = 0
+    per = 40
     while i < len(todo) and time.time() < deadline and fails < 5:
         batch, size = [], 0
-        while i < len(todo) and size + len(todo[i]) < 3000 and len(batch) < 40:
+        while i < len(todo) and size + len(todo[i]) < 3000 and len(batch) < per:
             batch.append(todo[i])
             size += len(todo[i]) + 1
             i += 1
@@ -542,6 +563,10 @@ def translate_missing(missing: list[str]) -> dict:
         lines = out.split("\n") if out is not None else None
         if lines is None:
             fails += 1
+            if len(batch) > 1:
+                # same texts again, in smaller batches
+                i -= len(batch)
+                per = max(1, len(batch) // 2)
             continue
         fails = 0
         if len(lines) != len(batch):
