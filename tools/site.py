@@ -999,6 +999,10 @@ def translate_missing(missing: list[str]) -> dict:
     if os.path.exists(AUTO):
         with open(AUTO, encoding="utf-8") as fh:
             cache = json.load(fh)
+    # older translations that lost a name (Rust -> Rost) are done again
+    for en in list(cache):
+        if any(name not in cache[en] for name in KEEP_NAMES.findall(en)):
+            del cache[en]
     todo = [t for t in missing if t not in cache and not KEEP_ENGLISH.match(t) and "\n" not in t]
     deadline = time.time() + 600
     fails = done = 0
