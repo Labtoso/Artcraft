@@ -208,6 +208,7 @@
     downloadPage();
     noMac(root);
     linuxColumn(root);
+    fileNames(root);
   }
 
   // the download page is about ArtCraft Studio on the original; here it is about the launcher
@@ -376,6 +377,17 @@
         if (/\.AppImage$/i.test(li.textContent.trim()) && /x86_64/.test(li.textContent)) hide(li);
       });
     });
+  }
+
+  // file names under the download links: the version built here (the link already loads it)
+  var FILE = /^([a-z]+)(-cli)?-(\d+\.\d+\.\d+)(-.+)$/;
+  function fileNames(root) {
+    if (!/^\/apps\/[^/]+\/$/.test(PAGE)) return;
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n, m, app;
+    while ((n = w.nextNode())) {
+      if (!(m = FILE.exec(n.nodeValue)) || !(app = C.apps[m[1]]) || m[3] === app.version) continue;
+      n.nodeValue = m[1] + (m[2] || '') + '-' + app.version + m[4];
+    }
   }
 
   // the top-right button: "Download" to the download page, like on the original
