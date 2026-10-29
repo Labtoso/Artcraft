@@ -61,7 +61,10 @@ jobs:
           git add site/i18n/de.auto.json
           if ! git diff --cached --quiet; then
             git commit -m "Website: German for new texts"
-            git pull --rebase origin main && git push origin HEAD:main
+            for i in 1 2 3 4 5; do
+              git pull --rebase origin main && git push origin HEAD:main && break
+              sleep $((i * 5))
+            done
           fi
       - name: Publish to gh-pages
         run: |

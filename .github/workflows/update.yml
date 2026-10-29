@@ -213,7 +213,10 @@ jobs:
     if: always() && needs.discover.outputs.any == 'true'
     runs-on: ubuntu-latest
     steps:
+      # the newest main, so state/versions.json holds everything published so far
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/download-artifact@v4
         with:
           name: discovered
@@ -248,7 +251,13 @@ jobs:
           git add state apps README.md
           if ! git diff --cached --quiet; then
             git commit -m "Update apps: $(python3 -c 'import json,os;print(", ".join(f"{m["id"]} {m["version"]}" for m in json.loads(os.environ["MATRIX"]) if os.path.isdir("dist/"+m["id"])))')"
-            git push
+            # other workflows (the website's German texts) push to main too: rebase and retry
+            for i in 1 2 3 4 5; do
+              git push && exit 0
+              sleep $((i * 5))
+              git pull --rebase origin main
+            done
+            exit 1
           fi
         env:
           MATRIX: ${{ needs.discover.outputs.matrix }}
