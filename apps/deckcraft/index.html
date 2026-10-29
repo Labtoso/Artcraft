@@ -116,7 +116,7 @@ html.ac-wait body{opacity:0!important}
 
   // ---- what goes ---------------------------------------------------------------------------
   var GONE_LINK = /app\.getartcraft\.com|discord\.(gg|com)|bsky\.app|bluesky|twitter\.com|\/\/(www\.)?x\.com\/|linkedin\.com|instagram\.com|tiktok\.com|youtube\.com\/@|reddit\.com\/(submit|r\/)|facebook\.com\/sharer|t\.me\/share|^mailto:|^tel:/i;
-  var GONE_PAGE = /^\/(pricing|tutorials|news|faq)(\/|$)/i;
+  var GONE_PAGE = /^\/(pricing|tutorials|news|faq|support)(\/|$)/i;
   var GONE_LABEL = /^(artcraft studio|community|pricing)$/i;
   function hide(el) { if (el && !el.hasAttribute('data-ac-hide')) el.setAttribute('data-ac-hide', ''); }
   // the smallest wrapper of a link that holds nothing else (list item, card)
@@ -157,6 +157,7 @@ html.ac-wait body{opacity:0!important}
     } else if (GONE_LINK.test(href)) {
       hide(linkBox(a)); return;
     } else if (/^https:\/\/getartcraft\.com/i.test(href)) {
+      if (GONE_PAGE.test(href.replace(/^https:\/\/getartcraft\.com/i, '').split(/[?#]/)[0])) { hide(linkBox(a)); return; }
       out = fixUrl(href.replace(/^https:\/\/getartcraft\.com/i, ''));
     } else if (GH.test(href) || /^https:\/\/github\.com\/storytold\/?$/i.test(href)) {
       out = mapGitHub(href);
@@ -229,6 +230,7 @@ html.ac-wait body{opacity:0!important}
     downloadPage();
     linuxColumn(root);
     fileNames(root);
+    noWeb(root);
   }
 
   // the download page is about ArtCraft Studio on the original; here it is about the launcher
@@ -380,6 +382,26 @@ html.ac-wait body{opacity:0!important}
       art.querySelectorAll('li').forEach(function (li) {
         if (/\.AppImage$/i.test(li.textContent.trim()) && /x86_64/.test(li.textContent)) hide(li);
       });
+    });
+  }
+
+  // the apps here are desktop apps only: every "in your browser" / "Web" mention goes, on every page
+  var WEB_CLAUSE = /,?\s*(and\s+)?(also\s+)?(right\s+)?(in\s+(your|the|a|any)\s+(web\s+)?browser|on\s+the\s+web|as\s+a\s+web\s+app)(\s+too)?/gi;
+  var WEB_ITEM = /(\s*·\s*Web\b(?!\s*\w)|,\s*(and\s+)?(the\s+)?web\b(?=[\s.,]|$)|\s+and\s+(the\s+)?web\b(?=[\s.,]|$))/gi;
+  function noWeb(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
+    while ((n = w.nextNode())) {
+      var e = n.parentElement;
+      if (!e || e.closest('script,style,[data-ac-own]')) continue;
+      var v = n.nodeValue, t = v.replace(WEB_CLAUSE, '').replace(WEB_ITEM, '');
+      if (t !== v) n.nodeValue = t.replace(/\s+\./g, '.');
+    }
+    // platform chips and download columns titled "Web" / "Browser"
+    root.querySelectorAll('article h3, div, span, li').forEach(function (el) {
+      if (el.children.length || !/^(web|browser|web app|in the browser)$/i.test(el.textContent.trim())) return;
+      if (el.closest('nav,footer,[data-ac-own]')) return;
+      var box = el.tagName === 'H3' ? el.closest('article') : el.closest('a') || el;
+      hide(box.parentElement && box.parentElement.children.length > 1 ? box : box.parentElement || box);
     });
   }
 
