@@ -6,9 +6,9 @@ const fs = require('fs');
 const path = require('path');
 
 const ORIGIN = 'https://getartcraft.com';
-const SKIP = /^\/(pricing|tutorials|news|faq)(\/|$)/i;
+const SKIP = /^\/(pricing|tutorials|news|faq|support)(\/|$)/i;
 const MEDIA = /\.(mp4|webm|mov|m4v|zip|dmg|exe|msi)$/i;
-const START = ['/', '/apps/', '/download/', '/support/', '/press-kit/'];
+const START = ['/', '/apps/', '/download/', '/press-kit/'];
 
 function fileFor(out, url, type) {
   const u = new URL(url);

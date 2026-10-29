@@ -5,7 +5,7 @@ The original runs with its own scripts (animations, 3D, menus), so it looks and 
 like the original. tools/capture.js saves it with every file a browser loads; this script
   * copies that capture to _site/ and points every path at /Artcraft/ (videos stay on the
     original server),
-  * leaves out the pages that are only about the AI studio (pricing, tutorials, news, FAQ) and
+  * leaves out the pages that are only about the AI studio or the original's services (pricing, tutorials, news, FAQ, support) and
     the original's analytics,
   * adds tools/site_runtime.js to every page: it hides the AI studio, pricing, Discord and social
     links once the original scripts have built the page, turns "Launch App" into "Download", puts
@@ -42,7 +42,7 @@ UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chr
 MAX_ASSET = 90 * 1024 * 1024
 
 # pages that are only about the original's AI studio or its pricing
-SKIP_PATHS = re.compile(r"^/(pricing|tutorials|news|faq)(/|$)", re.I)
+SKIP_PATHS = re.compile(r"^/(pricing|tutorials|news|faq|support)(/|$)", re.I)
 # the section index on the home page (drawn by the original's 3D script) without the studio parts
 JS_PATCHES = [
     (re.compile(r'\{id:"(?:studio|features|ownership|made-with|pricing)",label:"[^"]*"\},?'), ""),
