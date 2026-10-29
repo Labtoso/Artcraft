@@ -9,6 +9,8 @@ The launcher's look and behaviour stay as they are, except:
     launcher reaches installed ones as an update,
   * the feed is the only source of releases, also with pre-releases switched on: every app lives
     in the same repository here, so GitHub's "latest release" can't tell the apps apart,
+  * an app's Website, GitHub and Releases links open its page on this copy's website, its folder
+    and its releases in this repo; the footer says the releases came from this copy's website,
   * the Community box in the settings (Discord, website, GitHub, social icons) is gone,
   * the status bar keeps only the Website and GitHub icons, which open this copy's website and
     this repo; Discord and the social accounts are gone.
@@ -82,7 +84,23 @@ def main() -> int:
     text = sub(text, r'(pub const GITHUB_OWNER: &str = )"[^"]*"', rf'\1"{OWNER}"', catalog)
     text = sub(text, r'(pub const WEBSITE_URL: &str = )"[^"]*"', rf'\1"{SITE}"', catalog)
     text = sub(text, r'(pub const GITHUB_URL: &str = )"[^"]*"', rf'\1"https://github.com/{OWNER}/{NAME}"', catalog)
+    # an app's links: its page on this copy's website, its folder and its releases in this repo
+    text = sub(text, r'format!\("https://getartcraft\.com/apps/\{\}", self\.id\)', f'format!("{SITE}/apps/{{}}/", self.id)', catalog)
+    text = text.replace('"https://getartcraft.com/apps/pdfcraft"', f'"{SITE}/apps/pdfcraft/"').replace('"https://getartcraft.com/apps/wordcraft"', f'"{SITE}/apps/wordcraft/"')
+    text = sub(text, r'(pub fn releases_url\(&self\) -> String \{\n)(\s*)format!\("https://github\.com/\{\}/releases", self\.repo\)',
+               rf'\1\2if self.repo == "{OWNER}/{NAME}" {{ return format!("https://github.com/{{}}/releases?q={{}}&expanded=true", self.repo, self.id); }}\n\2format!("https://github.com/{{}}/releases", self.repo)', catalog)
+    text = sub(text, r'(pub fn repo_url\(&self\) -> String \{\n)(\s*)format!\("https://github\.com/\{\}", self\.repo\)',
+               rf'\1\2if self.repo == "{OWNER}/{NAME}" {{ return format!("https://github.com/{{}}/tree/main/apps/{{}}", self.repo, self.id); }}\n\2format!("https://github.com/{{}}", self.repo)', catalog)
     with open(catalog, "w", encoding="utf-8", newline="") as fh:
+        fh.write(text)
+
+    # the footer names where the releases came from: this copy's feed, not the original's API
+    protocol = os.path.join(src, "crates/core/src/protocol.rs")
+    with open(protocol, encoding="utf-8") as fh:
+        text = fh.read()
+    host = SITE.split("//", 1)[-1].rstrip("/")
+    text = sub(text, r'Self::ArtCraftApi => "ArtCraft API"', f'Self::ArtCraftApi => "{host}"', protocol)
+    with open(protocol, "w", encoding="utf-8", newline="") as fh:
         fh.write(text)
 
     with open(feed, encoding="utf-8") as fh:
