@@ -9,7 +9,7 @@
 
 ## What is this?
 
-The **Craft App Suite** is a collection of free, open-source desktop apps for creative work, written entirely in Rust: image editing, vector graphics, video editing, word processing, spreadsheets, presentations, CAD and more. They run natively on Windows and Linux (the original also on macOS and in the browser). The **ArtCraft Launcher** installs and updates every app with one click.
+The **Craft App Suite** is a collection of free, open-source desktop apps for creative work, written entirely in Rust: image editing, vector graphics, video editing, word processing, spreadsheets, presentations, CAD and more. They run natively on Windows, Linux and macOS (the original also in the browser). The **ArtCraft Launcher** installs and updates every app with one click.
 
 This repository takes every version of these apps, removes the community promotion from them and publishes the results as ready-to-use downloads.
 
@@ -46,11 +46,11 @@ Every app has its own folder under [`apps/`](apps/) with a description, the curr
 
 ## Install
 
-1. **Easiest:** Download the launcher from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite), `artcraft-launcher-…-windows-x64.msi` for Windows or `artcraft-launcher-…-linux-x86_64.AppImage` for Linux. Start it, pick an app, install. The launcher keeps everything up to date, itself included.
-2. **Single app:** Take the matching file from the suite release or from the app's own release (`<app>-v<version>`): `.msi` (installer) or `-portable.zip` for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux.
+1. **Easiest:** Download the launcher from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite), `artcraft-launcher-…-windows-x64.msi` for Windows, `artcraft-launcher-…-linux-x86_64.AppImage` for Linux or `artcraft-launcher-…-macos-universal.dmg` for macOS. Start it, pick an app, install. The launcher keeps everything up to date, itself included.
+2. **Single app:** Take the matching file from the suite release or from the app's own release (`<app>-v<version>`): `.msi` (installer) or `-portable.zip` for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel).
 3. **Website:** The download buttons on [artcraft.labtoso.de](https://artcraft.labtoso.de/) download the file for your system directly.
 
-The Windows files are not signed, so Windows SmartScreen asks on first start ("More info" → "Run anyway").
+The files are not signed by Microsoft or Apple. Windows SmartScreen asks on first start ("More info" → "Run anyway"). On macOS, open *System Settings → Privacy & Security* after the first start and click *Open Anyway*, or run `xattr -dr com.apple.quarantine "/Applications/<App>.app"`.
 
 ## How it works
 
@@ -59,7 +59,7 @@ Everything runs automatically on GitHub Actions, nobody has to start anything:
 1. **Discover** ([`tools/discover.py`](tools/discover.py)), every 6 hours: which apps exist upstream (the original launcher's app list and all `*craft` repositories), and which one has a new version? New apps are picked up on their own.
 2. **Debrand** ([`tools/debrand.py`](tools/debrand.py)): the Rust code of every app is searched for Discord and social networks. The code that shows the button, menu entry or link is removed as a whole statement or list entry. Then the remaining links are rewritten. Extra rules per app live in `apps/<app>/debrand.toml`.
 3. **Check** ([`tools/prepare.py`](tools/prepare.py)): `cargo check` has to pass. If a file no longer compiles after a removal, its code stays original and only its links are rewritten, so a broken version never reaches a release.
-4. **Build:** Windows x64 and Linux x86_64, with each app's original packaging scripts.
+4. **Build:** Windows x64, Linux x86_64 and macOS (universal, Apple silicon and Intel), with each app's original packaging scripts.
 5. **Publish** ([`tools/publish.py`](tools/publish.py)): one release per app version (`wordcraft-v0.5.0` and so on) and the **[`suite`](https://github.com/Labtoso/Artcraft/releases/tag/suite)** release, which always holds every current app and the launcher. If a build fails, the previous version stays online and an issue is opened.
 6. **Launcher** ([`tools/patch_launcher.py`](tools/patch_launcher.py)): the launcher looks exactly like the original, without the community box. It gets apps and its own updates from this repository's releases through the feed [`release_info.json`](https://artcraft.labtoso.de/release_info.json).
 7. **Website** ([`tools/site.py`](tools/site.py)), daily and after every update: [getartcraft.com](https://getartcraft.com) is mirrored 1:1 to [artcraft.labtoso.de](https://artcraft.labtoso.de/), without ArtCraft Studio, pricing, Discord and social links. Download buttons point to these releases, "Original on GitHub" links to the original, and the footer holds the credits. The site switches to German automatically when the browser or system is set to German, otherwise it shows English, and DE/EN switches by hand. Hand-made translations are in [`site/i18n/de.json`](site/i18n/de.json), new texts are translated automatically ([`de.auto.json`](site/i18n/de.auto.json)).
