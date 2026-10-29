@@ -51,6 +51,7 @@ JS_PATCHES = [
     (re.compile(r'`https://cdn-w\.storyteller\.ai\$\{'), "`${"),
 ]
 VIDEO_CDN = "https://cdn-w.storyteller.ai"
+FLIGHT_SCRIPT = re.compile(r"<script>self\.__next_f\.push\((\[.*?\])\)</script>", re.S)
 # files that stay on the original server (large media)
 REMOTE = re.compile(r"\.(mp4|webm|mov|m4v|zip|dmg|exe|msi)$", re.I)
 
@@ -380,9 +381,46 @@ class Builder:
         # the original's analytics stay out
         text = re.sub(r'<link[^>]+googletagmanager[^>]*>', "", text)
         text = re.sub(r'<script[^>]*googletagmanager[^>]*>\s*</script>', "", text)
-        text = self.fix_paths(text)
+        # the page's data for React (self.__next_f.push) is rewritten on its own: long text rows
+        # carry their length, which has to match after the rewrite or React gives up on the page
+        flight = list(FLIGHT_SCRIPT.finditer(text))
+        stream = "".join(json.loads(m[1])[1] for m in flight if json.loads(m[1])[0] == 1)
+        parts, last = [], 0
+        for m in flight:
+            parts.append(self.fix_paths(text[last:m.start()]))
+            if json.loads(m[1])[0] == 1:
+                if stream is not None:
+                    data = json.dumps([1, self.fix_flight(stream)], ensure_ascii=False)
+                    data = data.replace("<", "\\u003c").replace("\u2028", "\\u2028").replace("\u2029", "\\u2029")
+                    parts.append(f"<script>self.__next_f.push({data})</script>")
+                    stream = None
+            else:
+                parts.append(m[0])
+            last = m.end()
+        parts.append(self.fix_paths(text[last:]))
+        text = "".join(parts)
         text = re.sub(r"(<head[^>]*>)", lambda m: m.group(1) + head, text, count=1)
         return text
+
+    def fix_flight(self, stream: str) -> str:
+        """fix_paths for React's page data. Rows "<id>:T<hex length>,<text>" hold text of an exact
+        length in UTF-8 bytes; that length is recomputed after the rewrite."""
+        raw = stream.encode("utf-8")
+        out, pos, plain = [], 0, 0
+        row = re.compile(rb"([0-9a-f]+):T([0-9a-f]+),")
+        while pos < len(raw):
+            m = row.match(raw, pos)
+            if m:
+                out.append(self.fix_paths(raw[plain:pos].decode("utf-8")))
+                n = int(m[2], 16)
+                body = self.fix_paths(raw[m.end():m.end() + n].decode("utf-8"))
+                out.append(f"{m[1].decode()}:T{len(body.encode('utf-8')):x},{body}")
+                pos = plain = m.end() + n
+                continue
+            nl = raw.find(b"\n", pos)
+            pos = len(raw) if nl < 0 else nl + 1
+        out.append(self.fix_paths(raw[plain:].decode("utf-8")))
+        return "".join(out)
 
     def build(self):
         self.fetch_missing_chunks()
