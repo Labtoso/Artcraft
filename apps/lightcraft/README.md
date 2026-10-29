@@ -1,17 +1,17 @@
 # LightCraft
 
-**Fotobibliothek und RAW-Entwickler.** Fotos verwalten und RAW-Dateien entwickeln, nicht-destruktiv, mit Masken, Farbrädern, Alben und Bewertungen, alles lokal auf deinem Rechner.
+**Photo library and raw developer.** Organize photos and develop raw files, non-destructively, with masks, color wheels, albums and ratings, all locally on your computer.
 
 | | |
 |---|---|
-| Aktuelle Version hier | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/lightcraft-v0.15.0) |
+| Current version here | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/lightcraft-v0.15.0) |
 | Original | [github.com/storytold/lightcraft](https://github.com/storytold/lightcraft) |
-| Website | [https://labtoso.github.io/Artcraft/apps/lightcraft/](https://labtoso.github.io/Artcraft/apps/lightcraft/) |
-| Lizenz | MIT oder Apache-2.0 (wie das Original, Lizenzdateien liegen in jedem Download) |
+| Website | [https://artcraft.labtoso.de/apps/lightcraft/](https://artcraft.labtoso.de/apps/lightcraft/) |
+| License | MIT or Apache-2.0 (like the original; the license files are in every download) |
 
-## Was hier anders ist
+## What is different here
 
-Gleicher Code wie das Original v0.15.0, nur ohne Discord- und Social-Media-Buttons. Links zu GitHub, Fehlermeldungen und Updates zeigen auf dieses Repo, die Website auf die gespiegelte Seite. Alles wird automatisch aus jedem neuen Original-Release gebaut ([so funktioniert es](../../README.md#so-funktioniert-es)).
+The same code as the original v0.15.0, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
 
 ## Downloads (0.15.0)
 
@@ -23,4 +23,4 @@ Gleicher Code wie das Original v0.15.0, nur ohne Discord- und Social-Media-Butto
 - [lightcraft-0.15.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-windows-x64-portable.zip)
 - [lightcraft-0.15.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-windows-x64.msi)
 
-Am einfachsten installierst du sie über den [ArtCraft Launcher](../artcraft-launcher/README.md).
+The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

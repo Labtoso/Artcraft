@@ -1,17 +1,17 @@
 # DesignCraft
 
-**Seitenlayout und Publishing.** Layout für Bücher, Magazine und Flyer: Textfluss, Formate, Farbfelder, schöne Typografie und druckfertige PDFs.
+**Page layout and publishing.** Layout for books, magazines and flyers: text flow, styles, swatches, fine typography and print-ready PDFs.
 
 | | |
 |---|---|
-| Aktuelle Version hier | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/designcraft-v0.14.0) |
+| Current version here | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/designcraft-v0.14.0) |
 | Original | [github.com/storytold/designcraft](https://github.com/storytold/designcraft) |
-| Website | [https://labtoso.github.io/Artcraft/apps/designcraft/](https://labtoso.github.io/Artcraft/apps/designcraft/) |
-| Lizenz | MIT oder Apache-2.0 (wie das Original, Lizenzdateien liegen in jedem Download) |
+| Website | [https://artcraft.labtoso.de/apps/designcraft/](https://artcraft.labtoso.de/apps/designcraft/) |
+| License | MIT or Apache-2.0 (like the original; the license files are in every download) |
 
-## Was hier anders ist
+## What is different here
 
-Gleicher Code wie das Original v0.14.0, nur ohne Discord- und Social-Media-Buttons. Links zu GitHub, Fehlermeldungen und Updates zeigen auf dieses Repo, die Website auf die gespiegelte Seite. Alles wird automatisch aus jedem neuen Original-Release gebaut ([so funktioniert es](../../README.md#so-funktioniert-es)).
+The same code as the original v0.14.0, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
 
 ## Downloads (0.14.0)
 
@@ -24,6 +24,6 @@ Gleicher Code wie das Original v0.14.0, nur ohne Discord- und Social-Media-Butto
 - [designcraft-0.14.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-windows-x64-portable.zip)
 - [designcraft-0.14.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-windows-x64.msi)
 
-Am einfachsten installierst du sie über den [ArtCraft Launcher](../artcraft-launcher/README.md).
+The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).
 
-Zusätzliche Regeln für diese App: [debrand.toml](debrand.toml).
+Extra rules for this app: [debrand.toml](debrand.toml).

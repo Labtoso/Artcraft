@@ -1,17 +1,17 @@
 # PdfCraft
 
-**PDF-Werkbank.** PDFs ansehen, durchsuchen, Seiten wie Karten sortieren, zusammenführen, aufteilen und sicher speichern.
+**PDF workbench.** View and search PDFs, sort pages like cards, merge, split and save them safely.
 
 | | |
 |---|---|
-| Aktuelle Version hier | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/pdfcraft-v0.15.0) |
+| Current version here | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/pdfcraft-v0.15.0) |
 | Original | [github.com/storytold/pdfcraft](https://github.com/storytold/pdfcraft) |
-| Website | [https://labtoso.github.io/Artcraft/apps/pdfcraft/](https://labtoso.github.io/Artcraft/apps/pdfcraft/) |
-| Lizenz | MIT oder Apache-2.0 (wie das Original, Lizenzdateien liegen in jedem Download) |
+| Website | [https://artcraft.labtoso.de/apps/pdfcraft/](https://artcraft.labtoso.de/apps/pdfcraft/) |
+| License | MIT or Apache-2.0 (like the original; the license files are in every download) |
 
-## Was hier anders ist
+## What is different here
 
-Gleicher Code wie das Original v0.15.0, nur ohne Discord- und Social-Media-Buttons. Links zu GitHub, Fehlermeldungen und Updates zeigen auf dieses Repo, die Website auf die gespiegelte Seite. Alles wird automatisch aus jedem neuen Original-Release gebaut ([so funktioniert es](../../README.md#so-funktioniert-es)).
+The same code as the original v0.15.0, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
 
 ## Downloads (0.15.0)
 
@@ -24,6 +24,6 @@ Gleicher Code wie das Original v0.15.0, nur ohne Discord- und Social-Media-Butto
 - [pdfcraft-0.15.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/pdfcraft-v0.15.0/pdfcraft-0.15.0-windows-x64.msi)
 - [pdfcraft-cli-0.15.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/pdfcraft-v0.15.0/pdfcraft-cli-0.15.0-linux-x86_64.tar.gz)
 
-Am einfachsten installierst du sie über den [ArtCraft Launcher](../artcraft-launcher/README.md).
+The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).
 
-Zusätzliche Regeln für diese App: [debrand.toml](debrand.toml).
+Extra rules for this app: [debrand.toml](debrand.toml).

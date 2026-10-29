@@ -1,17 +1,17 @@
 # VectorCraft
 
-**Vektorillustration.** Vektorgrafik mit Zeichenstift, Boolean-Operationen, Live-Effekten, Bildnachzeichnung, Perspektivraster und offenen Formaten wie SVG und PDF.
+**Vector illustration.** Vector graphics with the pen tool, boolean operations, live effects, image tracing, perspective grids and open formats such as SVG and PDF.
 
 | | |
 |---|---|
-| Aktuelle Version hier | [0.18.0](https://github.com/Labtoso/Artcraft/releases/tag/vectorcraft-v0.18.0) |
+| Current version here | [0.18.0](https://github.com/Labtoso/Artcraft/releases/tag/vectorcraft-v0.18.0) |
 | Original | [github.com/storytold/vectorcraft](https://github.com/storytold/vectorcraft) |
-| Website | [https://labtoso.github.io/Artcraft/apps/vectorcraft/](https://labtoso.github.io/Artcraft/apps/vectorcraft/) |
-| Lizenz | MIT oder Apache-2.0 (wie das Original, Lizenzdateien liegen in jedem Download) |
+| Website | [https://artcraft.labtoso.de/apps/vectorcraft/](https://artcraft.labtoso.de/apps/vectorcraft/) |
+| License | MIT or Apache-2.0 (like the original; the license files are in every download) |
 
-## Was hier anders ist
+## What is different here
 
-Gleicher Code wie das Original v0.18.0, nur ohne Discord- und Social-Media-Buttons. Links zu GitHub, Fehlermeldungen und Updates zeigen auf dieses Repo, die Website auf die gespiegelte Seite. Alles wird automatisch aus jedem neuen Original-Release gebaut ([so funktioniert es](../../README.md#so-funktioniert-es)).
+The same code as the original v0.18.0, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
 
 ## Downloads (0.18.0)
 
@@ -23,4 +23,4 @@ Gleicher Code wie das Original v0.18.0, nur ohne Discord- und Social-Media-Butto
 - [vectorcraft-0.18.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-windows-x64-portable.zip)
 - [vectorcraft-0.18.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-windows-x64.msi)
 
-Am einfachsten installierst du sie über den [ArtCraft Launcher](../artcraft-launcher/README.md).
+The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

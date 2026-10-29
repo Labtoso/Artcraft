@@ -1,17 +1,17 @@
 # ArtCraft Launcher
 
-**Installiert, aktualisiert und startet alle Craft-Apps.** Ein Fenster für alle Apps: zeigt, was installiert ist, lädt mit einem Klick die passende Version für deinen Rechner und hält alles aktuell. Diese Version holt die Apps aus diesem Repo, also ohne Community-Links.
+**Installs, updates and starts every Craft app.** One window for all apps: shows what is installed, downloads the right build for your computer with one click and keeps everything up to date. This build installs the apps from this repository, so without community links.
 
 | | |
 |---|---|
-| Aktuelle Version hier | [0.9.1](https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.9.1) |
+| Current version here | [0.9.1](https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.9.1) |
 | Original | [github.com/storytold/craft-launcher](https://github.com/storytold/craft-launcher) |
-| Website | [https://labtoso.github.io/Artcraft/apps/](https://labtoso.github.io/Artcraft/apps/) |
-| Lizenz | MIT oder Apache-2.0 (wie das Original, Lizenzdateien liegen in jedem Download) |
+| Website | [https://artcraft.labtoso.de/apps/](https://artcraft.labtoso.de/apps/) |
+| License | MIT or Apache-2.0 (like the original; the license files are in every download) |
 
-## Was hier anders ist
+## What is different here
 
-Gleicher Code wie das Original v0.9.0, nur ohne Discord- und Social-Media-Buttons. Links zu GitHub, Fehlermeldungen und Updates zeigen auf dieses Repo, die Website auf die gespiegelte Seite. Alles wird automatisch aus jedem neuen Original-Release gebaut ([so funktioniert es](../../README.md#so-funktioniert-es)).
+The same code as the original v0.9.0, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
 
 ## Downloads (0.9.1)
 

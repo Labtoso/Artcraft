@@ -17,22 +17,22 @@ REPO = os.environ.get("GITHUB_REPOSITORY", "Labtoso/Artcraft")
 SITE = os.environ.get("ARTCRAFT_SITE", "https://artcraft.labtoso.de")
 UPSTREAM = "storytold"
 
-# What each app is for, in German. A new app falls back to its upstream description.
+# What each app is for. A new app falls back to its upstream description.
 ABOUT = {
-    "artcraft-launcher": ("Installiert, aktualisiert und startet alle Craft-Apps", "Ein Fenster für alle Apps: zeigt, was installiert ist, lädt mit einem Klick die passende Version für deinen Rechner und hält alles aktuell. Diese Version holt die Apps aus diesem Repo, also ohne Community-Links."),
-    "photocraft": ("Bildbearbeitung", "Ein Bildeditor, wie man ihn kennt: Ebenen, Masken, Auswahlen, Einstellungsebenen, Ebenenstile und Farbverwaltung, mit GPU-Leinwand und echten Ebenen-Dateien."),
-    "vectorcraft": ("Vektorillustration", "Vektorgrafik mit Zeichenstift, Boolean-Operationen, Live-Effekten, Bildnachzeichnung, Perspektivraster und offenen Formaten wie SVG und PDF."),
-    "filmcraft": ("Videoschnitt", "Professioneller Videoschnitt mit Timeline, bildgenauer Zeit, eigenen Codecs, Farbkorrektur, Effekten mit Keyframes und Audio auf Sendeniveau."),
-    "lightcraft": ("Fotobibliothek und RAW-Entwickler", "Fotos verwalten und RAW-Dateien entwickeln, nicht-destruktiv, mit Masken, Farbrädern, Alben und Bewertungen, alles lokal auf deinem Rechner."),
-    "pdfcraft": ("PDF-Werkbank", "PDFs ansehen, durchsuchen, Seiten wie Karten sortieren, zusammenführen, aufteilen und sicher speichern."),
-    "effectcraft": ("Motion Graphics und VFX", "Animation und visuelle Effekte mit Ebenen, Keyframes, Graph-Editor, über 250 Effekten, echtem 3D und Expressions."),
-    "designcraft": ("Seitenlayout und Publishing", "Layout für Bücher, Magazine und Flyer: Textfluss, Formate, Farbfelder, schöne Typografie und druckfertige PDFs."),
-    "figcraft": ("Interface-Design", "Oberflächen gestalten mit Auto-Layout, Komponenten und Varianten, Vektornetzen, Prototypen und Live-Sessions zu mehreren."),
-    "wordcraft": ("Textverarbeitung", "Textverarbeitung mit Menüband, echten Dokumentformaten (DOCX), schnellem Layout, Änderungsverfolgung, Inhaltsverzeichnissen und Zitaten."),
-    "soundcraft": ("Digitale Audio-Workstation", "Aufnehmen und Mischen mit Mischpult, Automation, eigenen Plugins und CLAP-Unterstützung, MIDI, Notation und Surround."),
-    "deckcraft": ("Präsentationen", "Folien mit Mastern und Themes, Formen, Übergängen und Animationen, Referentenansicht und PowerPoint-Kompatibilität (PPTX)."),
-    "cadcraft": ("CAD und technisches Zeichnen", "Technisches Zeichnen mit Papierbereich und Ansichtsfenstern, Bemaßungen, Schraffuren, Blockbibliotheken und parametrischen Abhängigkeiten."),
-    "gridcraft": ("Tabellenkalkulation", "Tabellen mit über 500 Funktionen, Diagrammen, Pivot-Tabellen, bedingter Formatierung und nativer XLSX-Kompatibilität."),
+    "artcraft-launcher": ("Installs, updates and starts every Craft app", "One window for all apps: shows what is installed, downloads the right build for your computer with one click and keeps everything up to date. This build installs the apps from this repository, so without community links."),
+    "photocraft": ("Image editing", "The image editor you already know: layers, masks, selections, adjustment layers, layer styles and color management, on a GPU canvas with real layered files."),
+    "vectorcraft": ("Vector illustration", "Vector graphics with the pen tool, boolean operations, live effects, image tracing, perspective grids and open formats such as SVG and PDF."),
+    "filmcraft": ("Video editing", "Professional video editing with a timeline, frame-accurate time, its own codecs, color correction, keyframed effects and broadcast-grade audio."),
+    "lightcraft": ("Photo library and raw developer", "Organize photos and develop raw files, non-destructively, with masks, color wheels, albums and ratings, all locally on your computer."),
+    "pdfcraft": ("PDF workbench", "View and search PDFs, sort pages like cards, merge, split and save them safely."),
+    "effectcraft": ("Motion graphics and VFX", "Animation and visual effects with layers, keyframes, a graph editor, more than 250 effects, real 3D and expressions."),
+    "designcraft": ("Page layout and publishing", "Layout for books, magazines and flyers: text flow, styles, swatches, fine typography and print-ready PDFs."),
+    "figcraft": ("Interface design", "Design interfaces with auto layout, components and variants, vector networks, prototypes and live sessions with others."),
+    "wordcraft": ("Word processing", "Word processing with a ribbon, real document formats (DOCX), fast layout, track changes, tables of contents and citations."),
+    "soundcraft": ("Digital audio workstation", "Record and mix with a mixing console, automation, its own plugins and CLAP support, MIDI, notation and surround."),
+    "deckcraft": ("Presentations", "Slides with masters and themes, shapes, transitions and animations, a presenter view and PowerPoint compatibility (PPTX)."),
+    "cadcraft": ("CAD and technical drawing", "Technical drawing with paper space and viewports, dimensions, hatches, block libraries and parametric constraints."),
+    "gridcraft": ("Spreadsheets", "Spreadsheets with more than 500 functions, charts, pivot tables, conditional formatting and native XLSX compatibility."),
 }
 
 
@@ -66,26 +66,26 @@ def main() -> int:
                 f"# {name}\n\n"
                 f"**{short}.** {long}\n\n"
                 f"| | |\n|---|---|\n"
-                f"| Aktuelle Version hier | {('[' + version + '](https://github.com/' + REPO + '/releases/tag/' + s['tag'] + ')') if version else 'wird gerade gebaut'} |\n"
+                f"| Current version here | {('[' + version + '](https://github.com/' + REPO + '/releases/tag/' + s['tag'] + ')') if version else 'being built'} |\n"
                 f"| Original | [github.com/{UPSTREAM}/{repo}](https://github.com/{UPSTREAM}/{repo}) |\n"
                 f"| Website | [{page}]({page}) |\n"
-                f"| Lizenz | MIT oder Apache-2.0 (wie das Original, Lizenzdateien liegen in jedem Download) |\n\n"
-                f"## Was hier anders ist\n\n"
-                f"Gleicher Code wie das Original {d.get('tag') or s.get('upstream_tag') or ''}, nur ohne Discord- und Social-Media-Buttons. "
-                f"Links zu GitHub, Fehlermeldungen und Updates zeigen auf dieses Repo, die Website auf die gespiegelte Seite. "
-                f"Alles wird automatisch aus jedem neuen Original-Release gebaut ([so funktioniert es](../../README.md#so-funktioniert-es)).\n\n"
+                f"| License | MIT or Apache-2.0 (like the original; the license files are in every download) |\n\n"
+                f"## What is different here\n\n"
+                f"The same code as the original {d.get('tag') or s.get('upstream_tag') or ''}, only without the Discord and social media buttons. "
+                f"Links to GitHub, error reports and updates point to this repository, website links to this fork's website. "
+                f"Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).\n\n"
                 + (f"## Downloads ({version})\n\n{files}\n\n" if files else "")
-                + ("Am einfachsten installierst du sie über den [ArtCraft Launcher](../artcraft-launcher/README.md).\n" if app_id != "artcraft-launcher" else "")
+                + ("The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).\n" if app_id != "artcraft-launcher" else "")
             )
             if os.path.exists(os.path.join(folder, "debrand.toml")):
-                fh.write("\nZusätzliche Regeln für diese App: [debrand.toml](debrand.toml).\n")
-        status = f"[{version}](https://github.com/{REPO}/releases/tag/{s['tag']})" if version else "kommt"
+                fh.write("\nExtra rules for this app: [debrand.toml](debrand.toml).\n")
+        status = f"[{version}](https://github.com/{REPO}/releases/tag/{s['tag']})" if version else "coming"
         rows.append(f"| [{name}](apps/{app_id}/README.md) | {short} | {status} | [Original](https://github.com/{UPSTREAM}/{repo}) |")
 
     readme = os.path.join(ROOT, "README.md")
     with open(readme, encoding="utf-8") as fh:
         text = fh.read()
-    table = "| App | Wofür | Version | Quelle |\n|---|---|---|---|\n" + "\n".join(rows)
+    table = "| App | What for | Version | Source |\n|---|---|---|---|\n" + "\n".join(rows)
     text = re.sub(r"(<!-- apps:start -->\n).*?(\n<!-- apps:end -->)", lambda m: m.group(1) + table + m.group(2), text, flags=re.S)
     with open(readme, "w", encoding="utf-8") as fh:
         fh.write(text)

@@ -1,17 +1,17 @@
 # DeckCraft
 
-**Präsentationen.** Folien mit Mastern und Themes, Formen, Übergängen und Animationen, Referentenansicht und PowerPoint-Kompatibilität (PPTX).
+**Presentations.** Slides with masters and themes, shapes, transitions and animations, a presenter view and PowerPoint compatibility (PPTX).
 
 | | |
 |---|---|
-| Aktuelle Version hier | [0.12.0](https://github.com/Labtoso/Artcraft/releases/tag/deckcraft-v0.12.0) |
+| Current version here | [0.12.0](https://github.com/Labtoso/Artcraft/releases/tag/deckcraft-v0.12.0) |
 | Original | [github.com/storytold/deckcraft](https://github.com/storytold/deckcraft) |
-| Website | [https://labtoso.github.io/Artcraft/apps/deckcraft/](https://labtoso.github.io/Artcraft/apps/deckcraft/) |
-| Lizenz | MIT oder Apache-2.0 (wie das Original, Lizenzdateien liegen in jedem Download) |
+| Website | [https://artcraft.labtoso.de/apps/deckcraft/](https://artcraft.labtoso.de/apps/deckcraft/) |
+| License | MIT or Apache-2.0 (like the original; the license files are in every download) |
 
-## Was hier anders ist
+## What is different here
 
-Gleicher Code wie das Original v0.12.0, nur ohne Discord- und Social-Media-Buttons. Links zu GitHub, Fehlermeldungen und Updates zeigen auf dieses Repo, die Website auf die gespiegelte Seite. Alles wird automatisch aus jedem neuen Original-Release gebaut ([so funktioniert es](../../README.md#so-funktioniert-es)).
+The same code as the original v0.12.0, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
 
 ## Downloads (0.12.0)
 
@@ -23,4 +23,4 @@ Gleicher Code wie das Original v0.12.0, nur ohne Discord- und Social-Media-Butto
 - [deckcraft-0.12.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-windows-x64-portable.zip)
 - [deckcraft-0.12.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-windows-x64.msi)
 
-Am einfachsten installierst du sie über den [ArtCraft Launcher](../artcraft-launcher/README.md).
+The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

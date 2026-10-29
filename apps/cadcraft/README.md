@@ -1,17 +1,17 @@
 # CADCraft
 
-**CAD und technisches Zeichnen.** Technisches Zeichnen mit Papierbereich und Ansichtsfenstern, Bemaßungen, Schraffuren, Blockbibliotheken und parametrischen Abhängigkeiten.
+**CAD and technical drawing.** Technical drawing with paper space and viewports, dimensions, hatches, block libraries and parametric constraints.
 
 | | |
 |---|---|
-| Aktuelle Version hier | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/cadcraft-v0.14.0) |
+| Current version here | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/cadcraft-v0.14.0) |
 | Original | [github.com/storytold/cadcraft](https://github.com/storytold/cadcraft) |
-| Website | [https://labtoso.github.io/Artcraft/apps/cadcraft/](https://labtoso.github.io/Artcraft/apps/cadcraft/) |
-| Lizenz | MIT oder Apache-2.0 (wie das Original, Lizenzdateien liegen in jedem Download) |
+| Website | [https://artcraft.labtoso.de/apps/cadcraft/](https://artcraft.labtoso.de/apps/cadcraft/) |
+| License | MIT or Apache-2.0 (like the original; the license files are in every download) |
 
-## Was hier anders ist
+## What is different here
 
-Gleicher Code wie das Original v0.14.0, nur ohne Discord- und Social-Media-Buttons. Links zu GitHub, Fehlermeldungen und Updates zeigen auf dieses Repo, die Website auf die gespiegelte Seite. Alles wird automatisch aus jedem neuen Original-Release gebaut ([so funktioniert es](../../README.md#so-funktioniert-es)).
+The same code as the original v0.14.0, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
 
 ## Downloads (0.14.0)
 
@@ -23,4 +23,4 @@ Gleicher Code wie das Original v0.14.0, nur ohne Discord- und Social-Media-Butto
 - [cadcraft-0.14.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/cadcraft-v0.14.0/cadcraft-0.14.0-windows-x64-portable.zip)
 - [cadcraft-0.14.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/cadcraft-v0.14.0/cadcraft-0.14.0-windows-x64.msi)
 
-Am einfachsten installierst du sie über den [ArtCraft Launcher](../artcraft-launcher/README.md).
+The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).
