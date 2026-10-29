@@ -112,6 +112,7 @@ jobs:
         os:
           - { name: windows, runner: windows-latest }
           - { name: linux, runner: ubuntu-22.04 }
+          - { name: macos, runner: macos-15 }
     env:
       CARGO_TERM_COLOR: always
       CARGO_INCREMENTAL: 0
@@ -142,6 +143,9 @@ jobs:
       - name: Check out craft-i18n
         uses: storytold/craft-common-actions/actions/checkout-craft-i18n@main
       - uses: dtolnay/rust-toolchain@stable
+        with:
+          # macOS: one universal app for Apple silicon and Intel, like the original
+          targets: ${{ matrix.os.name == 'macos' && 'aarch64-apple-darwin, x86_64-apple-darwin' || '' }}
       - uses: Swatinem/rust-cache@v2
         with:
           key: build-${{ matrix.os.name }}-${{ matrix.app.id }}
@@ -170,10 +174,20 @@ jobs:
         run: |
           bash packaging/linux/package.sh 2>&1 | tee build.log
           exit ${PIPESTATUS[0]}
+      # without Apple's signing secrets the original's script signs ad hoc (not notarized)
+      - name: Build and package (macOS)
+        id: mac
+        if: matrix.os.name == 'macos'
+        continue-on-error: true
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
+        run: |
+          bash packaging/macos/package.sh --arch universal 2>&1 | tee build.log
+          exit ${PIPESTATUS[0]}
       # Self-repair: when the debranded build fails, build again with only the links rewritten
       # (buttons stay, but every link points here), so a new version still ships.
       - name: Fallback build with links only
-        if: steps.win.outcome == 'failure' || steps.lin.outcome == 'failure'
+        if: steps.win.outcome == 'failure' || steps.lin.outcome == 'failure' || steps.mac.outcome == 'failure'
         shell: bash
         env:
           CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
@@ -185,12 +199,14 @@ jobs:
           if [ -s "$RUNNER_TEMP/patch/${{ matrix.app.id }}.safe.patch" ]; then git apply --whitespace=nowarn "$RUNNER_TEMP/patch/${{ matrix.app.id }}.safe.patch"; fi
           if [ "${{ matrix.os.name }}" = windows ]; then
             pwsh -NoProfile -File packaging/windows/package.ps1 -Arch x64 2>&1 | tee build.log
+          elif [ "${{ matrix.os.name }}" = macos ]; then
+            bash packaging/macos/package.sh --arch universal 2>&1 | tee build.log
           else
             bash packaging/linux/package.sh 2>&1 | tee build.log
           fi
           exit ${PIPESTATUS[0]}
       - name: Show the end of the build log
-        if: failure() || steps.win.outcome == 'failure' || steps.lin.outcome == 'failure'
+        if: failure() || steps.win.outcome == 'failure' || steps.lin.outcome == 'failure' || steps.mac.outcome == 'failure'
         shell: bash
         run: |
           log=build-first.log; [ -f "$log" ] || log=build.log
@@ -234,10 +250,13 @@ jobs:
             name="${d#_dist/dist-}"; app="${name%-*}"
             mkdir -p "dist/$app"; cp "$d"/* "dist/$app/"
           done
-          # an app counts only when every platform built
+          # an app counts only when Windows and Linux built; a missing macOS build is reported
           for app in $(ls dist); do
-            n=$(ls -d _dist/dist-"$app"-* 2>/dev/null | wc -l)
-            if [ "$n" -lt 2 ]; then echo "$app: not every platform built, keeping the previous version"; rm -rf "dist/$app"; fi
+            if [ ! -d "_dist/dist-$app-windows" ] || [ ! -d "_dist/dist-$app-linux" ]; then
+              echo "$app: not every platform built, keeping the previous version"; rm -rf "dist/$app"
+            elif [ ! -d "_dist/dist-$app-macos" ]; then
+              echo "::warning title=macOS::$app: the macOS build failed, publishing Windows and Linux only"
+            fi
           done
       - name: Publish releases
         env:
