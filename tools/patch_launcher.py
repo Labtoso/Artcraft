@@ -11,6 +11,7 @@ The launcher's look and behaviour stay as they are, except:
     in the same repository here, so GitHub's "latest release" can't tell the apps apart,
   * an app's Website, GitHub and Releases links open its page on this copy's website, its folder
     and its releases in this repo; the footer says the releases came from this copy's website,
+  * on macOS it installs apps signed ad hoc (this copy has no Apple Developer ID),
   * the Community box in the settings (Discord, website, GitHub, social icons) is gone,
   * the status bar keeps only the Website and GitHub icons, which open this copy's website and
     this repo; Discord and the social accounts are gone.
@@ -121,6 +122,16 @@ def main() -> int:
     text = sub(text, r"\n([ \t]*)let icon = 13\.0;",
                r'\n\1links.retain(|l| l.name == "Website" || l.name == "GitHub");\n\1let icon = 13.0;', views)
     with open(views, "w", encoding="utf-8", newline="") as fh:
+        fh.write(text)
+
+    # macOS: builds here are signed ad hoc, not with the original team's Apple Developer ID; the
+    # checksum from the feed and the app's version still have to match
+    install = os.path.join(src, "crates/native/src/install.rs")
+    with open(install, encoding="utf-8") as fh:
+        text = fh.read()
+    text = sub(text, r"Self \{ team: Some\(TEAM_ID\), version: release\.version\.as_ref\(\) \}",
+               "Self { team: None, version: release.version.as_ref() }", install)
+    with open(install, "w", encoding="utf-8", newline="") as fh:
         fh.write(text)
 
     with open(backend, encoding="utf-8") as fh:
