@@ -43,6 +43,13 @@ def sha256(path: str) -> str:
     return h.hexdigest()
 
 
+VERSION_NOTES = (
+    "Download files of every app at version {version}, for the ArtCraft Launcher's update check. "
+    f"Each app has its own release with notes (for example `photocraft-v{{version}}`), "
+    f"and the [suite release](https://github.com/{REPO}/releases/tag/{SUITE_TAG}) holds all current apps."
+)
+
+
 def release_exists(tag: str) -> bool:
     return gh("release", "view", tag, "--repo", REPO, "--json", "tagName", check=False, capture=True).returncode == 0
 
@@ -132,8 +139,16 @@ def main() -> int:
         sums_txt = sums + ".txt"
         shutil.copyfile(sums, sums_txt)
         gh("release", "upload", tag, "--repo", REPO, "--clobber", *files, sums, sums_txt)
+        # the launcher (and every app's own updater) only accepts a download whose release tag is
+        # the version itself, so the files also go into a shared release per version number
+        # ("v0.15.0"); the file names carry the app, so apps with the same version don't collide
+        vtag = f"v{app['version']}"
+        if not release_exists(vtag):
+            gh("release", "create", vtag, "--repo", REPO, "--title", f"Files for version {app['version']}",
+               "--notes", VERSION_NOTES.format(version=app["version"]), "--prerelease", "--latest=false")
+        gh("release", "upload", vtag, "--repo", REPO, "--clobber", *files)
         for a in assets:
-            a["download_url"] = f"https://github.com/{REPO}/releases/download/{tag}/{a['name']}"
+            a["download_url"] = f"https://github.com/{REPO}/releases/download/{vtag}/{a['name']}"
 
         # the suite release: this app's old files out, the new ones in; every other app keeps its files
         listing = gh("release", "view", SUITE_TAG, "--repo", REPO, "--json", "assets", "--jq", ".assets[].name", capture=True).stdout.split()
