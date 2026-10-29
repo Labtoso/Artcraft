@@ -105,6 +105,8 @@ def main() -> int:
             continue
         tag = rel["tag_name"]
         version = tag.lstrip("vV")
+        if app_id == "artcraft-launcher":
+            version = launcher_version(version)
         wf = raw(a["repo"], tag, ".github/workflows/release.yml") or ""
         fonts = re.search(r"craft-fonts-ref:\s*([0-9a-f]{40})", wf)
         has_pkg = raw(a["repo"], tag, "packaging/windows/package.ps1") is not None
@@ -122,7 +124,7 @@ def main() -> int:
         }
         found.append(entry)
         built = state.get(app_id, {})
-        if force == "all" or app_id in forced or built.get("upstream_tag") != tag or built.get("debrand_rev") != debrand_rev():
+        if force == "all" or app_id in forced or built.get("upstream_tag") != tag or built.get("debrand_rev") != debrand_rev() or built.get("version") != version:
             matrix.append({k: entry[k] for k in ("id", "name", "repo", "tag", "version", "fonts_ref")})
 
     with open("build/discovered.json", "w", encoding="utf-8") as fh:
@@ -134,6 +136,19 @@ def main() -> int:
             fh.write("\n".join(lines) + "\n")
     print(f"{len(found)} apps upstream, {len(matrix)} to build: {', '.join(m['id'] + ' ' + m['version'] for m in matrix) or 'none'}")
     return 0
+
+
+def launcher_version(upstream: str) -> str:
+    """This copy's launcher version: the original's major.minor, and patch * 1000 + the number in
+    tools/LAUNCHER_REV. Bumping LAUNCHER_REV ships a changed launcher as a newer version, so an
+    installed launcher offers it as an update (like the original does with its own releases).
+    tools/patch_launcher.py writes the same version into the launcher's Cargo.toml."""
+    m = re.match(r"(\d+)\.(\d+)\.(\d+)$", upstream)
+    if not m:
+        return upstream
+    with open(os.path.join(os.path.dirname(__file__), "LAUNCHER_REV"), encoding="utf-8") as fh:
+        rev = int(fh.read().strip() or 0)
+    return f"{m[1]}.{m[2]}.{int(m[3]) * 1000 + rev}"
 
 
 def debrand_rev() -> str:
