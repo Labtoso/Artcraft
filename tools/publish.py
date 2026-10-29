@@ -63,7 +63,8 @@ def app_notes(app: dict, upstream_url: str) -> str:
         f"## Install\n"
         f"- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/{REPO}/releases/tag/{SUITE_TAG}); it installs and updates every app.\n"
         f"- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, "
-        f"`.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux. Checksums are in `SHA256SUMS`.\n\n"
+        f"`.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n"
+        f"- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n"
         f"---\n\n### Original release notes\n\n{clean_notes(app.get('upstream_notes', ''))}\n"
     )
 
@@ -78,9 +79,10 @@ def suite_notes(state: dict) -> str:
         "## Fixed\n"
         "- Updated automatically whenever an app gets a new version or a new app comes out.\n\n"
         "## Install\n"
-        "- **Recommended:** download `artcraft-launcher-…-windows-x64.msi` (Windows) or `artcraft-launcher-…-linux-x86_64.AppImage` (Linux), "
+        "- **Recommended:** download `artcraft-launcher-…-windows-x64.msi` (Windows), `artcraft-launcher-…-linux-x86_64.AppImage` (Linux) or `artcraft-launcher-…-macos-universal.dmg` (macOS), "
         "start it and install any app with one click. It keeps everything up to date by itself.\n"
-        "- Or pick a single app's file below. Checksums are in `SHA256SUMS`.\n\n"
+        "- Or pick a single app's file below. Checksums are in `SHA256SUMS`.\n"
+        "- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n"
         "| App | Version | Original | Single release |\n|---|---|---|---|\n" + "\n".join(rows) + "\n"
     )
 
