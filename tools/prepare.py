@@ -5,7 +5,9 @@
 2. `cargo check` of the app's binary,
 3. on a compile error, files named in the errors lose their removals (links are still
    rewritten) and it starts over, up to five rounds,
-4. `git diff` becomes build/<app>.patch, the debrand report build/<app>.report.json.
+4. this copy's update library goes in (vendor_libs.py: updates from this copy's feed and
+   releases, macOS installs without the original's Apple team),
+5. `git diff` becomes build/<app>.patch, the debrand report build/<app>.report.json.
 
 The launcher is not debranded, only switched to this repo's builds (patch_launcher.py).
 
@@ -30,8 +32,20 @@ def run(cmd, cwd, check=True, capture=False):
 
 
 def reset(src):
+    run(["git", "reset", "-q"], src)
     run(["git", "checkout", "--", "."], src)
     run(["git", "clean", "-fdq"], src)
+
+
+def own_updates(src):
+    """This copy's update library (feed, releases, no Apple team pin): see vendor_libs.py."""
+    run([sys.executable, "-I", os.path.join(HERE, "vendor_libs.py"), src], ROOT)
+
+
+def diff(src) -> str:
+    # new files (the vendored library) belong in the patch too
+    run(["git", "add", "-A", "-N"], src)
+    return run(["git", "diff", "--binary"], src, capture=True).stdout
 
 
 def links_only(src, app, out, why) -> int:
@@ -39,10 +53,11 @@ def links_only(src, app, out, why) -> int:
     print(f"::warning title={app}::{why}; building with links rewritten only", flush=True)
     reset(src)
     run([sys.executable, "-I", os.path.join(HERE, "debrand.py"), src, "--app", app, "--links-only"], ROOT)
-    diff = run(["git", "diff", "--binary"], src, capture=True).stdout
+    own_updates(src)
+    text = diff(src)
     for name in (f"{app}.patch", f"{app}.safe.patch"):
         with open(os.path.join(out, name), "w", encoding="utf-8", newline="") as fh:
-            fh.write(diff)
+            fh.write(text)
     return 0
 
 
@@ -55,6 +70,7 @@ def main() -> int:
 
     if app == "artcraft-launcher":
         run([sys.executable, "-I", os.path.join(HERE, "patch_launcher.py"), src], ROOT)
+        own_updates(src)
         steps = [[]]
     else:
         steps = None
@@ -70,6 +86,7 @@ def main() -> int:
             for k in keep:
                 cmd += ["--keep", k]
             run(cmd, ROOT)
+            own_updates(src)
         res = subprocess.run(["cargo", "check", "--locked", "-p", app], cwd=src, env=env, text=True, capture_output=True)
         sys.stdout.write(res.stdout[-20000:])
         sys.stderr.write(res.stderr[-20000:])
@@ -86,26 +103,27 @@ def main() -> int:
     else:
         return links_only(src, app, out, f"still not compiling after keeping {keep}")
 
-    diff = run(["git", "diff", "--binary"], src, capture=True).stdout
+    patch = diff(src)
     if steps is None:
         # fallback for the build jobs: the same app with only its links rewritten
         reset(src)
         run([sys.executable, "-I", os.path.join(HERE, "debrand.py"), src, "--app", app, "--links-only"], ROOT)
-        safe = run(["git", "diff", "--binary"], src, capture=True).stdout
+        own_updates(src)
+        safe = diff(src)
         with open(os.path.join(out, f"{app}.safe.patch"), "w", encoding="utf-8", newline="") as fh:
             fh.write(safe)
     else:
         with open(os.path.join(out, f"{app}.safe.patch"), "w", encoding="utf-8", newline="") as fh:
-            fh.write(diff)
+            fh.write(patch)
     with open(os.path.join(out, f"{app}.patch"), "w", encoding="utf-8", newline="") as fh:
-        fh.write(diff)
+        fh.write(patch)
     if os.path.exists(report_path):
         with open(report_path, encoding="utf-8") as fh:
             report = json.load(fh)
         report["kept_files"] = keep
         with open(report_path, "w", encoding="utf-8") as fh:
             json.dump(report, fh, indent=2)
-    print(f"{app}: patch with {diff.count(chr(10))} lines, {len(keep)} files kept as they were")
+    print(f"{app}: patch with {patch.count(chr(10))} lines, {len(keep)} files kept as they were")
     return 0
 
 

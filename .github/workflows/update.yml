@@ -222,7 +222,7 @@ jobs:
           echo "::warning title=Fallback::debranded build failed, building with links rewritten only"
           cp build.log build-first.log 2>/dev/null || true
           git checkout -- .
-          rm -rf dist/release
+          rm -rf dist/release vendor-craft-update
           if [ -s "$RUNNER_TEMP/patch/${{ matrix.app.id }}.safe.patch" ]; then git apply --whitespace=nowarn "$RUNNER_TEMP/patch/${{ matrix.app.id }}.safe.patch"; fi
           if [ "${{ matrix.os.name }}" = windows ]; then
             pwsh -NoProfile -File packaging/windows/package.ps1 -Arch x64 2>&1 | tee build.log
