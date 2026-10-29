@@ -20,7 +20,9 @@ The same code as the original v0.17.0, only without the Discord and social media
 - [photocraft-0.17.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/photocraft-0.17.0-linux-x86_64.deb)
 - [photocraft-0.17.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/photocraft-0.17.0-linux-x86_64.rpm)
 - [photocraft-0.17.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/photocraft-0.17.0-linux-x86_64.tar.gz)
+- [photocraft-0.17.0-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/photocraft-0.17.0-macos-universal.dmg)
 - [photocraft-0.17.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/photocraft-0.17.0-windows-x64-portable.zip)
 - [photocraft-0.17.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/photocraft-0.17.0-windows-x64.msi)
+- [photocraft-cli-0.17.0-macos-universal.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/photocraft-cli-0.17.0-macos-universal.zip)
 
 The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).
