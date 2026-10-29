@@ -17,6 +17,7 @@ on:
 permissions:
   contents: write
   issues: write
+  pages: write
 
 concurrency:
   group: pages
@@ -78,6 +79,15 @@ jobs:
             git commit -m "Website update $(date -u +%Y-%m-%d)"
             git push origin gh-pages
           fi
+
+      - name: Custom domain and HTTPS
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          host=$(python3 -c 'import os,urllib.parse;print(urllib.parse.urlparse(os.environ["ARTCRAFT_SITE"]).hostname)')
+          case "$host" in *.github.io) exit 0;; esac
+          gh api -X PUT "repos/$GITHUB_REPOSITORY/pages" -f cname="$host" -F https_enforced=true || echo "::warning title=Pages::could not set HTTPS yet (the certificate may still be on its way)"
+          gh api "repos/$GITHUB_REPOSITORY/pages" --jq '"domain \(.cname), https \(.https_enforced), certificate \(.https_certificate.state // "none")"' | sed 's/^/::notice title=Pages::/' || true
 
   notify:
     needs: build

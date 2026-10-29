@@ -23,6 +23,7 @@ on:
 permissions:
   contents: write
   issues: write
+  pages: write
 
 concurrency:
   group: update
@@ -331,3 +332,4 @@ jobs:
     permissions:
       contents: write
       issues: write
+      pages: write
