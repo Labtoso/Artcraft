@@ -96,15 +96,15 @@ html.ac-wait body{opacity:0!important}
   }
   function mapGitHub(href) {
     var m = GH.exec(href);
-    if (!m) return href.replace(/^https:\/\/github\.com\/storytold\/?$/i, C.repo);
+    if (!m) return href.replace(/^https:\/\/github\.com\/storytold\/?$/i, C.repo + '/releases');
     var repo = m[1], rest = m[2] || '';
     var app = appFor(repo);
     var d = /^releases\/download\/([^/]+)\/([^/?#]+)/.exec(rest);
     if (d) return mapDownload(repo, d[1], decodeURIComponent(d[2]));
     if (/^releases/.test(rest)) return C.apps[app] ? C.apps[app].release : C.repo + '/releases/tag/suite';
     if (/^issues/.test(rest)) return C.repo + '/issues';
-    if (repo.toLowerCase() === 'artcraft' || app === 'artcraft-launcher' || !C.known[app]) return C.repo;
-    return C.repo + '/tree/main/apps/' + app;
+    // an app's (or the launcher's) code on the original -> its builds here; anything else -> all releases
+    return C.apps[app] ? C.apps[app].release : C.repo + '/releases';
   }
 
   // ---- what goes ---------------------------------------------------------------------------
