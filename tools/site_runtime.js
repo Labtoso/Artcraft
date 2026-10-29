@@ -63,7 +63,7 @@
     var os = /windows|win(32|64)|\.msi$|\.exe$/.test(n) ? 'windows' : /linux|\.appimage$|\.deb$|\.rpm$|\.flatpak$/.test(n) ? 'linux' : /mac|darwin|\.dmg$/.test(n) ? 'mac' : 'other';
     return os;
   }
-  // a download we don't build (macOS, ARM, Flatpak ...): null
+  // a download we don't build (ARM, Flatpak ...): null
   function mapDownload(repo, tag, name) {
     var app = C.apps[appFor(repo)];
     if (!app) return C.repo + '/releases/tag/suite';
@@ -76,7 +76,7 @@
     var app = C.apps[appFor(repo)];
     if (!app) return C.repo + '/releases/tag/suite';
     var os = kindOf(name), names = Object.keys(app.assets);
-    var pick = os === 'linux' ? /\.AppImage$/ : os === 'windows' ? /x64\.msi$|\.msi$/ : null;
+    var pick = os === 'linux' ? /\.AppImage$/ : os === 'windows' ? /x64\.msi$|\.msi$/ : os === 'mac' ? /macos-universal\.dmg$/ : null;
     for (var i = 0; pick && i < names.length; i++) if (pick.test(names[i])) return app.assets[names[i]];
     return app.release;
   }
@@ -206,21 +206,19 @@
       });
     });
     downloadPage();
-    noMac(root);
     linuxColumn(root);
     fileNames(root);
   }
 
   // the download page is about ArtCraft Studio on the original; here it is about the launcher
   var ON_LINUX = /linux/i.test(navigator.userAgent) && !/android/i.test(navigator.userAgent);
+  var ON_MAC = /macintosh|mac os x/i.test(navigator.userAgent) && !/iphone|ipad/i.test(navigator.userAgent);
   var DL_TEXT = {
-    'ArtCraft Studio · macOS · Windows · Web': 'ArtCraft Launcher · Windows · Linux',
+    'ArtCraft Studio · macOS · Windows · Web': 'ArtCraft Launcher · macOS · Windows · Linux',
     'Download ArtCraft ': 'Download the Craft ',
     'The generative AI studio for images and video. Edit on the canvas, compose 3D scenes and render them with the latest models, right on your desktop.':
       'ArtCraft Launcher installs all thirteen open-source Craft Apps with one click and keeps them up to date, right on your desktop.',
-    'Universal macOS build · x64 Windows': 'x64 Windows · x86_64 Linux',
-    'macOS': 'Linux',
-    'macOS 12.0 or newer': 'Ubuntu 22.04, Fedora 38 or newer (x86_64)',
+    'Universal macOS build · x64 Windows': 'Universal macOS build · x64 Windows · x86_64 Linux',
     'Install & sign in': 'Install',
     'Create a free account or log in.': 'Start ArtCraft Launcher and pick your apps.',
     'Start generating artwork immediately.': 'Every app keeps itself up to date.'
@@ -243,9 +241,13 @@
       [/x86_64\.deb$/, 'Debian, Ubuntu, Mint (.deb)', 'Debian, Ubuntu, Mint (.deb)'],
       [/x86_64\.rpm$/, 'Fedora, openSUSE, RHEL (.rpm)', 'Fedora, openSUSE, RHEL (.rpm)'],
       [/x86_64\.tar\.gz$/, 'Tarball (.tar.gz)', 'Archiv (.tar.gz)']
+    ],
+    mac: [
+      [/macos-universal\.dmg$/, 'Apple silicon and Intel (.dmg)', 'Apple Silicon und Intel (.dmg)']
     ]
   };
-  var chosen = { os: ON_LINUX ? 'linux' : 'windows', pkg: 0 };
+  var OS_NAME = { windows: 'Windows', linux: 'Linux', mac: 'macOS' };
+  var chosen = { os: ON_LINUX ? 'linux' : ON_MAC ? 'mac' : 'windows', pkg: 0 };
   function chooser(after) {
     var app = C.apps['artcraft-launcher'];
     if (!app || !after.parentElement) return;
@@ -268,7 +270,7 @@
     box.textContent = '';
     var tabs = document.createElement('div');
     tabs.className = 'ac-tabs hud-label';
-    [['windows', 'Windows'], ['linux', 'Linux']].forEach(function (o) {
+    [['windows', 'Windows'], ['linux', 'Linux'], ['mac', 'macOS']].forEach(function (o) {
       var b = document.createElement('button');
       b.type = 'button';
       b.textContent = o[1];
@@ -296,7 +298,7 @@
     a.className = box._cls;
     a.href = name ? app.assets[name] : app.release;
     if (name) a.setAttribute('download', name);
-    a.textContent = (de ? 'Herunterladen für ' : 'Download for ') + (chosen.os === 'linux' ? 'Linux' : 'Windows');
+    a.textContent = (de ? 'Herunterladen für ' : 'Download for ') + OS_NAME[chosen.os];
     box.appendChild(a);
     var info = document.createElement('p');
     info.className = 'hud-label ac-file';
@@ -320,7 +322,7 @@
       while (box.parentElement && !box.parentElement.querySelector('h1')) box = box.parentElement;
       hide(box);
     });
-    // the buttons: Windows -> the launcher's installer, Mac -> Linux (AppImage); the big one follows the visitor's system
+    // the buttons: the launcher's installer for Windows and macOS, like the original's cards; the big one becomes the chooser
     main.querySelectorAll('a').forEach(function (a) {
       if (own(a)) return;
       var t = a.textContent.replace(/\s+/g, ' ').trim();
@@ -329,34 +331,15 @@
       while (card && !card.querySelector('h1,h2')) card = card.parentElement;
       var h2 = card && !card.querySelector('h1') && card.querySelectorAll('h2').length === 1 ? card.querySelector('h2') : null;
       var inCard = !!h2 && /^(Windows|Linux|macOS)$/.test(h2.textContent.trim());
-      var linux = inCard ? h2.textContent.trim() !== 'Windows' : ON_LINUX;
-      var os = linux ? 'Linux' : 'Windows', tw = document.createTreeWalker(a, NodeFilter.SHOW_TEXT, null), c;
+      var sys = inCard ? { Windows: 'windows', Linux: 'linux', macOS: 'mac' }[h2.textContent.trim()] : chosen.os;
+      var os = sys === 'mac' ? 'Mac' : OS_NAME[sys], tw = document.createTreeWalker(a, NodeFilter.SHOW_TEXT, null), c;
       while ((c = tw.nextNode())) if (/^(Windows|Mac|Linux)$/.test(c.nodeValue) && c.nodeValue !== os) c.nodeValue = os;
-      var out = launcherFile(linux ? /\.AppImage$/ : /\.msi$/);
+      var out = launcherFile(PACKAGES[sys][0][0]);
       if (a.getAttribute('href') !== out) { a.setAttribute('data-ac-href', out); a.setAttribute('href', out); }
       if (a.hasAttribute('download')) a.removeAttribute('download');
       // the big button gives way to the chooser below
       if (!inCard) { hide(a); chooser(a); }
     });
-    main.querySelectorAll('h2').forEach(function (h) {
-      if (h.textContent.trim() !== 'Linux') return;
-      var box = h.parentElement;
-      box.querySelectorAll('svg').forEach(function (s) { if (!s.closest('a,li')) hide(s.parentElement !== box && s.parentElement.children.length === 1 ? s.parentElement : s); });
-    });
-  }
-
-  // there are no macOS builds here: the macOS download column and the macOS chips go
-  function noMac(root) {
-    root.querySelectorAll('article h3').forEach(function (h) {
-      if (h.textContent.trim() === 'macOS') hide(h.closest('article'));
-    });
-    root.querySelectorAll('div,span').forEach(function (e) {
-      if (e.children.length || e.textContent.trim() !== 'macOS' || !e.parentElement || e.parentElement.children.length < 2) return;
-      if (e.closest('h1,h2,h3,a')) return;
-      hide(e);
-    });
-    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
-    while ((n = w.nextNode())) if (/^macOS · /.test(n.nodeValue)) n.nodeValue = n.nodeValue.replace(/^macOS · /, '');
   }
 
   // an app's Linux column leads with Flatpak on the original; here the AppImage is the main download
