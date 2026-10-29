@@ -26,7 +26,7 @@ In den Original-Apps sind an vielen Stellen Buttons und Links zu Discord und soz
 <!-- apps:start -->
 | App | Wofür | Version | Quelle |
 |---|---|---|---|
-| [ArtCraft Launcher](apps/artcraft-launcher/README.md) | Installiert, aktualisiert und startet alle Craft-Apps | [0.9.0](https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.9.0) | [Original](https://github.com/storytold/craft-launcher) |
+| [ArtCraft Launcher](apps/artcraft-launcher/README.md) | Installiert, aktualisiert und startet alle Craft-Apps | [0.9.1](https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.9.1) | [Original](https://github.com/storytold/craft-launcher) |
 | [CADCraft](apps/cadcraft/README.md) | CAD und technisches Zeichnen | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/cadcraft-v0.14.0) | [Original](https://github.com/storytold/cadcraft) |
 | [DeckCraft](apps/deckcraft/README.md) | Präsentationen | [0.12.0](https://github.com/Labtoso/Artcraft/releases/tag/deckcraft-v0.12.0) | [Original](https://github.com/storytold/deckcraft) |
 | [DesignCraft](apps/designcraft/README.md) | Seitenlayout und Publishing | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/designcraft-v0.14.0) | [Original](https://github.com/storytold/designcraft) |
