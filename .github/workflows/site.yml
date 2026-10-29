@@ -4,12 +4,11 @@ name: Website
 # (tools/site_runtime.js), adds German and publishes it together with the launcher feed
 # (release_info.json) on the gh-pages branch, which GitHub Pages serves at
 # https://artcraft.labtoso.de/ (the custom domain; labtoso.github.io/Artcraft redirects there).
+# Runs daily at 01:00 German time as part of "Update apps", and after changes to the site tools.
 
 on:
   workflow_call:
   workflow_dispatch:
-  schedule:
-    - cron: "41 3 * * *"
   push:
     branches: [main]
     paths: ["tools/site.py", "tools/site_runtime.js", "tools/capture.js", "tools/collect.js", "site/**", ".github/workflows/site.yml"]

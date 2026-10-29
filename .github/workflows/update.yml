@@ -1,11 +1,15 @@
 name: Update apps
 
-# Every six hours: find new Craft apps and new versions upstream, debrand, build, publish,
-# then refresh the website and the launcher feed. Runs on its own; nothing to do by hand.
+# Every day at 01:00 German time: find new Craft apps and new versions of the apps and the
+# launcher upstream, debrand, build, publish, then copy the original website again and refresh
+# the launcher feed. Runs on its own; nothing to do by hand.
 
 on:
   schedule:
-    - cron: "17 */6 * * *"
+    # GitHub counts in UTC: 23:00 UTC is 01:00 in summer (CEST), 00:00 UTC is 01:00 in winter
+    # (CET); the clock job lets through only the one that is 01:00 in Germany today
+    - cron: "0 23 * * *"
+    - cron: "0 0 * * *"
   workflow_dispatch:
     inputs:
       force:
@@ -35,7 +39,30 @@ env:
   ARTCRAFT_SITE: https://artcraft.labtoso.de
 
 jobs:
+  clock:
+    runs-on: ubuntu-latest
+    outputs:
+      go: ${{ steps.c.outputs.go }}
+    steps:
+      - id: c
+        env:
+          EVENT: ${{ github.event_name }}
+          CRON: ${{ github.event.schedule }}
+        run: |
+          offset=$(TZ=Europe/Berlin date +%z)
+          go=true
+          if [ "$EVENT" = schedule ]; then
+            case "$CRON:$offset" in
+              "0 23 * * *:+0200" | "0 0 * * *:+0100") go=true ;;
+              *) go=false ;;
+            esac
+          fi
+          echo "go=$go" >> "$GITHUB_OUTPUT"
+          [ "$go" = true ] || echo "::notice title=Schedule::not 01:00 in Germany for this trigger, the other one runs today"
+
   discover:
+    needs: clock
+    if: needs.clock.outputs.go == 'true'
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.d.outputs.matrix }}
@@ -296,6 +323,8 @@ jobs:
   # GitHub pauses scheduled workflows in repos without activity for 60 days; a tiny commit
   # every 40 quiet days keeps the schedule alive.
   keepalive:
+    needs: clock
+    if: needs.clock.outputs.go == 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -339,14 +368,14 @@ jobs:
           RUN: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           title="Update run failed $(date -u +%Y-%m-%d)"
-          body="Something in the automatic update did not work. The previous versions stay online; the next run (every 6 hours) tries again.
+          body="Something in the automatic update did not work. The previous versions stay online; the next run (daily at 01:00 German time) tries again.
 
           Run: $RUN"
           gh issue create --assignee Labtoso --title "$title" --body "$body" || gh issue create --title "$title" --body "$body"
 
   site:
-    needs: [publish]
-    if: always()
+    needs: [clock, publish]
+    if: always() && needs.clock.outputs.go == 'true'
     uses: ./.github/workflows/site.yml
     permissions:
       contents: write
