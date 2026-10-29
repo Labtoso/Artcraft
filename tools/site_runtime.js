@@ -231,6 +231,78 @@
     for (var i = 0; i < names.length; i++) if (re.test(names[i])) return app.assets[names[i]];
     return app.release;
   }
+  // pick a system and a package, then download the file straight from this repository's release
+  var PACKAGES = {
+    windows: [
+      [/windows-x64\.msi$/, 'Installer (.msi)', 'Installationsprogramm (.msi)'],
+      [/windows-x64-portable\.zip$/, 'Portable (.zip)', 'Portabel (.zip)']
+    ],
+    linux: [
+      [/x86_64\.AppImage$/, 'AppImage (any distribution)', 'AppImage (jede Distribution)'],
+      [/x86_64\.deb$/, 'Debian, Ubuntu, Mint (.deb)', 'Debian, Ubuntu, Mint (.deb)'],
+      [/x86_64\.rpm$/, 'Fedora, openSUSE, RHEL (.rpm)', 'Fedora, openSUSE, RHEL (.rpm)'],
+      [/x86_64\.tar\.gz$/, 'Tarball (.tar.gz)', 'Archiv (.tar.gz)']
+    ]
+  };
+  var chosen = { os: ON_LINUX ? 'linux' : 'windows', pkg: 0 };
+  function chooser(after) {
+    var app = C.apps['artcraft-launcher'];
+    if (!app || !after.parentElement) return;
+    var box = after.parentElement.querySelector('[data-ac-own="chooser"]');
+    if (!box) {
+      box = document.createElement('div');
+      box.setAttribute('data-ac-own', 'chooser');
+      box.setAttribute('data-ac-skip', '');
+      box.className = 'ac-chooser';
+      after.parentElement.insertBefore(box, after.nextSibling);
+      box._cls = after.className;
+    }
+    var de = lang === 'de', key = chosen.os + chosen.pkg + lang;
+    if (box.getAttribute('data-ac-state') === key) return;
+    box.setAttribute('data-ac-state', key);
+    var names = Object.keys(app.assets);
+    function file(re) { for (var i = 0; i < names.length; i++) if (re.test(names[i])) return names[i]; return null; }
+    var list = PACKAGES[chosen.os].filter(function (p) { return file(p[0]); });
+    if (chosen.pkg >= list.length) chosen.pkg = 0;
+    box.textContent = '';
+    var tabs = document.createElement('div');
+    tabs.className = 'ac-tabs hud-label';
+    [['windows', 'Windows'], ['linux', 'Linux']].forEach(function (o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = o[1];
+      if (o[0] === chosen.os) b.setAttribute('aria-pressed', 'true');
+      b.addEventListener('click', function () { chosen.os = o[0]; chosen.pkg = 0; chooser(after); });
+      tabs.appendChild(b);
+    });
+    box.appendChild(tabs);
+    if (list.length > 1) {
+      var sel = document.createElement('select');
+      sel.className = 'ac-pkg';
+      sel.setAttribute('aria-label', de ? 'Paket' : 'Package');
+      list.forEach(function (p, i) {
+        var o = document.createElement('option');
+        o.value = String(i);
+        o.textContent = de ? p[2] : p[1];
+        if (i === chosen.pkg) o.selected = true;
+        sel.appendChild(o);
+      });
+      sel.addEventListener('change', function () { chosen.pkg = +sel.value; chooser(after); });
+      box.appendChild(sel);
+    }
+    var pick = list[chosen.pkg], name = pick && file(pick[0]);
+    var a = document.createElement('a');
+    a.className = box._cls;
+    a.href = name ? app.assets[name] : app.release;
+    if (name) a.setAttribute('download', name);
+    a.textContent = (de ? 'Herunterladen für ' : 'Download for ') + (chosen.os === 'linux' ? 'Linux' : 'Windows');
+    box.appendChild(a);
+    var info = document.createElement('p');
+    info.className = 'hud-label ac-file';
+    info.textContent = name || '';
+    box.appendChild(info);
+  }
+
   function downloadPage() {
     var main = document.querySelector('main');
     if (PAGE !== '/download/' || !main) return;
@@ -249,6 +321,7 @@
     });
     // the buttons: Windows -> the launcher's installer, Mac -> Linux (AppImage); the big one follows the visitor's system
     main.querySelectorAll('a').forEach(function (a) {
+      if (own(a)) return;
       var t = a.textContent.replace(/\s+/g, ' ').trim();
       if (!/^Download for (Windows|Mac|Linux)$/.test(t)) return;
       var card = a.parentElement;
@@ -261,7 +334,8 @@
       var out = launcherFile(linux ? /\.AppImage$/ : /\.msi$/);
       if (a.getAttribute('href') !== out) { a.setAttribute('data-ac-href', out); a.setAttribute('href', out); }
       if (a.hasAttribute('download')) a.removeAttribute('download');
-      if (!inCard && linux) a.querySelectorAll('svg').forEach(hide);
+      // the big button gives way to the chooser below
+      if (!inCard) { hide(a); chooser(a); }
     });
     main.querySelectorAll('h2').forEach(function (h) {
       if (h.textContent.trim() !== 'Linux') return;
@@ -401,12 +475,17 @@
     return { key: norm(parts.join('')), slots: slots };
   }
   function put(n, value) { n.nodeValue = value; applied.set(n, value); }
+  // app names stay English, also when they are split into parts ("Effect" + "Craft")
+  function inName(el) {
+    for (var i = 0; el && i < 3; i++, el = el.parentElement) if (/^[A-Z][A-Za-z]*Craft$/.test(norm(el.textContent))) return true;
+    return false;
+  }
   function translateTree(root) {
     if (lang !== 'de' || !DE) return;
     var done = new Set();
     var blocks = root.querySelectorAll ? root.querySelectorAll('p,h1,h2,h3,h4,h5,h6,li,a,button,figcaption,dt,dd,label,td,th,span,strong') : [];
     blocks.forEach(function (el) {
-      if (el.closest('[data-ac-skip]')) return;
+      if (el.closest('[data-ac-skip]') || inName(el)) return;
       var b = blockKey(el);
       if (!b || !DE[b.key]) return;
       var pieces = DE[b.key].split(/\[\[([\s\S]*?)\]\]/);
@@ -433,7 +512,7 @@
     });
     var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null), n;
     while ((n = w.nextNode())) {
-      if (done.has(n) || !n.parentElement || n.parentElement.closest('script,style,[data-ac-skip]')) continue;
+      if (done.has(n) || !n.parentElement || n.parentElement.closest('script,style,[data-ac-skip]') || inName(n.parentElement)) continue;
       var o = orig(n), k = norm(o);
       if (k && DE[k]) put(n, o.match(/^\s*/)[0] + DE[k] + o.match(/\s*$/)[0]);
     }
@@ -459,6 +538,8 @@
     try { localStorage.setItem(LKEY, l); } catch (e) {}
     html.lang = l;
     if (l === 'de') { loadDE().then(function () { translateTree(document.body); title(); }); } else { untranslate(); title(); }
+    document.querySelectorAll('[data-ac-own="chooser"]').forEach(function (b) { b.removeAttribute('data-ac-state'); });
+    if (ready) downloadPage();
     document.querySelectorAll('[data-ac-lang]').forEach(function (b) {
       var on = b.getAttribute('data-ac-lang') === l;
       b.style.opacity = on ? '1' : '.55';
@@ -519,7 +600,7 @@
     busy = true;
     try {
       list.forEach(function (m) {
-        if (m.type === 'attributes') { if (m.target.tagName === 'A') fixLink(m.target); return; }
+        if (m.type === 'attributes') { if (m.target.tagName === 'A') { fixLink(m.target); if (ready) downloadPage(); } return; }
         if (m.type === 'characterData') {
           var n = m.target;
           if (ready && lang === 'de' && DE && n.parentElement && !(applied.has(n) && applied.get(n) === n.nodeValue)) {
