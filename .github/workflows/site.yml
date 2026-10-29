@@ -3,7 +3,7 @@ name: Website
 # Copies the original website with all its scripts (animations, 3D, menus), debrands it
 # (tools/site_runtime.js), adds German and publishes it together with the launcher feed
 # (release_info.json) on the gh-pages branch, which GitHub Pages serves at
-# https://labtoso.github.io/Artcraft/.
+# https://artcraft.labtoso.de/ (the custom domain; labtoso.github.io/Artcraft redirects there).
 
 on:
   workflow_call:
@@ -25,7 +25,7 @@ concurrency:
 env:
   UPSTREAM: storytold
   ARTCRAFT_REPO: ${{ github.repository }}
-  ARTCRAFT_SITE: https://labtoso.github.io/Artcraft
+  ARTCRAFT_SITE: https://artcraft.labtoso.de
 
 jobs:
   build:
@@ -52,7 +52,7 @@ jobs:
         run: |
           python3 -m http.server 8000 --directory _site >/dev/null 2>&1 &
           sleep 2
-          node tools/collect.js _site http://localhost:8000/Artcraft texts.json
+          node tools/collect.js _site "http://localhost:8000$(python3 -c 'import os,urllib.parse;print(urllib.parse.urlparse(os.environ["ARTCRAFT_SITE"]).path.rstrip("/"))')" texts.json
           python3 -u tools/site.py translate --texts texts.json --out _site
       - name: Keep new German texts
         run: |
@@ -71,7 +71,7 @@ jobs:
           git fetch origin gh-pages || true
           git worktree add -B gh-pages _pages origin/gh-pages 2>/dev/null || git worktree add --orphan -b gh-pages _pages
           find _pages -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
-          cp -a _site/Artcraft/. _pages/
+          cp -a "_site/$(python3 -c 'import os,urllib.parse;print(urllib.parse.urlparse(os.environ["ARTCRAFT_SITE"]).path.strip("/"))')/." _pages/
           cd _pages
           git add -A
           if ! git diff --cached --quiet; then

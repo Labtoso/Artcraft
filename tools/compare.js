@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ORIGIN = 'https://getartcraft.com';
-const MIRROR = (process.env.ARTCRAFT_SITE || 'https://labtoso.github.io/Artcraft').replace(/\/$/, '');
+const MIRROR = (process.env.ARTCRAFT_SITE || 'https://artcraft.labtoso.de').replace(/\/$/, '');
 const PAGES = ['/', '/apps/', '/download/', '/support/', '/tutorials/', '/news/', '/faq/', '/press-kit/',
   '/apps/wordcraft/', '/apps/photocraft/', '/faq/models-supported/', '/news/welcome/', '/tutorials/2d-editor-basics/'];
 const SIZES = [{ name: 'desktop', width: 1440, height: 900 }, { name: 'mobile', width: 390, height: 844 }];

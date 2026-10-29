@@ -25,7 +25,7 @@ import re
 import sys
 
 OWNER, _, NAME = os.environ.get("ARTCRAFT_REPO", "Labtoso/Artcraft").partition("/")
-SITE = os.environ.get("ARTCRAFT_SITE", "https://labtoso.github.io/Artcraft")
+SITE = os.environ.get("ARTCRAFT_SITE", "https://artcraft.labtoso.de")
 UPSTREAM = os.environ.get("UPSTREAM", "storytold")
 
 

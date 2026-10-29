@@ -14,7 +14,7 @@ import re
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 REPO = os.environ.get("GITHUB_REPOSITORY", "Labtoso/Artcraft")
-SITE = os.environ.get("ARTCRAFT_SITE", "https://labtoso.github.io/Artcraft")
+SITE = os.environ.get("ARTCRAFT_SITE", "https://artcraft.labtoso.de")
 UPSTREAM = "storytold"
 
 # What each app is for, in German. A new app falls back to its upstream description.

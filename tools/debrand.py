@@ -33,7 +33,7 @@ except ModuleNotFoundError:  # Python < 3.11
     tomllib = None
 
 OWNER_REPO = os.environ.get("ARTCRAFT_REPO", "Labtoso/Artcraft")
-SITE = os.environ.get("ARTCRAFT_SITE", "https://labtoso.github.io/Artcraft")
+SITE = os.environ.get("ARTCRAFT_SITE", "https://artcraft.labtoso.de")
 REPO_URL = f"https://github.com/{OWNER_REPO}"
 
 # What counts as branding to remove from the UI.

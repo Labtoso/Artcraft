@@ -33,7 +33,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 REPO = os.environ.get("ARTCRAFT_REPO", "Labtoso/Artcraft")
 REPO_URL = f"https://github.com/{REPO}"
-SITE = os.environ.get("ARTCRAFT_SITE", "https://labtoso.github.io/Artcraft").rstrip("/")
+SITE = os.environ.get("ARTCRAFT_SITE", "https://artcraft.labtoso.de").rstrip("/")
 BASE = urllib.parse.urlparse(SITE).path.rstrip("/")  # "/Artcraft"
 UPSTREAM = os.environ.get("UPSTREAM", "storytold")
 ORIGINAL_GITHUB = f"https://github.com/{UPSTREAM}"
@@ -68,6 +68,13 @@ footer .grid:has(>nav[data-ac-hide])>:first-child{grid-column:1/-1!important}
 @media (min-width:1024px){footer .grid:has(>nav[data-ac-hide]){grid-template-columns:2fr 1fr 1fr!important}footer .grid:has(>nav[data-ac-hide])>:first-child{grid-column:auto!important}}
 /* without the studio and community columns the app list is the footer's tallest part: two columns */
 @media (min-width:768px){footer nav ul:has(>li:nth-child(9)){display:grid!important;grid-template-columns:repeat(2,minmax(0,max-content));column-gap:2.5rem}}
+.ac-chooser{display:flex;flex-direction:column;align-items:flex-start;gap:.75rem;margin-top:2rem}
+.ac-tabs{display:flex;border:1px solid var(--line)}
+.ac-tabs button{padding:.5rem 1rem;cursor:pointer;background:transparent;color:var(--ink);font:inherit;letter-spacing:inherit;text-transform:inherit}
+.ac-tabs button+button{border-left:1px solid var(--line)}
+.ac-tabs button[aria-pressed=true]{background:var(--invert-bg);color:var(--invert-fg)}
+.ac-pkg{min-width:18rem;padding:.55rem .75rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:.9rem}
+.ac-file{opacity:.6;font-size:11px}
 html.ac-wait body{opacity:0!important}
 """
 
@@ -459,6 +466,11 @@ class Builder:
             shutil.copyfile(home, os.path.join(self.dst, "404.html"))
         with open(os.path.join(self.dst, ".nojekyll"), "w") as fh:
             fh.write("")
+        # a custom domain: GitHub Pages reads it from the CNAME file
+        host = urllib.parse.urlparse(SITE).hostname or ""
+        if host and not host.endswith(".github.io"):
+            with open(os.path.join(self.dst, "CNAME"), "w") as fh:
+                fh.write(host + "\n")
         print(f"{self.fetch_videos()} videos")
         write_feed(self.dst, self.state)
         write_german(self.dst, {})

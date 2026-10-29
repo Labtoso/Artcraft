@@ -28,7 +28,7 @@ jobs:
       - run: npm install --no-save playwright@1.56.1 && npx playwright install --with-deps chromium
       - name: Screenshots
         env:
-          ARTCRAFT_SITE: https://labtoso.github.io/Artcraft
+          ARTCRAFT_SITE: https://artcraft.labtoso.de
         run: |
           sleep 60  # give Pages a minute to serve the newest version
           node tools/compare.js compare

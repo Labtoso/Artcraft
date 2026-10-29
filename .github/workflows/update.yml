@@ -31,7 +31,7 @@ concurrency:
 env:
   UPSTREAM: storytold
   ARTCRAFT_REPO: ${{ github.repository }}
-  ARTCRAFT_SITE: https://labtoso.github.io/Artcraft
+  ARTCRAFT_SITE: https://artcraft.labtoso.de
 
 jobs:
   discover:
