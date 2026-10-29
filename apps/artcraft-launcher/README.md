@@ -15,11 +15,12 @@ The same code as the original v0.9.0, only without the Discord and social media 
 
 ## Downloads (0.9.2)
 
-- [artcraft-launcher-0.9.2-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.AppImage)
-- [artcraft-launcher-0.9.2-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.AppImage.zsync)
-- [artcraft-launcher-0.9.2-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.deb)
-- [artcraft-launcher-0.9.2-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.rpm)
-- [artcraft-launcher-0.9.2-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.tar.gz)
-- [artcraft-launcher-0.9.2-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.2/artcraft-launcher-0.9.2-windows-x64-portable.zip)
-- [artcraft-launcher-0.9.2-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.2/artcraft-launcher-0.9.2-windows-x64.msi)
+- [artcraft-launcher-0.9.2-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.AppImage)
+- [artcraft-launcher-0.9.2-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.AppImage.zsync)
+- [artcraft-launcher-0.9.2-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.deb)
+- [artcraft-launcher-0.9.2-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.rpm)
+- [artcraft-launcher-0.9.2-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.9.2/artcraft-launcher-0.9.2-linux-x86_64.tar.gz)
+- [artcraft-launcher-0.9.2-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.9.2/artcraft-launcher-0.9.2-macos-universal.dmg)
+- [artcraft-launcher-0.9.2-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.9.2/artcraft-launcher-0.9.2-windows-x64-portable.zip)
+- [artcraft-launcher-0.9.2-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.9.2/artcraft-launcher-0.9.2-windows-x64.msi)
 

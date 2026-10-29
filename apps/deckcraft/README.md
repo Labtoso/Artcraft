@@ -15,12 +15,14 @@ The same code as the original v0.12.0, only without the Discord and social media
 
 ## Downloads (0.12.0)
 
-- [deckcraft-0.12.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-linux-x86_64.AppImage)
-- [deckcraft-0.12.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-linux-x86_64.AppImage.zsync)
-- [deckcraft-0.12.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-linux-x86_64.deb)
-- [deckcraft-0.12.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-linux-x86_64.rpm)
-- [deckcraft-0.12.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-linux-x86_64.tar.gz)
-- [deckcraft-0.12.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-windows-x64-portable.zip)
-- [deckcraft-0.12.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/deckcraft-v0.12.0/deckcraft-0.12.0-windows-x64.msi)
+- [deckcraft-0.12.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-0.12.0-linux-x86_64.AppImage)
+- [deckcraft-0.12.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-0.12.0-linux-x86_64.AppImage.zsync)
+- [deckcraft-0.12.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-0.12.0-linux-x86_64.deb)
+- [deckcraft-0.12.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-0.12.0-linux-x86_64.rpm)
+- [deckcraft-0.12.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-0.12.0-linux-x86_64.tar.gz)
+- [deckcraft-0.12.0-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-0.12.0-macos-universal.dmg)
+- [deckcraft-0.12.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-0.12.0-windows-x64-portable.zip)
+- [deckcraft-0.12.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-0.12.0-windows-x64.msi)
+- [deckcraft-cli-0.12.0-macos-universal.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/deckcraft-cli-0.12.0-macos-universal.zip)
 
 The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

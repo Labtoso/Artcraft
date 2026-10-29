@@ -15,12 +15,14 @@ The same code as the original v0.13.0, only without the Discord and social media
 
 ## Downloads (0.13.0)
 
-- [gridcraft-0.13.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/gridcraft-v0.13.0/gridcraft-0.13.0-linux-x86_64.AppImage)
-- [gridcraft-0.13.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/gridcraft-v0.13.0/gridcraft-0.13.0-linux-x86_64.AppImage.zsync)
-- [gridcraft-0.13.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/gridcraft-v0.13.0/gridcraft-0.13.0-linux-x86_64.deb)
-- [gridcraft-0.13.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/gridcraft-v0.13.0/gridcraft-0.13.0-linux-x86_64.rpm)
-- [gridcraft-0.13.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/gridcraft-v0.13.0/gridcraft-0.13.0-linux-x86_64.tar.gz)
-- [gridcraft-0.13.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/gridcraft-v0.13.0/gridcraft-0.13.0-windows-x64-portable.zip)
-- [gridcraft-0.13.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/gridcraft-v0.13.0/gridcraft-0.13.0-windows-x64.msi)
+- [gridcraft-0.13.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-0.13.0-linux-x86_64.AppImage)
+- [gridcraft-0.13.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-0.13.0-linux-x86_64.AppImage.zsync)
+- [gridcraft-0.13.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-0.13.0-linux-x86_64.deb)
+- [gridcraft-0.13.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-0.13.0-linux-x86_64.rpm)
+- [gridcraft-0.13.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-0.13.0-linux-x86_64.tar.gz)
+- [gridcraft-0.13.0-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-0.13.0-macos-universal.dmg)
+- [gridcraft-0.13.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-0.13.0-windows-x64-portable.zip)
+- [gridcraft-0.13.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-0.13.0-windows-x64.msi)
+- [gridcraft-cli-0.13.0-macos-universal.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.13.0/gridcraft-cli-0.13.0-macos-universal.zip)
 
 The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

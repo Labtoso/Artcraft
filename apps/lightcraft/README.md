@@ -15,12 +15,14 @@ The same code as the original v0.15.0, only without the Discord and social media
 
 ## Downloads (0.15.0)
 
-- [lightcraft-0.15.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-linux-x86_64.AppImage)
-- [lightcraft-0.15.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-linux-x86_64.AppImage.zsync)
-- [lightcraft-0.15.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-linux-x86_64.deb)
-- [lightcraft-0.15.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-linux-x86_64.rpm)
-- [lightcraft-0.15.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-linux-x86_64.tar.gz)
-- [lightcraft-0.15.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-windows-x64-portable.zip)
-- [lightcraft-0.15.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/lightcraft-v0.15.0/lightcraft-0.15.0-windows-x64.msi)
+- [lightcraft-0.15.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-0.15.0-linux-x86_64.AppImage)
+- [lightcraft-0.15.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-0.15.0-linux-x86_64.AppImage.zsync)
+- [lightcraft-0.15.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-0.15.0-linux-x86_64.deb)
+- [lightcraft-0.15.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-0.15.0-linux-x86_64.rpm)
+- [lightcraft-0.15.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-0.15.0-linux-x86_64.tar.gz)
+- [lightcraft-0.15.0-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-0.15.0-macos-universal.dmg)
+- [lightcraft-0.15.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-0.15.0-windows-x64-portable.zip)
+- [lightcraft-0.15.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-0.15.0-windows-x64.msi)
+- [lightcraft-cli-0.15.0-macos-universal.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/lightcraft-cli-0.15.0-macos-universal.zip)
 
 The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

@@ -15,12 +15,14 @@ The same code as the original v0.18.0, only without the Discord and social media
 
 ## Downloads (0.18.0)
 
-- [vectorcraft-0.18.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-linux-x86_64.AppImage)
-- [vectorcraft-0.18.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-linux-x86_64.AppImage.zsync)
-- [vectorcraft-0.18.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-linux-x86_64.deb)
-- [vectorcraft-0.18.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-linux-x86_64.rpm)
-- [vectorcraft-0.18.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-linux-x86_64.tar.gz)
-- [vectorcraft-0.18.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-windows-x64-portable.zip)
-- [vectorcraft-0.18.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/vectorcraft-v0.18.0/vectorcraft-0.18.0-windows-x64.msi)
+- [vectorcraft-0.18.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-0.18.0-linux-x86_64.AppImage)
+- [vectorcraft-0.18.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-0.18.0-linux-x86_64.AppImage.zsync)
+- [vectorcraft-0.18.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-0.18.0-linux-x86_64.deb)
+- [vectorcraft-0.18.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-0.18.0-linux-x86_64.rpm)
+- [vectorcraft-0.18.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-0.18.0-linux-x86_64.tar.gz)
+- [vectorcraft-0.18.0-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-0.18.0-macos-universal.dmg)
+- [vectorcraft-0.18.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-0.18.0-windows-x64-portable.zip)
+- [vectorcraft-0.18.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-0.18.0-windows-x64.msi)
+- [vectorcraft-cli-0.18.0-macos-universal.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/vectorcraft-cli-0.18.0-macos-universal.zip)
 
 The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

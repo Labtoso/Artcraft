@@ -15,12 +15,14 @@ The same code as the original v0.18.0, only without the Discord and social media
 
 ## Downloads (0.18.0)
 
-- [effectcraft-0.18.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/effectcraft-v0.18.0/effectcraft-0.18.0-linux-x86_64.AppImage)
-- [effectcraft-0.18.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/effectcraft-v0.18.0/effectcraft-0.18.0-linux-x86_64.AppImage.zsync)
-- [effectcraft-0.18.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/effectcraft-v0.18.0/effectcraft-0.18.0-linux-x86_64.deb)
-- [effectcraft-0.18.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/effectcraft-v0.18.0/effectcraft-0.18.0-linux-x86_64.rpm)
-- [effectcraft-0.18.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/effectcraft-v0.18.0/effectcraft-0.18.0-linux-x86_64.tar.gz)
-- [effectcraft-0.18.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/effectcraft-v0.18.0/effectcraft-0.18.0-windows-x64-portable.zip)
-- [effectcraft-0.18.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/effectcraft-v0.18.0/effectcraft-0.18.0-windows-x64.msi)
+- [effectcraft-0.18.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-0.18.0-linux-x86_64.AppImage)
+- [effectcraft-0.18.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-0.18.0-linux-x86_64.AppImage.zsync)
+- [effectcraft-0.18.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-0.18.0-linux-x86_64.deb)
+- [effectcraft-0.18.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-0.18.0-linux-x86_64.rpm)
+- [effectcraft-0.18.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-0.18.0-linux-x86_64.tar.gz)
+- [effectcraft-0.18.0-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-0.18.0-macos-universal.dmg)
+- [effectcraft-0.18.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-0.18.0-windows-x64-portable.zip)
+- [effectcraft-0.18.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-0.18.0-windows-x64.msi)
+- [effectcraft-cli-0.18.0-macos-universal.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/effectcraft-cli-0.18.0-macos-universal.zip)
 
 The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

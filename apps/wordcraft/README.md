@@ -15,12 +15,14 @@ The same code as the original v0.12.0, only without the Discord and social media
 
 ## Downloads (0.12.0)
 
-- [wordcraft-0.12.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/wordcraft-v0.12.0/wordcraft-0.12.0-linux-x86_64.AppImage)
-- [wordcraft-0.12.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/wordcraft-v0.12.0/wordcraft-0.12.0-linux-x86_64.AppImage.zsync)
-- [wordcraft-0.12.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/wordcraft-v0.12.0/wordcraft-0.12.0-linux-x86_64.deb)
-- [wordcraft-0.12.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/wordcraft-v0.12.0/wordcraft-0.12.0-linux-x86_64.rpm)
-- [wordcraft-0.12.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/wordcraft-v0.12.0/wordcraft-0.12.0-linux-x86_64.tar.gz)
-- [wordcraft-0.12.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/wordcraft-v0.12.0/wordcraft-0.12.0-windows-x64-portable.zip)
-- [wordcraft-0.12.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/wordcraft-v0.12.0/wordcraft-0.12.0-windows-x64.msi)
+- [wordcraft-0.12.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-0.12.0-linux-x86_64.AppImage)
+- [wordcraft-0.12.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-0.12.0-linux-x86_64.AppImage.zsync)
+- [wordcraft-0.12.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-0.12.0-linux-x86_64.deb)
+- [wordcraft-0.12.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-0.12.0-linux-x86_64.rpm)
+- [wordcraft-0.12.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-0.12.0-linux-x86_64.tar.gz)
+- [wordcraft-0.12.0-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-0.12.0-macos-universal.dmg)
+- [wordcraft-0.12.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-0.12.0-windows-x64-portable.zip)
+- [wordcraft-0.12.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-0.12.0-windows-x64.msi)
+- [wordcraft-cli-0.12.0-macos-universal.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.12.0/wordcraft-cli-0.12.0-macos-universal.zip)
 
 The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).

@@ -15,14 +15,16 @@ The same code as the original v0.14.0, only without the Discord and social media
 
 ## Downloads (0.14.0)
 
-- [designcraft-0.14.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-linux-x86_64.AppImage)
-- [designcraft-0.14.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-linux-x86_64.AppImage.zsync)
-- [designcraft-0.14.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-linux-x86_64.deb)
-- [designcraft-0.14.0-linux-x86_64.pkg.tar.zst](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-linux-x86_64.pkg.tar.zst)
-- [designcraft-0.14.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-linux-x86_64.rpm)
-- [designcraft-0.14.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-linux-x86_64.tar.gz)
-- [designcraft-0.14.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-windows-x64-portable.zip)
-- [designcraft-0.14.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/designcraft-v0.14.0/designcraft-0.14.0-windows-x64.msi)
+- [designcraft-0.14.0-linux-x86_64.AppImage](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-linux-x86_64.AppImage)
+- [designcraft-0.14.0-linux-x86_64.AppImage.zsync](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-linux-x86_64.AppImage.zsync)
+- [designcraft-0.14.0-linux-x86_64.deb](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-linux-x86_64.deb)
+- [designcraft-0.14.0-linux-x86_64.pkg.tar.zst](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-linux-x86_64.pkg.tar.zst)
+- [designcraft-0.14.0-linux-x86_64.rpm](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-linux-x86_64.rpm)
+- [designcraft-0.14.0-linux-x86_64.tar.gz](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-linux-x86_64.tar.gz)
+- [designcraft-0.14.0-macos-universal.dmg](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-macos-universal.dmg)
+- [designcraft-0.14.0-windows-x64-portable.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-windows-x64-portable.zip)
+- [designcraft-0.14.0-windows-x64.msi](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-0.14.0-windows-x64.msi)
+- [designcraft-cli-0.14.0-macos-universal.zip](https://github.com/Labtoso/Artcraft/releases/download/v0.14.0/designcraft-cli-0.14.0-macos-universal.zip)
 
 The easiest way to install it is the [ArtCraft Launcher](../artcraft-launcher/README.md).
 
