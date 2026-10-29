@@ -3,56 +3,56 @@
   "apps": {
    "artcraft-launcher": {
     "repo": "Labtoso/Artcraft",
-    "app_last_fetched": "2026-10-28T23:35:49Z",
+    "app_last_fetched": "2026-10-29T00:36:41Z",
     "latest_release": {
-     "tag": "v0.9.0",
-     "name": "ArtCraft Launcher 0.9.0",
-     "published_at": "2026-10-28T23:35:49Z",
-     "html_url": "https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.9.0",
+     "tag": "v0.9.1",
+     "name": "ArtCraft Launcher 0.9.1",
+     "published_at": "2026-10-29T00:36:41Z",
+     "html_url": "https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.9.1",
      "prerelease": false,
-     "notes_markdown": "## Added\n- ArtCraft Launcher 0.9.0, built from the original release [v0.9.0](https://github.com/storytold/craft-launcher/releases/tag/v0.9.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.9.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux. Checksums are in `SHA256SUMS`.\n\n---\n\n### Original release notes\n\n## What's Changed\n* Migrate Craft Launcher to egui 0.37 by @skylartaylor in https://github.com/storytold/craft-launcher/pull/873\n* refactor: delegate self-update functionality to craft-update by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/871\n* build: pin craft-update to craft-libs main (495e597) by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/896\n* chore(deps): refresh serde_json, winresource, plist, ureq, tray-icon by @skylartaylor in https://github.com/storytold/craft-launcher/pull/898\n* packaging(macos): read stapler arguments into locals (S7679) by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/902\n* native(install): split the archive unpack and the flat-layout move into helpers (S3776) by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/903\n* refactor(ui): use craft-ui's ComboBox for every dropdown by @aiongg in https://github.com/storytold/craft-launcher/pull/939\n* Enforce Rust coding standards via Clippy by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/927\n* Windows installation policy: ArtCraft Launcher by @Jeremy8776 in https://github.com/storytold/craft-launcher/pull/925\n\n\n**Full Changelog**: https://github.com/storytold/craft-launcher/compare/v0.8.1...v0.9.0\n",
+     "notes_markdown": "## Added\n- ArtCraft Launcher 0.9.1, built from the original release [v0.9.0](https://github.com/storytold/craft-launcher/releases/tag/v0.9.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.9.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux. Checksums are in `SHA256SUMS`.\n\n---\n\n### Original release notes\n\n## What's Changed\n* Migrate Craft Launcher to egui 0.37 by @skylartaylor in https://github.com/storytold/craft-launcher/pull/873\n* refactor: delegate self-update functionality to craft-update by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/871\n* build: pin craft-update to craft-libs main (495e597) by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/896\n* chore(deps): refresh serde_json, winresource, plist, ureq, tray-icon by @skylartaylor in https://github.com/storytold/craft-launcher/pull/898\n* packaging(macos): read stapler arguments into locals (S7679) by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/902\n* native(install): split the archive unpack and the flat-layout move into helpers (S3776) by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/903\n* refactor(ui): use craft-ui's ComboBox for every dropdown by @aiongg in https://github.com/storytold/craft-launcher/pull/939\n* Enforce Rust coding standards via Clippy by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/927\n* Windows installation policy: ArtCraft Launcher by @Jeremy8776 in https://github.com/storytold/craft-launcher/pull/925\n\n\n**Full Changelog**: https://github.com/storytold/craft-launcher/compare/v0.8.1...v0.9.0\n",
      "assets": [
       {
-       "name": "artcraft-launcher-0.9.0-linux-x86_64.AppImage",
-       "size_bytes": 13138424,
-       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.0/artcraft-launcher-0.9.0-linux-x86_64.AppImage",
-       "sha256": "d0e7fa321c521ca189588948b6a850f80198125c2eb8a4f58047aad86d985a27"
+       "name": "artcraft-launcher-0.9.1-linux-x86_64.AppImage",
+       "size_bytes": 13130232,
+       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.1/artcraft-launcher-0.9.1-linux-x86_64.AppImage",
+       "sha256": "b45f91983875d7f3e1237e4bdf951570c4f2bc4314b9325340ccaf3f18e223ea"
       },
       {
-       "name": "artcraft-launcher-0.9.0-linux-x86_64.AppImage.zsync",
-       "size_bytes": 45173,
-       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.0/artcraft-launcher-0.9.0-linux-x86_64.AppImage.zsync",
-       "sha256": "8a457de250aea4a9823c441c99f8b93aa0f8764b9ec7e7ee75457fe950312a2f"
+       "name": "artcraft-launcher-0.9.1-linux-x86_64.AppImage.zsync",
+       "size_bytes": 45145,
+       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.1/artcraft-launcher-0.9.1-linux-x86_64.AppImage.zsync",
+       "sha256": "eb6361dd80d74c0730c76992ad2e23dc29cfef64ade9c851e12db64d8ac9f9fd"
       },
       {
-       "name": "artcraft-launcher-0.9.0-linux-x86_64.deb",
-       "size_bytes": 13497852,
-       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.0/artcraft-launcher-0.9.0-linux-x86_64.deb",
-       "sha256": "ce99ef8dcf9564b2a158b4b4b273c64900e4e80495f038085a3b595f832146c9"
+       "name": "artcraft-launcher-0.9.1-linux-x86_64.deb",
+       "size_bytes": 13495592,
+       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.1/artcraft-launcher-0.9.1-linux-x86_64.deb",
+       "sha256": "5a8afecf645064b8c05b83228bf38fc57c320e7a8056a23cec2b0c8988e290af"
       },
       {
-       "name": "artcraft-launcher-0.9.0-linux-x86_64.rpm",
-       "size_bytes": 13863221,
-       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.0/artcraft-launcher-0.9.0-linux-x86_64.rpm",
-       "sha256": "99d148952a535db6d38c39489be06cf03aec9ae4aa0833a694a24abeb6841bf1"
+       "name": "artcraft-launcher-0.9.1-linux-x86_64.rpm",
+       "size_bytes": 13871833,
+       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.1/artcraft-launcher-0.9.1-linux-x86_64.rpm",
+       "sha256": "739f97ebc2a9c641c3ceec309e24a249dd4a1116e39a850d59601f7e949b863f"
       },
       {
-       "name": "artcraft-launcher-0.9.0-linux-x86_64.tar.gz",
-       "size_bytes": 13283922,
-       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.0/artcraft-launcher-0.9.0-linux-x86_64.tar.gz",
-       "sha256": "20b0c492ccd9c7d432c0e4e476913a0e979a7cbd3456144d23e432dc1074ac9b"
+       "name": "artcraft-launcher-0.9.1-linux-x86_64.tar.gz",
+       "size_bytes": 13281375,
+       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.1/artcraft-launcher-0.9.1-linux-x86_64.tar.gz",
+       "sha256": "fc21ef4f85059dd1e4b4e7d0b641d01dd37dd50360b93c0b5768f68906a3ee66"
       },
       {
-       "name": "artcraft-launcher-0.9.0-windows-x64-portable.zip",
-       "size_bytes": 10780764,
-       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.0/artcraft-launcher-0.9.0-windows-x64-portable.zip",
-       "sha256": "bd01c31a2f0e8a43c369d034df67e9a6ebb4f3df835fd244f6295846c29bb077"
+       "name": "artcraft-launcher-0.9.1-windows-x64-portable.zip",
+       "size_bytes": 10779691,
+       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.1/artcraft-launcher-0.9.1-windows-x64-portable.zip",
+       "sha256": "daa3f477ca6fd3ed7e6b1eb51ab3e766a36666f77fc7d6f1964f701ac622e444"
       },
       {
-       "name": "artcraft-launcher-0.9.0-windows-x64.msi",
+       "name": "artcraft-launcher-0.9.1-windows-x64.msi",
        "size_bytes": 9719808,
-       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.0/artcraft-launcher-0.9.0-windows-x64.msi",
-       "sha256": "40cf1a083ea73fcbac6feeb557c7015ce7bb492c8f404656bfc009c472f0ff66"
+       "download_url": "https://github.com/Labtoso/Artcraft/releases/download/artcraft-launcher-v0.9.1/artcraft-launcher-0.9.1-windows-x64.msi",
+       "sha256": "390df9f4d21c47d221bd949a50f1f1cbf789d1dadbae18e617189ae6c9f5141a"
       }
      ]
     }
