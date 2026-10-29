@@ -124,7 +124,11 @@ def main() -> int:
         }
         found.append(entry)
         built = state.get(app_id, {})
-        if force == "all" or app_id in forced or built.get("upstream_tag") != tag or built.get("debrand_rev") != debrand_rev() or built.get("version") != version:
+        # self-repair: a version published without one of the systems (a build or upload that
+        # failed) is built again on the next run
+        systems = {s for s in ("windows", "linux", "macos") if any(s in x["name"] for x in built.get("assets", []))}
+        missing = bool(built) and systems != {"windows", "linux", "macos"}
+        if force == "all" or app_id in forced or missing or built.get("upstream_tag") != tag or built.get("debrand_rev") != debrand_rev() or built.get("version") != version:
             matrix.append({k: entry[k] for k in ("id", "name", "repo", "tag", "version", "fonts_ref")})
 
     with open("build/discovered.json", "w", encoding="utf-8") as fh:
