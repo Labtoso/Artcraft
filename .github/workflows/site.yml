@@ -88,6 +88,15 @@ jobs:
           case "$host" in *.github.io) exit 0;; esac
           gh api -X PUT "repos/$GITHUB_REPOSITORY/pages" -f cname="$host" -F https_enforced=true || echo "::warning title=Pages::could not set HTTPS yet (the certificate may still be on its way)"
           gh api "repos/$GITHUB_REPOSITORY/pages" --jq '"domain \(.cname), https \(.https_enforced), certificate \(.https_certificate.state // "none")"' | sed 's/^/::notice title=Pages::/' || true
+      # installed launchers must find the feed, also the ones from before the custom domain
+      - name: Check the launcher feed
+        run: |
+          sleep 60
+          for url in "$ARTCRAFT_SITE/release_info.json" "https://labtoso.github.io/Artcraft/release_info.json"; do
+            res=$(curl -sSL -o feed.json -w '%{http_code} %{url_effective}' "$url" || true)
+            launcher=$(python3 -c 'import json;print(json.load(open("feed.json"))["release_info"]["apps"]["artcraft-launcher"]["latest_release"]["tag"])' 2>/dev/null || echo "unreadable")
+            echo "::notice title=Feed::$url -> $res, launcher $launcher"
+          done
 
   notify:
     needs: build

@@ -137,8 +137,12 @@ def write_feed(out: str, state: dict):
         "repo_renames": [],
         "important_notices": {"announcements": [], "alerts": []},
     }
-    with open(os.path.join(out, "release_info.json"), "w", encoding="utf-8") as fh:
-        json.dump(feed, fh, indent=1, ensure_ascii=False)
+    # launchers from before the custom domain ask labtoso.github.io/Artcraft/, which GitHub
+    # forwards here; the copy under Artcraft/ answers wherever that forwarding lands
+    for folder in (out, os.path.join(out, "Artcraft")):
+        os.makedirs(folder, exist_ok=True)
+        with open(os.path.join(folder, "release_info.json"), "w", encoding="utf-8") as fh:
+            json.dump(feed, fh, indent=1, ensure_ascii=False)
 
 
 # names that stay as they are in German
