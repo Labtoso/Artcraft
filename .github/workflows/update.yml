@@ -246,11 +246,25 @@ jobs:
           mkdir -p out
           find dist/release -maxdepth 1 -type f ! -name 'SHA256SUMS*' ! -name '*.sha256' -exec cp {} out/ \;
           ls -la out
+      # GitHub's artifact service times out now and then: try again before giving up the build
       - uses: actions/upload-artifact@v4
+        id: upload
+        continue-on-error: true
         with:
           name: dist-${{ matrix.app.id }}-${{ matrix.os.name }}
           path: out/*
           if-no-files-found: error
+      - name: Wait before the second upload
+        if: steps.upload.outcome == 'failure'
+        shell: bash
+        run: sleep 60
+      - uses: actions/upload-artifact@v4
+        if: steps.upload.outcome == 'failure'
+        with:
+          name: dist-${{ matrix.app.id }}-${{ matrix.os.name }}
+          path: out/*
+          if-no-files-found: error
+          overwrite: true
 
   publish:
     needs: [discover, build]
