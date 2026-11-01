@@ -35,7 +35,7 @@ The original apps have buttons and links to Discord and social networks in many 
 | [FilmCraft](apps/filmcraft/README.md) | Video editing | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/filmcraft-v0.15.0) | [Original](https://github.com/storytold/filmcraft) |
 | [GridCraft](apps/gridcraft/README.md) | Spreadsheets | [0.14.2](https://github.com/Labtoso/Artcraft/releases/tag/gridcraft-v0.14.2) | [Original](https://github.com/storytold/gridcraft) |
 | [LightCraft](apps/lightcraft/README.md) | Photo library and raw developer | [0.16.0](https://github.com/Labtoso/Artcraft/releases/tag/lightcraft-v0.16.0) | [Original](https://github.com/storytold/lightcraft) |
-| [PdfCraft](apps/pdfcraft/README.md) | PDF workbench | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/pdfcraft-v0.15.0) | [Original](https://github.com/storytold/pdfcraft) |
+| [PdfCraft](apps/pdfcraft/README.md) | PDF workbench | [0.16.1](https://github.com/Labtoso/Artcraft/releases/tag/pdfcraft-v0.16.1) | [Original](https://github.com/storytold/pdfcraft) |
 | [PhotoCraft](apps/photocraft/README.md) | Image editing | [0.18.0](https://github.com/Labtoso/Artcraft/releases/tag/photocraft-v0.18.0) | [Original](https://github.com/storytold/photocraft) |
 | [SoundCraft](apps/soundcraft/README.md) | Digital audio workstation | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/soundcraft-v0.15.0) | [Original](https://github.com/storytold/soundcraft) |
 | [VectorCraft](apps/vectorcraft/README.md) | Vector illustration | [0.19.0](https://github.com/Labtoso/Artcraft/releases/tag/vectorcraft-v0.19.0) | [Original](https://github.com/storytold/vectorcraft) |
