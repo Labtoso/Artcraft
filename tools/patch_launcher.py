@@ -129,8 +129,13 @@ def main() -> int:
     install = os.path.join(src, "crates/native/src/install.rs")
     with open(install, encoding="utf-8") as fh:
         text = fh.read()
-    text = sub(text, r"Self \{ team: Some\(TEAM_ID\), version: release\.version\.as_ref\(\) \}",
+    text = sub(text, r"Self \{ team: (Some\(TEAM_ID\)|app\.mac_team), version: release\.version\.as_ref\(\) \}",
                "Self { team: None, version: release.version.as_ref() }", install)
+    # newer launchers refuse a missing team outside tests; builds here have none
+    if "fn required_team(" in text:
+        text = sub(text, r"\n([ \t]*)pub\(super\) fn required_team\(",
+                   r"\n\1/// Builds here are signed ad hoc: no Apple team to require.\n\1const AD_HOC_BUILDS: bool = true;\n\n\1pub(super) fn required_team(", install)
+        text = sub(text, r"if team\.is_none\(\) && !test_build \{", "if team.is_none() && !test_build && !AD_HOC_BUILDS {", install)
     with open(install, "w", encoding="utf-8", newline="") as fh:
         fh.write(text)
 
