@@ -6,11 +6,12 @@ Left as it is, that library
   * asks GitHub for new versions of storytold/<app>, so an app here would offer the original's
     build and replace this copy with it,
   * trusts downloads only from github.com/storytold/<app>/releases,
-  * on macOS installs only apps signed by the original team's Apple Developer ID.
+  * on macOS installs only apps signed by the original team's Apple Developer ID,
+  * on Windows updates only a program with an Authenticode signature (builds here have none).
 
 This script copies the library's crate at the revision the app pins into `vendor-craft-update/`,
 points it at this copy (the release feed on this copy's website, this repo's releases, no Apple
-team pin) and wires it in with a `[patch]` section. Cargo.lock is updated to match, so builds with
+team pin, unsigned Windows updates) and wires it in with a `[patch]` section. Cargo.lock is updated to match, so builds with
 `--locked` work. Nothing is done when the app doesn't use craft-update.
 
 Usage: vendor_libs.py SRC_DIR
@@ -170,6 +171,17 @@ def patch_sources(crate: str):
     # bundle's version still have to match
     text = sub(text, r"Self \{ team: Some\(TEAM_ID\), version: release\.version\.as_ref\(\) \}",
                "Self { team: None, version: release.version.as_ref() }", path)
+    with open(path, "w", encoding="utf-8", newline="") as fh:
+        fh.write(text)
+
+    path = os.path.join(crate, "src", "self_update.rs")
+    with open(path, encoding="utf-8") as fh:
+        text = fh.read()
+    # Windows: builds here carry no Authenticode signature, and the original only updates a signed
+    # program with a file from the same publisher. An unsigned copy takes an update whose checksum
+    # from this copy's feed matched (checked before this point); a signed one keeps the rule.
+    text = sub(text, r"let ours = publisher\(reference\)\.map_err\(\|e\| format!\(\"this copy of \{\} isn't signed \(\{e\}\), so it doesn't install updates\", app\.name\)\)\?;",
+               "let Ok(ours) = publisher(reference) else { return Ok(()) };", path)
     with open(path, "w", encoding="utf-8", newline="") as fh:
         fh.write(text)
 
