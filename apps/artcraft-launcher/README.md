@@ -11,7 +11,7 @@
 
 ## What is different here
 
-The same code as the original v0.11.1, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
+The same code as the original v0.13.0, only without the Discord and social media buttons. Links to GitHub, error reports and updates point to this repository, website links to this fork's website. Everything is built automatically from every new original release ([how it works](../../README.md#how-it-works)).
 
 ## Downloads (0.10.4)
 
