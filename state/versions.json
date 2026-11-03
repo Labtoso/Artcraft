@@ -752,66 +752,66 @@
     "name": "SoundCraft",
     "tagline": "Recording, editing and mixing audio",
     "repo": "soundcraft",
-    "upstream_tag": "v0.16.0",
-    "version": "0.16.0",
-    "tag": "soundcraft-v0.16.0",
+    "upstream_tag": "v0.17.0",
+    "version": "0.17.0",
+    "tag": "soundcraft-v0.17.0",
     "debrand_rev": "3",
-    "published_at": "2026-11-02T02:06:08Z",
-    "notes": "## Added\n- SoundCraft 0.16.0, built from the original release [v0.16.0](https://github.com/storytold/soundcraft/releases/tag/v0.16.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.16.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Updates: shared check-result dialog from craft-update by @aiongg in https://github.com/storytold/soundcraft/pull/1219\n* docs: tidy agent, contributor and release docs by @aiongg in https://github.com/storytold/soundcraft/pull/1218\n* Clip menu: act on the whole edit selection when the right-clicked clip is part of it by @ydking0911 in https://github.com/storytold/soundcraft/pull/1196\n* Zoom Toggle: Alt+Shift+E and Alt-click cancel it and keep the current view by @dotCooCoo in https://github.com/storytold/soundcraft/pull/1101\n* Mix: clamp clip-FX gain and send-level automation (fixes #884) by @SusieeTheLinuxUser in https://github.com/storytold/soundcraft/pull/1126\n* Fix integer overflow in AutomationLane::value_at for distant breakpoints by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1215\n* Fix overflow in GridValue::step_samples at extreme positions by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1216\n* Fix overflow in TempoMap bar math with a meter near i64::MAX by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1220\n* Fix remove_dc mean when a channel has non-finite samples by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1221\n* Reject oversized CAF cookie lengths by @TheGalitube in https://github.com/storytold/soundcraft/pull/1200\n* Reject skipped drop-frame timecode labels by @TheGalitube in https://github.com/storytold/soundcraft/pull/1201\n* Reject overflowing WAV byte rates by @TheGalitube in https://github.com/storytold/soundcraft/pull/1202\n* Keep RMS finite for large samples by @TheGalitube in https://github.com/storytold/soundcraft/pull/1222\n* Reject overflowing FLAC vendor string lengths by @kk376 in https://github.com/storytold/soundcraft/pull/1211\n* fix(engine): bound MIDI import tempo and track floods (#890) by @kk376 in https://github.com/storytold/soundcraft/pull/1212\n* automation: test that Remote returns app errors unchanged by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1128\n* Saturate H.264 POC type 0 bottom field order count by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1226\n* Fix H.264 DPB integer overflow on huge pic num differences by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1229\n* Default range start to the selection start in range_param by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1214\n* Play transport.play {from} at the requested position, not the selection by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1075\n* Keep plugin parameter id case in AutoParam::parse by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1227\n* packaging(flatpak): add OCI image build and GHCR publishing helper by @dylanmtaylor in https://github.com/storytold/soundcraft/pull/1233\n\n## New Contributors\n* @ydking0911 made their first contribution in https://github.com/storytold/soundcraft/pull/1196\n* @kk376 made their first contribution in https://github.com/storytold/soundcraft/pull/1211\n\n**Full Changelog**: https://github.com/storytold/soundcraft/compare/v0.15.0...v0.16.0\n",
+    "published_at": "2026-11-03T01:02:57Z",
+    "notes": "## Added\n- SoundCraft 0.17.0, built from the original release [v0.17.0](https://github.com/storytold/soundcraft/releases/tag/v0.17.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.17.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Keep score export notes when bars are shorter than a sixteenth by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1234\n* Export only the MIDI notes a trimmed clip still plays by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1032\n* AIFF: test that a negative channel count is rejected by @TheGalitube in https://github.com/storytold/soundcraft/pull/1223\n* Accept VST3 multi-out instruments with up to 64 audio buses by @Silvertree2010 in https://github.com/storytold/soundcraft/pull/1248\n* feat(ui): improve the New Tracks creation workflow by @SlyLaM in https://github.com/storytold/soundcraft/pull/559\n* Fix GNOME/Wayland window controls by @danielmigueltejedor in https://github.com/storytold/soundcraft/pull/637\n\n## New Contributors\n* @SlyLaM made their first contribution in https://github.com/storytold/soundcraft/pull/559\n* @danielmigueltejedor made their first contribution in https://github.com/storytold/soundcraft/pull/637\n\n**Full Changelog**: https://github.com/storytold/soundcraft/compare/v0.16.0...v0.17.0\n",
     "assets": [
       {
-        "name": "soundcraft-0.16.0-linux-x86_64.AppImage",
-        "size_bytes": 19679736,
-        "sha256": "bcf4aead700184f9fa76b2d42c4d938f6638f0ebded3d9fc3cada97c4914ce57",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-0.16.0-linux-x86_64.AppImage"
+        "name": "soundcraft-0.17.0-linux-x86_64.AppImage",
+        "size_bytes": 19831288,
+        "sha256": "a2c841d227857e9e6516dae3bdad9050d9b8f44ee456b3405da0efac7f388f52",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-0.17.0-linux-x86_64.AppImage"
       },
       {
-        "name": "soundcraft-0.16.0-linux-x86_64.AppImage.zsync",
-        "size_bytes": 67519,
-        "sha256": "4b406fa9a5c1e43b2bb182713e52575e1e93e01d1f8ceadcfa697a1aec0abe2d",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-0.16.0-linux-x86_64.AppImage.zsync"
+        "name": "soundcraft-0.17.0-linux-x86_64.AppImage.zsync",
+        "size_bytes": 68037,
+        "sha256": "92fbaf28df13fcbfcec8bc335118a76a73a137221248dbab4afd5cd3722be94e",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-0.17.0-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "soundcraft-0.16.0-linux-x86_64.deb",
-        "size_bytes": 20957212,
-        "sha256": "14915745ebba79999cc10d7ae451604be937a5814dc26b017f909e57f5fd3849",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-0.16.0-linux-x86_64.deb"
+        "name": "soundcraft-0.17.0-linux-x86_64.deb",
+        "size_bytes": 21115572,
+        "sha256": "e8205de260b798df334640411359f13565304119fa7311bb7e875685fcb04e3e",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-0.17.0-linux-x86_64.deb"
       },
       {
-        "name": "soundcraft-0.16.0-linux-x86_64.rpm",
-        "size_bytes": 21556411,
-        "sha256": "a4d6f6f20cae58370587e4b6e538e57dbcee19392a4801871d6ac8449a7faa7d",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-0.16.0-linux-x86_64.rpm"
+        "name": "soundcraft-0.17.0-linux-x86_64.rpm",
+        "size_bytes": 21722130,
+        "sha256": "75d52127d08996fc9011018a621a51e0c9236535fcf7f3a41fe3ec1a763758ff",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-0.17.0-linux-x86_64.rpm"
       },
       {
-        "name": "soundcraft-0.16.0-linux-x86_64.tar.gz",
-        "size_bytes": 20577878,
-        "sha256": "b5c158a72859542f1c32105a05a0108f47d8a778771f7eea3efdcffb32df9a12",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-0.16.0-linux-x86_64.tar.gz"
+        "name": "soundcraft-0.17.0-linux-x86_64.tar.gz",
+        "size_bytes": 20731682,
+        "sha256": "e9516696e1cc4c8a8609233b312b31a9c1cea87994cbf5e152d5b15b5e7c791c",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-0.17.0-linux-x86_64.tar.gz"
       },
       {
-        "name": "soundcraft-0.16.0-macos-universal.dmg",
-        "size_bytes": 29843202,
-        "sha256": "d9afbd2018048e27a3bc50fda57ab011e385e69487e379f29f7d3c76bd4e4866",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-0.16.0-macos-universal.dmg"
+        "name": "soundcraft-0.17.0-macos-universal.dmg",
+        "size_bytes": 29894310,
+        "sha256": "61e97a635c0f676276741878c05fd6b111d51c9adb042cc2d4c5311e8bbbef8d",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-0.17.0-macos-universal.dmg"
       },
       {
-        "name": "soundcraft-0.16.0-windows-x64-portable.zip",
-        "size_bytes": 18508542,
-        "sha256": "691d3563b1b0047d8ff217148626836394e42ebe6d4693d386e4f713f90aa730",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-0.16.0-windows-x64-portable.zip"
+        "name": "soundcraft-0.17.0-windows-x64-portable.zip",
+        "size_bytes": 18522894,
+        "sha256": "dcc7630207cc3610a0107d048a56e055c99a2f51e00f8c0adec5fbc028055f38",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-0.17.0-windows-x64-portable.zip"
       },
       {
-        "name": "soundcraft-0.16.0-windows-x64.msi",
-        "size_bytes": 14319616,
-        "sha256": "a03eda69afb1959436e78eeff526d3c981f90515a711b873f2dd894bd41d4d30",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-0.16.0-windows-x64.msi"
+        "name": "soundcraft-0.17.0-windows-x64.msi",
+        "size_bytes": 14303232,
+        "sha256": "3955c293b05aaa288330f3e62c79cb81f33a53c43c2840a4f6d2ddbe6bad5bc0",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-0.17.0-windows-x64.msi"
       },
       {
-        "name": "soundcraft-cli-0.16.0-macos-universal.zip",
-        "size_bytes": 8070602,
-        "sha256": "fef118a3bc06f13ea514f0a4c275171a3c1533f5d1d5e8f742a99264b8b1d727",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.0/soundcraft-cli-0.16.0-macos-universal.zip"
+        "name": "soundcraft-cli-0.17.0-macos-universal.zip",
+        "size_bytes": 8080061,
+        "sha256": "7af059d1a5a228b9656da1a3e6b2ce50a00abd468bdf9729779b51639b8fb030",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/soundcraft-cli-0.17.0-macos-universal.zip"
       }
     ]
   },
@@ -1080,6 +1080,73 @@
         "size_bytes": 13452446,
         "sha256": "af7120c7a309d54bf60f3c7176b4cd765d998da11c6c405a1e6ffe774ed59abc",
         "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.2.0/texturecraft-cli-0.2.0-macos-universal.zip"
+      }
+    ]
+  },
+  "materialcraft": {
+    "name": "MaterialCraft",
+    "tagline": "Procedural material design",
+    "repo": "materialcraft",
+    "upstream_tag": "v0.1.0",
+    "version": "0.1.0",
+    "tag": "materialcraft-v0.1.0",
+    "debrand_rev": "3",
+    "published_at": "2026-11-03T01:02:57Z",
+    "notes": "## Added\n- MaterialCraft 0.1.0, built from the original release [v0.1.0](https://github.com/storytold/materialcraft/releases/tag/v0.1.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.1.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Cross-app materials: .mcmat portable materials for TextureCraft by @bflatastic in https://github.com/storytold/materialcraft/pull/1\n* Fix the release build: script permissions and FreeBSD on a private repo by @echelon in https://github.com/storytold/materialcraft/pull/2\n\n## New Contributors\n* @bflatastic made their first contribution in https://github.com/storytold/materialcraft/pull/1\n* @echelon made their first contribution in https://github.com/storytold/materialcraft/pull/2\n\n**Full Changelog**: https://github.com/storytold/materialcraft/commits/v0.1.0\n",
+    "assets": [
+      {
+        "name": "materialcraft-0.1.0-linux-x86_64.AppImage",
+        "size_bytes": 15968760,
+        "sha256": "77043f1852293f4ec369bf9ca10b5a208a6ab2ab17bce5d515c81adf8fe82aaf",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.AppImage"
+      },
+      {
+        "name": "materialcraft-0.1.0-linux-x86_64.AppImage.zsync",
+        "size_bytes": 54839,
+        "sha256": "614e57efbdea3402959c082f5ad748487d227f1ef4e08b88e70fc79e497617b3",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.AppImage.zsync"
+      },
+      {
+        "name": "materialcraft-0.1.0-linux-x86_64.deb",
+        "size_bytes": 16831002,
+        "sha256": "a3013ba4621e1f8edb89bc3ecfa55a44f674e9bbe6103a2772c48231ecd91bad",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.deb"
+      },
+      {
+        "name": "materialcraft-0.1.0-linux-x86_64.rpm",
+        "size_bytes": 17320315,
+        "sha256": "af843dd8b9edb45261b2556bdf91746c2def1435872273214f9c653b14f069a7",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.rpm"
+      },
+      {
+        "name": "materialcraft-0.1.0-linux-x86_64.tar.gz",
+        "size_bytes": 16548420,
+        "sha256": "077589dd3d77d54c4e132e9ef5164e5004280d01fa14ba7cf515b4aea87226f9",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.tar.gz"
+      },
+      {
+        "name": "materialcraft-0.1.0-macos-universal.dmg",
+        "size_bytes": 19875748,
+        "sha256": "dfaced6d7ca9fdf7f803ac48f11d4bc39364f01a8b37470fb24fe5a48e6f62d4",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-macos-universal.dmg"
+      },
+      {
+        "name": "materialcraft-0.1.0-windows-x64-portable.zip",
+        "size_bytes": 15685956,
+        "sha256": "ebe7d75f92340001bde48fa2cc2e4031d0121dc56aec0d04423fcea8d56e6289",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-windows-x64-portable.zip"
+      },
+      {
+        "name": "materialcraft-0.1.0-windows-x64.msi",
+        "size_bytes": 11722752,
+        "sha256": "df220c3139592f97e6d1d7ec5c7b3ef2658972a0882e6484999a731775d458cb",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-windows-x64.msi"
+      },
+      {
+        "name": "materialcraft-cli-0.1.0-macos-universal.zip",
+        "size_bytes": 9065428,
+        "sha256": "e224b62a66506f46b8cf0d65122cee70a004e8c1af2bfdb1d94ed43589a79ea2",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-cli-0.1.0-macos-universal.zip"
       }
     ]
   }

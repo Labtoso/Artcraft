@@ -36,9 +36,10 @@ The original apps have buttons and links to Discord and social networks in many 
 | [FilmCraft](apps/filmcraft/README.md) | Video editing | [0.16.0](https://github.com/Labtoso/Artcraft/releases/tag/filmcraft-v0.16.0) | [Original](https://github.com/storytold/filmcraft) |
 | [GridCraft](apps/gridcraft/README.md) | Spreadsheets | [0.15.0](https://github.com/Labtoso/Artcraft/releases/tag/gridcraft-v0.15.0) | [Original](https://github.com/storytold/gridcraft) |
 | [LightCraft](apps/lightcraft/README.md) | Photo library and raw developer | [0.17.0](https://github.com/Labtoso/Artcraft/releases/tag/lightcraft-v0.17.0) | [Original](https://github.com/storytold/lightcraft) |
+| [MaterialCraft](apps/materialcraft/README.md) | Procedural material design | [0.1.0](https://github.com/Labtoso/Artcraft/releases/tag/materialcraft-v0.1.0) | [Original](https://github.com/storytold/materialcraft) |
 | [PdfCraft](apps/pdfcraft/README.md) | PDF workbench | [0.17.0](https://github.com/Labtoso/Artcraft/releases/tag/pdfcraft-v0.17.0) | [Original](https://github.com/storytold/pdfcraft) |
 | [PhotoCraft](apps/photocraft/README.md) | Image editing | [0.19.0](https://github.com/Labtoso/Artcraft/releases/tag/photocraft-v0.19.0) | [Original](https://github.com/storytold/photocraft) |
-| [SoundCraft](apps/soundcraft/README.md) | Digital audio workstation | [0.16.0](https://github.com/Labtoso/Artcraft/releases/tag/soundcraft-v0.16.0) | [Original](https://github.com/storytold/soundcraft) |
+| [SoundCraft](apps/soundcraft/README.md) | Digital audio workstation | [0.17.0](https://github.com/Labtoso/Artcraft/releases/tag/soundcraft-v0.17.0) | [Original](https://github.com/storytold/soundcraft) |
 | [TextureCraft](apps/texturecraft/README.md) | 3D texture painting | [0.2.0](https://github.com/Labtoso/Artcraft/releases/tag/texturecraft-v0.2.0) | [Original](https://github.com/storytold/texturecraft) |
 | [VectorCraft](apps/vectorcraft/README.md) | Vector illustration | [0.20.0](https://github.com/Labtoso/Artcraft/releases/tag/vectorcraft-v0.20.0) | [Original](https://github.com/storytold/vectorcraft) |
 | [WordCraft](apps/wordcraft/README.md) | Word processing | [0.14.0](https://github.com/Labtoso/Artcraft/releases/tag/wordcraft-v0.14.0) | [Original](https://github.com/storytold/wordcraft) |
