@@ -198,72 +198,66 @@
     "name": "DesignCraft",
     "tagline": "Page layout and publishing",
     "repo": "designcraft",
-    "upstream_tag": "v0.17.0",
-    "version": "0.17.0",
-    "tag": "designcraft-v0.17.0",
+    "upstream_tag": "v0.17.1",
+    "version": "0.17.1",
+    "tag": "designcraft-v0.17.1",
     "debrand_rev": "4",
-    "published_at": "2026-11-03T17:21:43Z",
-    "notes": "## Added\n- DesignCraft 0.17.0, built from the original release [v0.17.0](https://github.com/storytold/designcraft/releases/tag/v0.17.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.17.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Drop text variable markers in Text Only and RTF story export by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2098\n* Skip children of hidden groups in EPUB/HTML export by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2097\n* Match placed SVG font-family against legacy family and full names by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2094\n* Drop XML-forbidden control characters from math SVG text by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2092\n* Keep Color::to_hsb hue below 360 by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2090\n* Read PDF/X output intent and Info as parsed objects in validate-pdf by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2086\n* Clamp math.svg size to the same range as math.insert by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2084\n* Fix zero tangent angle in Type on a Path at collapsed handles by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2083\n* Report script parse error line numbers from the original text by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2081\n* Fix intersects_rect missing hits for zero-width/height marquee rects by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2076\n* file.openBytes: title a .designcraft file without its extension by @Tom-R-Main in https://github.com/storytold/designcraft/pull/2108\n* Zoom In/Out shortcuts zoom around the pointer over the canvas (#2075) by @MarekSpodBiedry in https://github.com/storytold/designcraft/pull/2124\n* Contributors: credit Y-az by @y-az in https://github.com/storytold/designcraft/pull/1162\n* Hyphenation: bundle the Dutch patterns by @y-az in https://github.com/storytold/designcraft/pull/1147\n* Add initial Hungarian (hu) interface localization by @macrobi in https://github.com/storytold/designcraft/pull/1223\n* font.list: report each face's fsType embedding bits by @Tom-R-Main in https://github.com/storytold/designcraft/pull/2109\n* i18n: Swedish (sv) interface translation by @kler in https://github.com/storytold/designcraft/pull/1018\n* Windows: keep the custom title bar window borderless by @aiongg in https://github.com/storytold/designcraft/pull/2139\n* Fix parent page resizing in panels and Page Tool by @makesomethingshit in https://github.com/storytold/designcraft/pull/1654\n* Restore GNOME Wayland window controls without bundled fonts by @danielmigueltejedor in https://github.com/storytold/designcraft/pull/1072\n\n## New Contributors\n* @Tom-R-Main made their first contribution in https://github.com/storytold/designcraft/pull/2108\n* @macrobi made their first contribution in https://github.com/storytold/designcraft/pull/1223\n* @kler made their first contribution in https://github.com/storytold/designcraft/pull/1018\n* @makesomethingshit made their first contribution in https://github.com/storytold/designcraft/pull/1654\n* @danielmigueltejedor made their first contribution in https://github.com/storytold/designcraft/pull/1072\n\n**Full Changelog**: https://github.com/storytold/designcraft/compare/v0.16.0...v0.17.0\n",
+    "published_at": "2026-11-05T00:46:30Z",
+    "notes": "## Added\n- DesignCraft 0.17.1, built from the original release [v0.17.1](https://github.com/storytold/designcraft/releases/tag/v0.17.1) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.17.1 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Assets: index placed files by content so importing many graphics stays linear by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2181\n* type.char: warn when the font family or style isn't available (#2189) by @JonRC in https://github.com/storytold/designcraft/pull/2190\n* Space dotted paragraph border dots evenly by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2176\n* Keep style export tags and classes on IDML import and export by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2174\n* Text: Indent to Here indents the paragraph's later lines to the character (#2080) by @ljkx in https://github.com/storytold/designcraft/pull/2169\n* Color Picker: reopens on the component it was left on by @4waymedia in https://github.com/storytold/designcraft/pull/2162\n* Dialogs: the Color Picker opens at its full height (#2129) by @4waymedia in https://github.com/storytold/designcraft/pull/2160\n* Links: an unchanged linked image is not read again on every poll (#2164) by @4waymedia in https://github.com/storytold/designcraft/pull/2165\n* Keep the graphics backend when the window closes before its first frame by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2158\n* Include single-anchor subpaths in PathData::bounds by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2153\n* M3: a Custom text variable defined with a number shows its digits (#2093) by @TrevorBrown-dev in https://github.com/storytold/designcraft/pull/2142\n* Reject signed record numbers in data merge record ranges by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2141\n* File import: keep native and IDML bytes out of the INDD converter by @Tom-R-Main in https://github.com/storytold/designcraft/pull/2125\n* Keep stroke styles from joining the subpaths of a compound path by @Silvertree2010 in https://github.com/storytold/designcraft/pull/1993\n* Pin the indd dependency by rev, as every other git dependency is (#1599) by @Hamza0101 in https://github.com/storytold/designcraft/pull/1873\n* Linux: file managers show a .designcraft file's first page through a freedesktop thumbnailer (#1782) by @marcoarnulfo in https://github.com/storytold/designcraft/pull/1792\n* An export says what text its pages had no room for (#1465) by @Hamza0101 in https://github.com/storytold/designcraft/pull/1493\n* M4: the Pen previews the segment a dragged smooth point shapes and curves the rubber band after one (#1438) by @TrevorBrown-dev in https://github.com/storytold/designcraft/pull/2143\n* M6: EPUB Export Options names a cover image file (#1934) by @TrevorBrown-dev in https://github.com/storytold/designcraft/pull/2149\n* Integration batch integration-designcraft-20261103-3 by @aiongg in https://github.com/storytold/designcraft/pull/2194\n* Fix dotted strokes dropping most of their dots by @Silvertree2010 in https://github.com/storytold/designcraft/pull/1951\n* compose: index lookups that were quadratic in a paragraph, line or table by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2180\n* compose cache: compact neighbour signatures, resolve each anchored host once by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2186\n* hyphenation: linear heuristic, cache misses outside the lock by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2185\n* Reject ISO timestamps without ':' between hour and minute by @Silvertree2010 in https://github.com/storytold/designcraft/pull/1857\n* IDML: Q ruler units are Q, as InDesign writes them by @con3code in https://github.com/storytold/designcraft/pull/1366\n* Integration batch integration-designcraft-20261103-5 by @aiongg in https://github.com/storytold/designcraft/pull/2243\n* Type fields read the unit typed (13Q, 5mm), as InDesign's do by @con3code in https://github.com/storytold/designcraft/pull/1367\n* Effects panel: drop shadow Distance and Size in the document's unit by @con3code in https://github.com/storytold/designcraft/pull/1556\n* Mojikumi: consecutive punctuation closes up by @con3code in https://github.com/storytold/designcraft/pull/1222\n* Integration batch integration-designcraft-20261103-6 by @aiongg in https://github.com/storytold/designcraft/pull/2246\n* fix(fonts): resolve Document Fonts beside bare filenames (#2014) by @Zaxaerith in https://github.com/storytold/designcraft/pull/2024\n* cli: script --export prints the export's warnings, as run does (#2191) by @JonRC in https://github.com/storytold/designcraft/pull/2192\n* type.char: warn about the font the text resolves to (follow-up to #2190) by @JonRC in https://github.com/storytold/designcraft/pull/2193\n* Integration batch integration-designcraft-20261103-7 by @aiongg in https://github.com/storytold/designcraft/pull/2255\n* Canvas: an empty graphic frame's X joins its corners, as in InDesign by @moppeeer in https://github.com/storytold/designcraft/pull/1424\n* Reject signed or out-of-range timezone offsets in parse_iso_date by @Silvertree2010 in https://github.com/storytold/designcraft/pull/1856\n* docs: list all layered crates in README (#1979) by @Zaxaerith in https://github.com/storytold/designcraft/pull/1986\n* docs: fix Sample Document menu path in README (#1978) by @Zaxaerith in https://github.com/storytold/designcraft/pull/1987\n* Require object params in compact script lines by @Silvertree2010 in https://github.com/storytold/designcraft/pull/2102\n* Integration batch integration-designcraft-20261103-8 by @aiongg in https://github.com/storytold/designcraft/pull/2259\n* mcp: the page bases state each other - render_page's 0 is exportPdf's position 1 by @midasmatterhorn in https://github.com/storytold/designcraft/pull/1900\n* MCP: complete tool hints and check nested argument keys by @storybored379 in https://github.com/storytold/designcraft/pull/184\n* Snapping: a drawn or resized edge snaps to the page's centre line, as InDesign's smart guides do by @moppeeer in https://github.com/storytold/designcraft/pull/1404\n* fix: bundle the CLI with the macOS app by @haranishi in https://github.com/storytold/designcraft/pull/690\n* Give anchored objects fresh ids when copying text frames (fixes #1522) by @VoiceLessQ in https://github.com/storytold/designcraft/pull/1968\n* Fill the empty or graphic frame under the pointer when a file is dropped on it (#1646) by @MarekSpodBiedry in https://github.com/storytold/designcraft/pull/1666\n* cli: the three argument bugs photocraft#7071 lists are live here too by @Hamza0101 in https://github.com/storytold/designcraft/pull/1478\n* Layers: a document opens on its topmost shown, unlocked layer by @texjer in https://github.com/storytold/designcraft/pull/2267\n* Frames with a nested image: hit inside the frame, take a placed graphic; replacing keeps the crop; open on a usable layer by @texjer in https://github.com/storytold/designcraft/pull/2226\n* Tables: Convert Cell to Graphic Cell… is dimmed without a table target by @dotCooCoo in https://github.com/storytold/designcraft/pull/2270\n* Format: a saved document opens whatever the size of its placed images (#2166) by @4waymedia in https://github.com/storytold/designcraft/pull/2168\n* Fix mojikumi: middle dot loses its quarter em beside a proportional by @aiongg in https://github.com/storytold/designcraft/pull/2285\n* Mojikumi: test consecutive punctuation under the one-em line-end set too by @con3code in https://github.com/storytold/designcraft/pull/2287\n* PDF: keep hyperlinks on rasterized frames; report package PDF warnings by @KnottyDyes in https://github.com/storytold/designcraft/pull/1302\n* Table: refuse to split more than 1024 cells in one call by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2273\n* Place: implicit image placement preserves lines and open paths by @KnottyDyes in https://github.com/storytold/designcraft/pull/1294\n* Text import: cap style names read from Tagged Text and DOCX files by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2258\n* PPTX export: table border and paragraph lookups by index, direct charmap lookups by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2256\n* Images: one budget for the nested SVG data images of a parse by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2254\n* Opening documents: repair parent Based-on links in one pass by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2244\n* Logging: a line break in a message can't forge another record by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2220\n* Private temporary folders for MCP screenshots, the signing certificate and the PDF benchmark by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2219\n* Render: style groups by map, no repeated futile cache eviction, one PDF open for all page sizes by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2217\n* Imports: xlsx data-source text budget, linear DOCX style retention and hyphenation exceptions by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2213\n* PDF: sets instead of list searches for page ranges, optional content and PDF/X diagnostics by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2207\n* warichu: split long runs in one pass instead of trying every length by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2184\n* PDF export: placements of one media asset share one embedded file by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2266\n* Integration batch integration-designcraft-20261104-1 by @aiongg in https://github.com/storytold/designcraft/pull/2291\n* Bound a recent file's preview size and a PDF crop box's pixels by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2211\n* Compose: bound dictionary inflation, linear soft-hyphen widths in the breaker by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2231\n* EPUB/HTML export: output budgets, note and graphic lookups, title cap by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2250\n* xtask: bound the PngSuite corpus download by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2271\n* Fonts: bound named instances per file, index axis settings in style strings by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2215\n* Hyphenation: enable the Danish hypher patterns (#2282) by @MarekSpodBiedry in https://github.com/storytold/designcraft/pull/2293\n* Fonts: a missing Korean sans face falls back to a sans one (#1692) by @Hamza0101 in https://github.com/storytold/designcraft/pull/1755\n* Master pages: skip hidden and locked layers when picking items (#2221) by @MarekSpodBiedry in https://github.com/storytold/designcraft/pull/2292\n* Swatches: renaming a swatch renames it on the images it colours (#2306) by @Hamza0101 in https://github.com/storytold/designcraft/pull/2311\n* Place: a graphic dropped on a frame holding a nested image replaces it by @texjer in https://github.com/storytold/designcraft/pull/2303\n* Place: a file dragged in from the Finder fills the frame it was dropped on by @texjer in https://github.com/storytold/designcraft/pull/2304\n* Linux packages: require libxkbcommon-x11 by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2320\n* Linux: let the shared makepkg job build the Arch package by @dylanmtaylor in https://github.com/storytold/designcraft/pull/2322\n\n## New Contributors\n* @JonRC made their first contribution in https://github.com/storytold/designcraft/pull/2190\n* @ljkx made their first contribution in https://github.com/storytold/designcraft/pull/2169\n* @TrevorBrown-dev made their first contribution in https://github.com/storytold/designcraft/pull/2142\n* @Zaxaerith made their first contribution in https://github.com/storytold/designcraft/pull/2024\n\n**Full Changelog**: https://github.com/storytold/designcraft/compare/v0.17.0...v0.17.1\n",
     "assets": [
       {
-        "name": "designcraft-0.17.0-linux-x86_64.AppImage",
-        "size_bytes": 117021176,
-        "sha256": "78643f11b1b346fa791094f06f34334ea73944e4f2cd5e7a6a64e6e9ac1d031f",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-linux-x86_64.AppImage"
+        "name": "designcraft-0.17.1-linux-x86_64.AppImage",
+        "size_bytes": 117406200,
+        "sha256": "89d6d903bca5c3bf369b6a858093e3b2120c4bc2b209f6cc5d2bdc08546b95ae",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-0.17.1-linux-x86_64.AppImage"
       },
       {
-        "name": "designcraft-0.17.0-linux-x86_64.AppImage.zsync",
-        "size_bytes": 200242,
-        "sha256": "c3cfd4b516e2ea3765fe2fb6f171662847b4211e8bbace02a7d4374e2cfd74f5",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-linux-x86_64.AppImage.zsync"
+        "name": "designcraft-0.17.1-linux-x86_64.AppImage.zsync",
+        "size_bytes": 200900,
+        "sha256": "713cc2127798d92858ad948d5cfac64aa4f6996dc5f9f0345a7cb8f1b08bee24",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-0.17.1-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "designcraft-0.17.0-linux-x86_64.deb",
-        "size_bytes": 124812636,
-        "sha256": "c89559448464cfff2e8180b95ca25cd462ab5d3ea7c3e001efbfcdc4fa5ac154",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-linux-x86_64.deb"
+        "name": "designcraft-0.17.1-linux-x86_64.deb",
+        "size_bytes": 125297850,
+        "sha256": "2a4212a9935bb26606a07b39974b789e16ba0f465976b61d5d00b08612f879d8",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-0.17.1-linux-x86_64.deb"
       },
       {
-        "name": "designcraft-0.17.0-linux-x86_64.pkg.tar.zst",
-        "size_bytes": 120042740,
-        "sha256": "ad54153e31c7c61a17b6c8266a97933d3ca817f71e4a0bae482caf3cb3dd3379",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-linux-x86_64.pkg.tar.zst"
+        "name": "designcraft-0.17.1-linux-x86_64.rpm",
+        "size_bytes": 128543233,
+        "sha256": "e87bc7fc3531f026f6d14fc1adfd1378cd81f1f3378f0eb4daab1b11b9963d7a",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-0.17.1-linux-x86_64.rpm"
       },
       {
-        "name": "designcraft-0.17.0-linux-x86_64.rpm",
-        "size_bytes": 128033638,
-        "sha256": "669cf8fbd7bc0ca35ce3cc3891b0233b2400990f1b29112f132eaf2e80d36f1b",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-linux-x86_64.rpm"
+        "name": "designcraft-0.17.1-linux-x86_64.tar.gz",
+        "size_bytes": 124278232,
+        "sha256": "a716bee7a23d3bb614868b53e266c142fd1efca9a78b683dcb039d9ebd3ea82f",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-0.17.1-linux-x86_64.tar.gz"
       },
       {
-        "name": "designcraft-0.17.0-linux-x86_64.tar.gz",
-        "size_bytes": 123803064,
-        "sha256": "1537463aa5ad4489c12c2716b6b39652aaff544de7316e75c8dce07ae6fabafd",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-linux-x86_64.tar.gz"
+        "name": "designcraft-0.17.1-macos-universal.dmg",
+        "size_bytes": 247408588,
+        "sha256": "5bf5df5e55a4d79ada39c50cd456dffda6895f38824c3cf968600ce1f5266f68",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-0.17.1-macos-universal.dmg"
       },
       {
-        "name": "designcraft-0.17.0-macos-universal.dmg",
-        "size_bytes": 137489464,
-        "sha256": "f3e1d6e172001277080a095561351513827c44d4f633434d5097baa813723c5b",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-macos-universal.dmg"
+        "name": "designcraft-0.17.1-windows-x64-portable.zip",
+        "size_bytes": 124545911,
+        "sha256": "a3f4c12a1c512286e81b301842b7ec6a2ce1c0f2ffbcca002190d2b3c764b2b8",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-0.17.1-windows-x64-portable.zip"
       },
       {
-        "name": "designcraft-0.17.0-windows-x64-portable.zip",
-        "size_bytes": 124066082,
-        "sha256": "6d34dde25b34120b375bae0a743214ad4a3455fb7ecf696c5e58c68be29e1233",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-windows-x64-portable.zip"
+        "name": "designcraft-0.17.1-windows-x64.msi",
+        "size_bytes": 98754560,
+        "sha256": "032dd16f670e862292255e92bdaf72e871751577e4531e5b347d16cf53e39b56",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-0.17.1-windows-x64.msi"
       },
       {
-        "name": "designcraft-0.17.0-windows-x64.msi",
-        "size_bytes": 98377728,
-        "sha256": "d29c58f26523e049943f0a985cd7e11c7f30ef9161582395a036ff3fc16c7254",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-0.17.0-windows-x64.msi"
-      },
-      {
-        "name": "designcraft-cli-0.17.0-macos-universal.zip",
-        "size_bytes": 109300656,
-        "sha256": "3cffb70d3013da2bbfc46d14e47549cacc12d3c9848aa840a600c9a4653da205",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.0/designcraft-cli-0.17.0-macos-universal.zip"
+        "name": "designcraft-cli-0.17.1-macos-universal.zip",
+        "size_bytes": 110020916,
+        "sha256": "22f078317a55745478e6be349bd2da0a75042e4c6c05153cc018db26285d8d90",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.1/designcraft-cli-0.17.1-macos-universal.zip"
       }
     ]
   },
@@ -606,72 +600,72 @@
     "name": "PdfCraft",
     "tagline": "Reading, organizing and protecting PDFs",
     "repo": "pdfcraft",
-    "upstream_tag": "v0.18.0",
-    "version": "0.18.0",
-    "tag": "pdfcraft-v0.18.0",
+    "upstream_tag": "v0.18.1",
+    "version": "0.18.1",
+    "tag": "pdfcraft-v0.18.1",
     "debrand_rev": "4",
-    "published_at": "2026-11-03T17:21:43Z",
-    "notes": "## Added\n- PdfCraft 0.18.0, built from the original release [v0.18.0](https://github.com/storytold/pdfcraft/releases/tag/v0.18.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.18.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* M2: a reference in a colour space or array isn't lost: Indexed tables, Pattern spaces, /Decode, /W and functions by @Piohrun in https://github.com/storytold/pdfcraft/pull/5539\n* fix(render): a JBIG2 page's segments are bounded in what they hold and refer to (hayro-jbig2 patches 5 to 9, hayro-syntax 29) by @Piohrun in https://github.com/storytold/pdfcraft/pull/5491\n* Reject signed and empty arcs in try_oid by @Silvertree2010 in https://github.com/storytold/pdfcraft/pull/5581\n* Ignore a negative trailer /Size in incremental saves by @Silvertree2010 in https://github.com/storytold/pdfcraft/pull/5566\n* tests(engine): the XFA opening scale test times its small and large forms in the same rounds by @guillehr2 in https://github.com/storytold/pdfcraft/pull/5586\n* M3: the wheel scrolls right after Alt+Tab back, before the mouse moves (#1518) by @Lcoding15 in https://github.com/storytold/pdfcraft/pull/5608\n* M10: Create ▸ Blank page uses the system region's paper (#5644) by @Lcoding15 in https://github.com/storytold/pdfcraft/pull/5651\n* M14: the comments panel lays out only the cards in view (#5488) by @Lcoding15 in https://github.com/storytold/pdfcraft/pull/5583\n* M8: typing the last page of a range keeps what is typed (#5574) by @Lcoding15 in https://github.com/storytold/pdfcraft/pull/5579\n* fix(create): a /Decode array needs two finite numbers to invert an export by @Piohrun in https://github.com/storytold/pdfcraft/pull/5678\n* Make MCP aligns enums compatible with Kimi by @Barzabel in https://github.com/storytold/pdfcraft/pull/5592\n* M2: a shrunk image on a turned or mirrored page snaps to whole pixels (#5530) by @MichaelMuClaude in https://github.com/storytold/pdfcraft/pull/5640\n* M8: redaction clears the covered pixels of JBIG2 scans instead of removing them (protect.redact-image-pixels) by @Piohrun in https://github.com/storytold/pdfcraft/pull/5461\n* M11: Monochrome Images averages indexed black-and-white images, the palette saying which sample is dark (optimize.downsample-images) by @Piohrun in https://github.com/storytold/pdfcraft/pull/5471\n* M11: Monochrome Images reads JBIG2 scans: averaged like any, and stored again as JBIG2 (optimize.mono-compression) by @Piohrun in https://github.com/storytold/pdfcraft/pull/5472\n* M8: a redacted black-and-white scan is stored as Group 4, or JBIG2 again, when smaller (protect.redact-image-pixels) by @Piohrun in https://github.com/storytold/pdfcraft/pull/5474\n* feat(ui,annot): customizable hotbar strip, freehand highlight, and moveable navigation rail by @Arch-amon in https://github.com/storytold/pdfcraft/pull/5677\n* fix(ui): don't check recent files on the UI thread at startup (#5682) by @Elarionus in https://github.com/storytold/pdfcraft/pull/5692\n* Fix Matrix::invert rejecting valid matrices with a small scale by @Silvertree2010 in https://github.com/storytold/pdfcraft/pull/5703\n* M7: make page-mark replacement transactional (#5657) by @AdrianTM in https://github.com/storytold/pdfcraft/pull/5704\n* Repair scan: an object whose header names another generation is still found (#5580) by @Hamza0101 in https://github.com/storytold/pdfcraft/pull/5584\n* Reject '+' sign in page selection numbers by @Silvertree2010 in https://github.com/storytold/pdfcraft/pull/5715\n* ui: modernize preferences dialog with card-based layout by @Combiler01 in https://github.com/storytold/pdfcraft/pull/5710\n* fix(ui): Format text fields read as fields, line up, and fit the Tools pane (#5634) by @RiceDee in https://github.com/storytold/pdfcraft/pull/5637\n* fix(ui): centre the quick-tools bar in the margin beside the page (#5635) by @RiceDee in https://github.com/storytold/pdfcraft/pull/5638\n* fix(ui): the rail's page box fits, and the zoom field looks like a field (#5636) by @RiceDee in https://github.com/storytold/pdfcraft/pull/5639\n* M2.6: the images of a run, and a page's JBIG2 images, share one allowance of decoding by @Piohrun in https://github.com/storytold/pdfcraft/pull/5569\n* fix(ui): prevent panel resize handle collision with scrollbar (#5730) by @Combiler01 in https://github.com/storytold/pdfcraft/pull/5740\n\n## New Contributors\n* @Barzabel made their first contribution in https://github.com/storytold/pdfcraft/pull/5592\n* @Arch-amon made their first contribution in https://github.com/storytold/pdfcraft/pull/5677\n* @Elarionus made their first contribution in https://github.com/storytold/pdfcraft/pull/5692\n\n**Full Changelog**: https://github.com/storytold/pdfcraft/compare/v0.17.0...v0.18.0\n",
+    "published_at": "2026-11-05T00:46:30Z",
+    "notes": "## Added\n- PdfCraft 0.18.1, built from the original release [v0.18.1](https://github.com/storytold/pdfcraft/releases/tag/v0.18.1) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.18.1 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* fix(ui): prevent wheel lockup at edge in non-continuous view (#5713) by @Combiler01 in https://github.com/storytold/pdfcraft/pull/5748\n* fix(redact): rewritten form XObjects drop /PCAdded by @dylanmtaylor in https://github.com/storytold/pdfcraft/pull/5868\n* fix(redact): structure titles go with the descriptions of removed content by @dylanmtaylor in https://github.com/storytold/pdfcraft/pull/5866\n* fix(create): write a new document's page tree once by @dylanmtaylor in https://github.com/storytold/pdfcraft/pull/5865\n* fix(a11y): splice named and multi-stream marked content in mark_tag_artifact by @jonathanwxh-cell in https://github.com/storytold/pdfcraft/pull/5263\n* M12: FormCalc prints numbers to at most 15 significant digits by @seanGSISG in https://github.com/storytold/pdfcraft/pull/5819\n* Expand header/footer tokens preceded by extra '<' characters by @Silvertree2010 in https://github.com/storytold/pdfcraft/pull/5766\n* M7: Arrange keeps a top-level inline image a unit of its own (#3146) by @ljkx in https://github.com/storytold/pdfcraft/pull/5823\n* fix(optimize): make pictures under a stencil mask smaller by @quincy-jc in https://github.com/storytold/pdfcraft/pull/5847\n* M11: Optimize runs when a category it discards holds nothing by @Piohrun in https://github.com/storytold/pdfcraft/pull/5742\n* M10: macOS print jobs name their title and owner (#5743) by @hasannadeem in https://github.com/storytold/pdfcraft/pull/5757\n* M3: Preferences can invert the middle-button drag direction (#5790) by @KenM76 in https://github.com/storytold/pdfcraft/pull/5817\n* i18n(fr): translate the 16 strings the report listed as missing by @rahul05ranjan in https://github.com/storytold/pdfcraft/pull/5736\n* i18n(tr): translate the 288 strings the gaps report lists by @fatihkunak in https://github.com/storytold/pdfcraft/pull/5795\n* Feat/unify hotbar quick tools (Fixes #5890) by @Combiler01 in https://github.com/storytold/pdfcraft/pull/5909\n* fix(ui): do not open right-click context menu on image in crop mode (#5835) by @Combiler01 in https://github.com/storytold/pdfcraft/pull/5900\n* Keep disabled scroll animations in Preferences by @dotCooCoo in https://github.com/storytold/pdfcraft/pull/5886\n* M2: a soft hyphen a substitute font lacks draws its hyphen (#5888) by @hasannadeem in https://github.com/storytold/pdfcraft/pull/5896\n* Add CSS-free HTML export by @Harrison-Booth in https://github.com/storytold/pdfcraft/pull/5938\n* Open: measure cached objects once, read plain reals without a copy, keep no /PieceInfo in inspection (#5873) by @Hamza0101 in https://github.com/storytold/pdfcraft/pull/5958\n* Continue Bates numbering across ordered PDFs by @Harrison-Booth in https://github.com/storytold/pdfcraft/pull/5953\n* M5: keep Fill & Sign editing on Enter and preserve line breaks (#5850) by @AdrianTM in https://github.com/storytold/pdfcraft/pull/5954\n* fix(audit): read content one operator at a time and charge hidden text and findings by @dylanmtaylor in https://github.com/storytold/pdfcraft/pull/5875\n* fix(xfa): scripts come only from the XDP's own packets and quote the date pattern by @dylanmtaylor in https://github.com/storytold/pdfcraft/pull/5987\n* fix(engine): decode signature preview images within a small work allowance by @dylanmtaylor in https://github.com/storytold/pdfcraft/pull/5981\n* i18n: interface translations from craft-i18n by @benandez in https://github.com/storytold/pdfcraft/pull/6055\n* i18n: move the craft-i18n pin to 575cfde by @benandez in https://github.com/storytold/pdfcraft/pull/6068\n* Release: PdfCraft v0.18.1 by @dylanmtaylor in https://github.com/storytold/pdfcraft/pull/6078\n\n## New Contributors\n* @seanGSISG made their first contribution in https://github.com/storytold/pdfcraft/pull/5819\n* @ljkx made their first contribution in https://github.com/storytold/pdfcraft/pull/5823\n* @quincy-jc made their first contribution in https://github.com/storytold/pdfcraft/pull/5847\n* @hasannadeem made their first contribution in https://github.com/storytold/pdfcraft/pull/5757\n* @fatihkunak made their first contribution in https://github.com/storytold/pdfcraft/pull/5795\n* @benandez made their first contribution in https://github.com/storytold/pdfcraft/pull/6055\n\n**Full Changelog**: https://github.com/storytold/pdfcraft/compare/v0.18.0...v0.18.1\n",
     "assets": [
       {
-        "name": "pdfcraft-0.18.0-linux-x86_64.AppImage",
-        "size_bytes": 105953784,
-        "sha256": "66ff77c43bf9c17deaeb87bf347f2b630e4183b0f2d944786f7cc0460ddf4e65",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-0.18.0-linux-x86_64.AppImage"
+        "name": "pdfcraft-0.18.1-linux-x86_64.AppImage",
+        "size_bytes": 108075512,
+        "sha256": "b60815e54695db3fc59bef5370469cb2e6e94a5e64a8341cbbf22c5e5a198037",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-0.18.1-linux-x86_64.AppImage"
       },
       {
-        "name": "pdfcraft-0.18.0-linux-x86_64.AppImage.zsync",
-        "size_bytes": 181322,
-        "sha256": "9a4c284fc8ee68ddb73c182f21873675fb6a87ae1b5fca8d45b88842a900cc0b",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-0.18.0-linux-x86_64.AppImage.zsync"
+        "name": "pdfcraft-0.18.1-linux-x86_64.AppImage.zsync",
+        "size_bytes": 184948,
+        "sha256": "972137267b183c0b8f4603d39a80c393c01a41a35cc03b7bcc0f5aa15e28eb84",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-0.18.1-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "pdfcraft-0.18.0-linux-x86_64.deb",
-        "size_bytes": 112030912,
-        "sha256": "3a3660a6c1465d5b87aeb217928ec593c1ebeadda433634fdf60619252a1ac57",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-0.18.0-linux-x86_64.deb"
+        "name": "pdfcraft-0.18.1-linux-x86_64.deb",
+        "size_bytes": 114310264,
+        "sha256": "dd0ff877e6e33dc9612f276fe9cd5a75ac732a8e6e9a62bf22a3146cacac2757",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-0.18.1-linux-x86_64.deb"
       },
       {
-        "name": "pdfcraft-0.18.0-linux-x86_64.rpm",
-        "size_bytes": 115484262,
-        "sha256": "fa3f145cdbb3a94dd89240329dff4b8bf82697f9895b20c5f9b46e41cab2ee0b",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-0.18.0-linux-x86_64.rpm"
+        "name": "pdfcraft-0.18.1-linux-x86_64.rpm",
+        "size_bytes": 117877470,
+        "sha256": "6ac4f339688a008bb50969fadf1ef1537d3c644c91524bf1cdb637b50118b35b",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-0.18.1-linux-x86_64.rpm"
       },
       {
-        "name": "pdfcraft-0.18.0-linux-x86_64.tar.gz",
-        "size_bytes": 111481184,
-        "sha256": "0e8b887132e1cc3dbe3d876c50e01ddb2349083d03d19cb103e058a31e8f6a37",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-0.18.0-linux-x86_64.tar.gz"
+        "name": "pdfcraft-0.18.1-linux-x86_64.tar.gz",
+        "size_bytes": 113769503,
+        "sha256": "c2c3a899e57281703d979536756b92fc679ce7e541389728a5972d5e95e634a7",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-0.18.1-linux-x86_64.tar.gz"
       },
       {
-        "name": "pdfcraft-0.18.0-macos-universal.dmg",
-        "size_bytes": 123471817,
-        "sha256": "41ee61a0e801f02860f3e14e8d1437849892cca1b30761661dffc2646ce28e2d",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-0.18.0-macos-universal.dmg"
+        "name": "pdfcraft-0.18.1-macos-universal.dmg",
+        "size_bytes": 127983799,
+        "sha256": "c2f600c2b16724919f75db7103bbe2a1f20a42326b5e2a1a0def1339f00dee37",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-0.18.1-macos-universal.dmg"
       },
       {
-        "name": "pdfcraft-0.18.0-windows-x64-portable.zip",
-        "size_bytes": 112465332,
-        "sha256": "086bc17a491fdad3a14377e22dae101ec4e6b311b812c6d40f474bd362b602c8",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-0.18.0-windows-x64-portable.zip"
+        "name": "pdfcraft-0.18.1-windows-x64-portable.zip",
+        "size_bytes": 114754644,
+        "sha256": "588ca179a6a540b1f311e3b89bc5463762b69a1274f74a0532c826dc4963186d",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-0.18.1-windows-x64-portable.zip"
       },
       {
-        "name": "pdfcraft-0.18.0-windows-x64.msi",
-        "size_bytes": 92114944,
-        "sha256": "4b75c0819145aee880ab6272de1d76ab4c2d20c0681e5f9e3b73dd354e610070",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-0.18.0-windows-x64.msi"
+        "name": "pdfcraft-0.18.1-windows-x64.msi",
+        "size_bytes": 93462528,
+        "sha256": "61876939f0cea2f0322e781a8f14788ff4dcdda2cd0ff625267066650109c3ac",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-0.18.1-windows-x64.msi"
       },
       {
-        "name": "pdfcraft-cli-0.18.0-linux-x86_64.tar.gz",
-        "size_bytes": 42093555,
-        "sha256": "d5f454a4c88b63fbb50ef34033ea5b036673c388500b610d374ecd40fc6afbea",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-cli-0.18.0-linux-x86_64.tar.gz"
+        "name": "pdfcraft-cli-0.18.1-linux-x86_64.tar.gz",
+        "size_bytes": 42120720,
+        "sha256": "270ada684c80ed8160499e6bf6032bc643daee85d90e9ce29d4a49c659d0cfa1",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-cli-0.18.1-linux-x86_64.tar.gz"
       },
       {
-        "name": "pdfcraft-cli-0.18.0-macos-universal.zip",
-        "size_bytes": 84689365,
-        "sha256": "c4f0bd79b4ce5f842f7823d007e8326d716d4c22a6f34d4234eb0dc23d713b42",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.0/pdfcraft-cli-0.18.0-macos-universal.zip"
+        "name": "pdfcraft-cli-0.18.1-macos-universal.zip",
+        "size_bytes": 84743187,
+        "sha256": "feb45e90d54b4b99b38b9038284ff7bd71b361b7782d218a13f7164bf039dc39",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.1/pdfcraft-cli-0.18.1-macos-universal.zip"
       }
     ]
   },
@@ -886,66 +880,66 @@
     "name": "WordCraft",
     "tagline": "Writing and document design",
     "repo": "wordcraft",
-    "upstream_tag": "v0.15.0",
-    "version": "0.15.0",
-    "tag": "wordcraft-v0.15.0",
+    "upstream_tag": "v0.15.1",
+    "version": "0.15.1",
+    "tag": "wordcraft-v0.15.1",
     "debrand_rev": "4",
-    "published_at": "2026-11-03T17:21:43Z",
-    "notes": "## Added\n- WordCraft 0.15.0, built from the original release [v0.15.0](https://github.com/storytold/wordcraft/releases/tag/v0.15.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.15.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Use the body boundary for header margin anchors by @finwarman in https://github.com/storytold/wordcraft/pull/2485\n* Keep repeated spaces in LaTeX export by @Silvertree2010 in https://github.com/storytold/wordcraft/pull/5051\n* Paragraph side borders lie outside the text (#5036) by @VoiceLessQ in https://github.com/storytold/wordcraft/pull/5088\n* Lists: a level above counts its first number at the first deeper item by @pakiat in https://github.com/storytold/wordcraft/pull/5108\n* Layout: tab leader dots spaced and placed as in Word by @pakiat in https://github.com/storytold/wordcraft/pull/5144\n* Tables: a middle or bottom cell of a row split across pages lines up on the first page by @pakiat in https://github.com/storytold/wordcraft/pull/5145\n* Tables: a row isn't split to leave a picture cell empty beside its text; it moves on whole, as in Word (#4272) by @hsmith-dev in https://github.com/storytold/wordcraft/pull/5161\n* .doc import: the default font is the stylesheet's standard font, so Word 365 files open in Aptos (#5066) by @D13GOOOO in https://github.com/storytold/wordcraft/pull/5069\n* Layout tests: compare pairs of layouts drawn with the same faces by @pakiat in https://github.com/storytold/wordcraft/pull/5167\n* Columns: the line between them is drawn for selected text, as tall as the section's text (#5178) by @D13GOOOO in https://github.com/storytold/wordcraft/pull/5183\n* Shapes: arrowheads keep their kind and size and are drawn at Word's sizes by @pakiat in https://github.com/storytold/wordcraft/pull/5192\n* Markdown export: a list inside a block quote stays in the quote by @MichaelMuClaude in https://github.com/storytold/wordcraft/pull/5156\n* DOCX: keep alternate-content table rows and cells by @OPUZZLES in https://github.com/storytold/wordcraft/pull/5221\n* review.compare: keep text boxes of both documents in the result by @Silvertree2010 in https://github.com/storytold/wordcraft/pull/5248\n* Count the runs proofing text walks, instead of timing it (#5185) by @Hamza0101 in https://github.com/storytold/wordcraft/pull/5190\n* #3660: refuse a package that declares too many zip entries before zip parses them by @ljkx in https://github.com/storytold/wordcraft/pull/5260\n* Shapes: align soft-edge paint and caret opacity by @finwarman in https://github.com/storytold/wordcraft/pull/1600\n* DOCX: VML horizontal rules take their line by @Morzilla in https://github.com/storytold/wordcraft/pull/3956\n* Review: add a Word-style Proofing task pane with clickable suggestions by @totoz64 in https://github.com/storytold/wordcraft/pull/4471\n* Files: documents keep their embedded alternative format chunks (w:altChunk), and MHT opens by @naxvog in https://github.com/storytold/wordcraft/pull/1104\n* CP1.3: proofing moves to craft-proof (craft-libs) and craft-i18n language-data by @benandez in https://github.com/storytold/wordcraft/pull/5202\n* CP2.3: English spelling reads SCOWL 2026 (#40, #520, #1281, #1045) by @benandez in https://github.com/storytold/wordcraft/pull/5205\n* CP4.3–CP4.5: Language packs — proof.packs/installPack/removePack, Options › Language packs, missing-pack bar, About › Language data by @benandez in https://github.com/storytold/wordcraft/pull/5208\n\n## New Contributors\n* @hsmith-dev made their first contribution in https://github.com/storytold/wordcraft/pull/5161\n* @ljkx made their first contribution in https://github.com/storytold/wordcraft/pull/5260\n* @totoz64 made their first contribution in https://github.com/storytold/wordcraft/pull/4471\n\n**Full Changelog**: https://github.com/storytold/wordcraft/compare/v0.14.0...v0.15.0\n",
+    "published_at": "2026-11-05T00:46:30Z",
+    "notes": "## Added\n- WordCraft 0.15.1, built from the original release [v0.15.1](https://github.com/storytold/wordcraft/releases/tag/v0.15.1) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.15.1 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Read Aloud: look citations up by binary search, not a scan per character by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5335\n* Language packs 2: 75 packs and the merged craft-proof (compounding, en-AU); #5208 review follow-ups by @benandez in https://github.com/storytold/wordcraft/pull/5224\n* Pictures: refuse a TIFF whose first image names its compression twice by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5337\n* Fonts: cut names read from a font's name table to 128 characters by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5333\n* Fonts: refuse WOFF2 collections whose rebuilt directories are huge or repeat a table by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5332\n* A command line file's Password box survives the startup document's replacement (#5299) by @MichaelMuClaude in https://github.com/storytold/wordcraft/pull/5334\n* #5290: Page Up/Down move by a page in Outline, Draft and Web Layout by @ljkx in https://github.com/storytold/wordcraft/pull/5300\n* References: Remove and Replace Table of Contents treat a title above a section break as Word does (#4041) by @hsmith-dev in https://github.com/storytold/wordcraft/pull/5152\n* Proofing: look up unchecked runs by binary search, not a scan per issue by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5344\n* i18n: Arabic interface with mirrored RTL shell (+ parity docs) by @tareq-halaby in https://github.com/storytold/wordcraft/pull/5370\n* Tests: harnesses that render through wgpu take turns by @pakiat in https://github.com/storytold/wordcraft/pull/5354\n* DOC import: attach sections to their paragraphs through an index of paragraph ends by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5373\n* DOC import: keep one override per table cell instead of a copy per repeated sprm by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5374\n* Paste: charge copied text box stories for the formatting they clone by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5379\n* Comments: a long comment's card and balloon stop at ten lines (#3382) by @squaredcow in https://github.com/storytold/wordcraft/pull/3899\n* CP4.3: craft-i18n.rev at 20467b6 (craft-i18n#116): embed the Language data language-packs-2 was built from by @benandez in https://github.com/storytold/wordcraft/pull/5385\n* CP4.3: craft-proof pin at craft-libs 01315d9: French elision suggestions first; Valencian reads its pack by @benandez in https://github.com/storytold/wordcraft/pull/5509\n* About: credits tables fit without side-scrolling and their columns resize by @FredApps in https://github.com/storytold/wordcraft/pull/5506\n* #3867 follow-up: header repeats count canvas members, one budget per layout; contours and chain widths don't depend on cache history by @benandez in https://github.com/storytold/wordcraft/pull/4385\n* CP4.3: craft-i18n.rev at cde4900: translated rows for Options › Language, the missing-pack bar and Language pack names by @benandez in https://github.com/storytold/wordcraft/pull/5518\n* CP4.3: craft-i18n.rev at 9d6d54d: region names and the Language (Region) template by @benandez in https://github.com/storytold/wordcraft/pull/5522\n* CP4.3: one language list: Language pack languages in Set Proofing Language, Review › Language and the status bar by @benandez in https://github.com/storytold/wordcraft/pull/5513\n* CP4.3: the missing-pack bar works on a fresh install and counts the caret's language by @benandez in https://github.com/storytold/wordcraft/pull/5514\n* CP4.3: Options › Language: Your languages with proofing status, Add a language…, Set as default by @benandez in https://github.com/storytold/wordcraft/pull/5515\n* Release: WordCraft v0.15.1 by @dylanmtaylor in https://github.com/storytold/wordcraft/pull/5524\n\n## New Contributors\n* @tareq-halaby made their first contribution in https://github.com/storytold/wordcraft/pull/5370\n\n**Full Changelog**: https://github.com/storytold/wordcraft/compare/v0.15.0...v0.15.1\n",
     "assets": [
       {
-        "name": "wordcraft-0.15.0-linux-x86_64.AppImage",
-        "size_bytes": 108427768,
-        "sha256": "b8691181ab88b2ee2f0d30420066a6dba2373bce6e559ba8831008af4c370d56",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-0.15.0-linux-x86_64.AppImage"
+        "name": "wordcraft-0.15.1-linux-x86_64.AppImage",
+        "size_bytes": 109185528,
+        "sha256": "5dc1e33df3510b1299c196b609b0679f05e9ec5341a2cdce33749e663e5b37a9",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-0.15.1-linux-x86_64.AppImage"
       },
       {
-        "name": "wordcraft-0.15.0-linux-x86_64.AppImage.zsync",
-        "size_bytes": 185552,
-        "sha256": "2c3682c5524c470a1765a4a4a4c5a6a11e7d01f37b81913067ffb4e351d7a50d",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-0.15.0-linux-x86_64.AppImage.zsync"
+        "name": "wordcraft-0.15.1-linux-x86_64.AppImage.zsync",
+        "size_bytes": 186847,
+        "sha256": "8383b7e73501228acfdd314833f6fdd935299e7f667594d839df2b0c18de7727",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-0.15.1-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "wordcraft-0.15.0-linux-x86_64.deb",
-        "size_bytes": 115277004,
-        "sha256": "3cc60c23b7bb663c3493180578d355308ae0dcc98c398546bcd0e62fa983ccee",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-0.15.0-linux-x86_64.deb"
+        "name": "wordcraft-0.15.1-linux-x86_64.deb",
+        "size_bytes": 116129934,
+        "sha256": "1e58bd3a04c936914b4265b06b57214cc10349cc2fadf47e00b1f3c197fb433c",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-0.15.1-linux-x86_64.deb"
       },
       {
-        "name": "wordcraft-0.15.0-linux-x86_64.rpm",
-        "size_bytes": 118292810,
-        "sha256": "37b7df43a49cb931ad76e0dfa3f76aec4f1c1be1eca82a974b25f4155b6ab2f4",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-0.15.0-linux-x86_64.rpm"
+        "name": "wordcraft-0.15.1-linux-x86_64.rpm",
+        "size_bytes": 119277473,
+        "sha256": "a278e2d8231f2a014124183fd07eadc2734d24c6d6fd8e9452fa5b7b7fbb1137",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-0.15.1-linux-x86_64.rpm"
       },
       {
-        "name": "wordcraft-0.15.0-linux-x86_64.tar.gz",
-        "size_bytes": 114355257,
-        "sha256": "db504811a36aa0f6cffc42a90266998058d7150563497698c8c371efe36b4dee",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-0.15.0-linux-x86_64.tar.gz"
+        "name": "wordcraft-0.15.1-linux-x86_64.tar.gz",
+        "size_bytes": 115190715,
+        "sha256": "edb7a5365b82739bfda61ae304018d02d9aa735b580b2e5d01866dc858477d35",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-0.15.1-linux-x86_64.tar.gz"
       },
       {
-        "name": "wordcraft-0.15.0-macos-universal.dmg",
-        "size_bytes": 127082817,
-        "sha256": "3b7b3be02b42fad1dc6aa4bec80299dce8fd119ca33b6fad93e08fa40381facf",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-0.15.0-macos-universal.dmg"
+        "name": "wordcraft-0.15.1-macos-universal.dmg",
+        "size_bytes": 128390165,
+        "sha256": "ff5b1d2557dc5513174dcc574574f595104de7fd76ba96e3a9c9ff2518fcd389",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-0.15.1-macos-universal.dmg"
       },
       {
-        "name": "wordcraft-0.15.0-windows-x64-portable.zip",
-        "size_bytes": 113355988,
-        "sha256": "e702d982cafa06bbbc9e38baee4b864ac43d47b3d2fe83e28424178b0032e026",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-0.15.0-windows-x64-portable.zip"
+        "name": "wordcraft-0.15.1-windows-x64-portable.zip",
+        "size_bytes": 114444068,
+        "sha256": "c2f6cffa0c8ee414d5c1a09f44cceb5b2a2384d4ffeb5f497724b4426da063f9",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-0.15.1-windows-x64-portable.zip"
       },
       {
-        "name": "wordcraft-0.15.0-windows-x64.msi",
-        "size_bytes": 91623424,
-        "sha256": "033ea1d1bf90446016c938820d6fe97043bc2bd510d745a05b42f7beb1540f50",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-0.15.0-windows-x64.msi"
+        "name": "wordcraft-0.15.1-windows-x64.msi",
+        "size_bytes": 92143616,
+        "sha256": "cd65c0cd4a0dcd875d0f8841b1636784ce2c989af8c576d1b0a12a9bf51089aa",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-0.15.1-windows-x64.msi"
       },
       {
-        "name": "wordcraft-cli-0.15.0-macos-universal.zip",
-        "size_bytes": 99649755,
-        "sha256": "665abd66ee4199c75e1db62e1e7af56f807a4cc21acaf5f2c58cf469bbddabd5",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.0/wordcraft-cli-0.15.0-macos-universal.zip"
+        "name": "wordcraft-cli-0.15.1-macos-universal.zip",
+        "size_bytes": 100309781,
+        "sha256": "a25344b64494c73c5dc79c41a3ed57a42d03fcd1dab3d1bcc4e1b2607a83fdd0",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.15.1/wordcraft-cli-0.15.1-macos-universal.zip"
       }
     ]
   },
@@ -1020,66 +1014,66 @@
     "name": "TextureCraft",
     "tagline": "3D texture painting",
     "repo": "texturecraft",
-    "upstream_tag": "v0.3.0",
-    "version": "0.3.0",
-    "tag": "texturecraft-v0.3.0",
+    "upstream_tag": "v0.3.1",
+    "version": "0.3.1",
+    "tag": "texturecraft-v0.3.1",
     "debrand_rev": "4",
-    "published_at": "2026-11-03T17:21:43Z",
-    "notes": "## Added\n- TextureCraft 0.3.0, built from the original release [v0.3.0](https://github.com/storytold/texturecraft/releases/tag/v0.3.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.3.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Retry macOS stapling and validation by @dylanmtaylor in https://github.com/storytold/texturecraft/pull/36\n* New README showcase renders: storm lantern and rangefinder camera by @bflatastic in https://github.com/storytold/texturecraft/pull/37\n* Camera render: brassing only on edges and corners by @bflatastic in https://github.com/storytold/texturecraft/pull/38\n* Show a portable TV in the README screenshots by @bflatastic in https://github.com/storytold/texturecraft/pull/48\n* Fix layer rename focus trap and restore Undo (#39) by @test-bit-sys in https://github.com/storytold/texturecraft/pull/42\n* Control channel: harden the token file and the app's control server by @Agapenordev in https://github.com/storytold/texturecraft/pull/43\n* Bump zip from 2.4.2 to 9.0.5 by @dependabot[bot] in https://github.com/storytold/texturecraft/pull/12\n* Wireframes show the mesh's polygons, not their triangles by @bflatastic in https://github.com/storytold/texturecraft/pull/53\n* Layer rows: the empty mask slot adds a mask by @bflatastic in https://github.com/storytold/texturecraft/pull/59\n* Add complete Arabic (ar) UI localization by @test-bit-sys in https://github.com/storytold/texturecraft/pull/47\n* Text: any installed font as a brush alpha or a decal by @bflatastic in https://github.com/storytold/texturecraft/pull/67\n* Start window: new, open or a recent project at launch by @bflatastic in https://github.com/storytold/texturecraft/pull/68\n* Brushes: 18 brush presets in the shelf, and your own by @bflatastic in https://github.com/storytold/texturecraft/pull/70\n* Docs: roadmap estimate after text, brush presets and the start window by @bflatastic in https://github.com/storytold/texturecraft/pull/78\n* Docs: command_run also allows file.removeUnused by @bflatastic in https://github.com/storytold/texturecraft/pull/80\n* display.set: refuse unknown environment names by @bflatastic in https://github.com/storytold/texturecraft/pull/82\n* USD export: the primvar reader's varname is a string by @bflatastic in https://github.com/storytold/texturecraft/pull/83\n* CLI: --automation-read-root / --automation-write-root for mcp and serve by @bflatastic in https://github.com/storytold/texturecraft/pull/84\n* CLI: say that new --sample bakes its mesh maps at up to 1024 px by @bflatastic in https://github.com/storytold/texturecraft/pull/87\n* Decals: an up parameter, and an upright rule that never degenerates by @bflatastic in https://github.com/storytold/texturecraft/pull/88\n* Projects keep the names of a mesh's unnamed parts on reopen by @bflatastic in https://github.com/storytold/texturecraft/pull/91\n* Viewport: show the baked normal map by @bflatastic in https://github.com/storytold/texturecraft/pull/92\n* Effect sliders apply what they were dragged or clicked to by @bflatastic in https://github.com/storytold/texturecraft/pull/95\n* Material channels: Alt+click keeps one channel by @bflatastic in https://github.com/storytold/texturecraft/pull/96\n* Texture Set List: show all, hide all, invert, and focus on one set by @bflatastic in https://github.com/storytold/texturecraft/pull/98\n* Docs: roadmap after today's fixes by @bflatastic in https://github.com/storytold/texturecraft/pull/99\n* Layers: Ctrl+C, Ctrl+X and Ctrl+V copy, cut and paste a layer by @bflatastic in https://github.com/storytold/texturecraft/pull/102\n* Ask to save unsaved changes when the app closes by @bflatastic in https://github.com/storytold/texturecraft/pull/103\n* Color picker: keep the popup in place while the color changes by @bflatastic in https://github.com/storytold/texturecraft/pull/104\n* Materials: twill for denim and carbon fiber, a pile for velvet by @bflatastic in https://github.com/storytold/texturecraft/pull/107\n* Viewport: no ghost edges in the subsurface blur by @bflatastic in https://github.com/storytold/texturecraft/pull/109\n* Ask to save before opening, starting or closing another project by @bflatastic in https://github.com/storytold/texturecraft/pull/110\n* Polygon fill: UV island mode follows the UVs across split vertices by @bflatastic in https://github.com/storytold/texturecraft/pull/111\n* Docs: roadmap after the issue fixes by @bflatastic in https://github.com/storytold/texturecraft/pull/112\n* Web: ask to save before replacing the project or closing the tab by @bflatastic in https://github.com/storytold/texturecraft/pull/115\n* Color picker: our own picker with a copy icon from the icon set by @bflatastic in https://github.com/storytold/texturecraft/pull/117\n* Levels: a histogram of what the effect reads by @bflatastic in https://github.com/storytold/texturecraft/pull/114\n* Materials: platinum, zinc, cobalt, bark, sand, mud, ice, snow and bone by @bflatastic in https://github.com/storytold/texturecraft/pull/119\n* Filters: histogram scan, range and shift by @bflatastic in https://github.com/storytold/texturecraft/pull/118\n* Docs: roadmap after the levels histogram, web save prompt, filters and materials by @bflatastic in https://github.com/storytold/texturecraft/pull/120\n* Histogram Scan: full contrast is a threshold by @bflatastic in https://github.com/storytold/texturecraft/pull/121\n* Bake: thickness max occluder distance defaults to 0.1 by @Rebornim in https://github.com/storytold/texturecraft/pull/79\n* Mesh maps: use an image instead of a bake by @bflatastic in https://github.com/storytold/texturecraft/pull/124\n* Effects: drag to reorder, duplicate by @bflatastic in https://github.com/storytold/texturecraft/pull/122\n* Brush: Ctrl+drag sets size, hardness, flow and angle by @bflatastic in https://github.com/storytold/texturecraft/pull/125\n* History: click a step to return to it by @bflatastic in https://github.com/storytold/texturecraft/pull/126\n* feat(export): MaterialX (.mtlx) OpenPBR material per texture set by @SteamSmith in https://github.com/storytold/texturecraft/pull/50\n* feat(export): choose the colour space of exported colour maps by @SteamSmith in https://github.com/storytold/texturecraft/pull/81\n* Effects: copy, cut and paste between layers by @bflatastic in https://github.com/storytold/texturecraft/pull/128\n* Paint through a selected filter instead of refusing the stroke by @Agapenordev in https://github.com/storytold/texturecraft/pull/56\n* Never crash importing meshes with many materials by @Agapenordev in https://github.com/storytold/texturecraft/pull/55\n* feat(app): support multi-GPU selection and discrete adapter preference (#49) by @kk376 in https://github.com/storytold/texturecraft/pull/58\n* feat(import): MaterialX (.mtlx) material import as a fill layer by @SteamSmith in https://github.com/storytold/texturecraft/pull/75\n* feat(bake): Auto-rebake keeps one mesh map up to date by @SteamSmith in https://github.com/storytold/texturecraft/pull/69\n* cli: support builtin:<id> in info command by @test-bit-sys in https://github.com/storytold/texturecraft/pull/77\n* Effect paste: keep the active target, offer it on any row by @bflatastic in https://github.com/storytold/texturecraft/pull/129\n* Docs: roadmap after effect reorder and clipboard, mesh map images, Ctrl+drag brush, the History panel and outside contributions by @bflatastic in https://github.com/storytold/texturecraft/pull/130\n* Startup: say why when the app cannot start or has to close by @bflatastic in https://github.com/storytold/texturecraft/pull/138\n* Fill layers: put an image on any channel by @bflatastic in https://github.com/storytold/texturecraft/pull/137\n* Settings: a data folder on any drive by @bflatastic in https://github.com/storytold/texturecraft/pull/139\n* MaterialCraft materials: .mcmat fills with live graph inputs by @bflatastic in https://github.com/storytold/texturecraft/pull/131\n* Texture Set Settings: the project's normal map format by @bflatastic in https://github.com/storytold/texturecraft/pull/141\n* Follow-ups for MaterialX export/import, Auto-rebake and colour space by @SteamSmith in https://github.com/storytold/texturecraft/pull/135\n* Make paths non-destructive with path sublayers (#113) by @justinjohn0306 in https://github.com/storytold/texturecraft/pull/133\n* Fill projection: UV rotation and offset, sharpness, axis and offset by @bflatastic in https://github.com/storytold/texturecraft/pull/143\n* Export: record the chosen colour space in the files by @SteamSmith in https://github.com/storytold/texturecraft/pull/136\n* feat(bake): skew correction for high-poly transfer rays by @SteamSmith in https://github.com/storytold/texturecraft/pull/60\n* Auto-rebake: a changed skew map rebakes the map by @SteamSmith in https://github.com/storytold/texturecraft/pull/132\n* Effect and fill sliders apply live while dragged, as one undo step by @bflatastic in https://github.com/storytold/texturecraft/pull/146\n* Fill normal images can be marked DirectX by @bflatastic in https://github.com/storytold/texturecraft/pull/152\n* Slider number fields keep what is typed and change nothing when left unchanged by @bflatastic in https://github.com/storytold/texturecraft/pull/150\n* OBJ export writes an MTL material library with each material's maps by @bflatastic in https://github.com/storytold/texturecraft/pull/154\n* UV-tiled sets take mesh maps from one image per tile by @bflatastic in https://github.com/storytold/texturecraft/pull/155\n* OBJ export follow-ups: companions named after the OBJ, implicit material, case-insensitive ids by @bflatastic in https://github.com/storytold/texturecraft/pull/157\n* Pen pressure thins strokes in the 2D view too by @bflatastic in https://github.com/storytold/texturecraft/pull/167\n* Filter radii and height slopes follow each UV tile's own resolution by @bflatastic in https://github.com/storytold/texturecraft/pull/168\n* OBJ exports whose names sanitize alike keep their own MTL and maps by @bflatastic in https://github.com/storytold/texturecraft/pull/169\n* Nine more procedural materials by @bflatastic in https://github.com/storytold/texturecraft/pull/170\n* Make zip entry names unique when saving bake meshes and resources by @Silvertree2010 in https://github.com/storytold/texturecraft/pull/144\n* Fix export failing for file names with a max-length stem by @Silvertree2010 in https://github.com/storytold/texturecraft/pull/151\n* Fix PLY import when face element precedes vertex element by @Silvertree2010 in https://github.com/storytold/texturecraft/pull/163\n* Keep OBJ and MTL header comments on one line by @Silvertree2010 in https://github.com/storytold/texturecraft/pull/164\n\n## New Contributors\n* @test-bit-sys made their first contribution in https://github.com/storytold/texturecraft/pull/42\n* @Agapenordev made their first contribution in https://github.com/storytold/texturecraft/pull/43\n* @dependabot[bot] made their first contribution in https://github.com/storytold/texturecraft/pull/12\n* @Rebornim made their first contribution in https://github.com/storytold/texturecraft/pull/79\n* @SteamSmith made their first contribution in https://github.com/storytold/texturecraft/pull/50\n* @kk376 made their first contribution in https://github.com/storytold/texturecraft/pull/58\n* @justinjohn0306 made their first contribution in https://github.com/storytold/texturecraft/pull/133\n\n**Full Changelog**: https://github.com/storytold/texturecraft/compare/v0.2.0...v0.3.0\n",
+    "published_at": "2026-11-05T00:46:30Z",
+    "notes": "## Added\n- TextureCraft 0.3.1, built from the original release [v0.3.1](https://github.com/storytold/texturecraft/releases/tag/v0.3.1) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.3.1 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Name unnamed OBJ parts after the file stem by @Silvertree2010 in https://github.com/storytold/texturecraft/pull/166\n* Six more smart masks by @bflatastic in https://github.com/storytold/texturecraft/pull/172\n* geom: prevent degenerate BVH leaves when large and small triangles overlap (#61) by @test-bit-sys in https://github.com/storytold/texturecraft/pull/145\n* Apply brush symmetry to filled closed paths by @Silvertree2010 in https://github.com/storytold/texturecraft/pull/181\n* Bake: ambient occlusion defaults of 64 rays and a tenth of the diagonal, linear falloff by @Rebornim in https://github.com/storytold/texturecraft/pull/221\n* 📝 CodeRabbit Chat: Replace reference product and vendor names in AGENTS.md with neutral wording by @coderabbitai[bot] in https://github.com/storytold/texturecraft/pull/237\n* Add guideline to avoid naming reference product by @chasse20 in https://github.com/storytold/texturecraft/pull/236\n* Bake: curvature from short rays around each texel, on the GPU when there is one by @Rebornim in https://github.com/storytold/texturecraft/pull/197\n\n## New Contributors\n* @coderabbitai[bot] made their first contribution in https://github.com/storytold/texturecraft/pull/237\n\n**Full Changelog**: https://github.com/storytold/texturecraft/compare/v0.3.0...v0.3.1\n",
     "assets": [
       {
-        "name": "texturecraft-0.3.0-linux-x86_64.AppImage",
-        "size_bytes": 38308344,
-        "sha256": "7f41d8733d45c0970d294e6c0f38eed2176843add8f186154b37f40328421c69",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-0.3.0-linux-x86_64.AppImage"
+        "name": "texturecraft-0.3.1-linux-x86_64.AppImage",
+        "size_bytes": 38603256,
+        "sha256": "f4036c0abae19f327a24cf57d4c79c9688f9b257ad6d8bd173d38b0ad578f652",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-0.3.1-linux-x86_64.AppImage"
       },
       {
-        "name": "texturecraft-0.3.0-linux-x86_64.AppImage.zsync",
-        "size_bytes": 131193,
-        "sha256": "0a83907fecdebb2a365362bb7800f96a8853b8d1db9f2589e5fcd8dba0756559",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-0.3.0-linux-x86_64.AppImage.zsync"
+        "name": "texturecraft-0.3.1-linux-x86_64.AppImage.zsync",
+        "size_bytes": 132201,
+        "sha256": "8cbc265b3e733f70d08354feee0ed750aa8207248a76c34ec3f54b816d50eea5",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-0.3.1-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "texturecraft-0.3.0-linux-x86_64.deb",
-        "size_bytes": 40220886,
-        "sha256": "ffe0b18024dfe91ab79e1f4a44f1d397b1a3c1f37bac13ce6dc134319899d236",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-0.3.0-linux-x86_64.deb"
+        "name": "texturecraft-0.3.1-linux-x86_64.deb",
+        "size_bytes": 40570952,
+        "sha256": "7ed2ca30cbb63115499d99b55d70604615ee633221359b0fb4b695e652aae325",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-0.3.1-linux-x86_64.deb"
       },
       {
-        "name": "texturecraft-0.3.0-linux-x86_64.rpm",
-        "size_bytes": 41284273,
-        "sha256": "2290fd3905c0c7a414ad414d44d329a390ec43f1d619faa4d95dbd4c2d818072",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-0.3.0-linux-x86_64.rpm"
+        "name": "texturecraft-0.3.1-linux-x86_64.rpm",
+        "size_bytes": 41627853,
+        "sha256": "d60216387f702184780616d76db9afa47b270e71f2241ccfc14d9314764345fa",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-0.3.1-linux-x86_64.rpm"
       },
       {
-        "name": "texturecraft-0.3.0-linux-x86_64.tar.gz",
-        "size_bytes": 39788084,
-        "sha256": "8ee0b0f602ad3bed3fff867baa79d55818952116be9b0cd34802407fc8ae58ad",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-0.3.0-linux-x86_64.tar.gz"
+        "name": "texturecraft-0.3.1-linux-x86_64.tar.gz",
+        "size_bytes": 40135317,
+        "sha256": "99521b9ceed3292023f10f1b045846b4108afa6296147e7ee96039129fa4e413",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-0.3.1-linux-x86_64.tar.gz"
       },
       {
-        "name": "texturecraft-0.3.0-macos-universal.dmg",
-        "size_bytes": 59085982,
-        "sha256": "bb486d96e53b52e34eb526cf42480b2bc71124761b6195a08aabe4ebc6b0e724",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-0.3.0-macos-universal.dmg"
+        "name": "texturecraft-0.3.1-macos-universal.dmg",
+        "size_bytes": 59485574,
+        "sha256": "173d0e36fbac680dc3ddab45919b45cdf888997c937028c580e925374ddc8ad7",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-0.3.1-macos-universal.dmg"
       },
       {
-        "name": "texturecraft-0.3.0-windows-x64-portable.zip",
-        "size_bytes": 39584429,
-        "sha256": "f8a09b6be97de0bc56703ded85470918f0c5868feaafb55c32499e1dd8d3f597",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-0.3.0-windows-x64-portable.zip"
+        "name": "texturecraft-0.3.1-windows-x64-portable.zip",
+        "size_bytes": 39950263,
+        "sha256": "ccfa970ac2a7026fb261277c97db59397cc7177b4692423895b5be9e3a9f2eb7",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-0.3.1-windows-x64-portable.zip"
       },
       {
-        "name": "texturecraft-0.3.0-windows-x64.msi",
-        "size_bytes": 32464896,
-        "sha256": "4358b0d64d4e98a23c097d13b59bb7b4ac4df524200e6f5caacbd9b48350a896",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-0.3.0-windows-x64.msi"
+        "name": "texturecraft-0.3.1-windows-x64.msi",
+        "size_bytes": 32743424,
+        "sha256": "3d98b1037bf5f0cc888e89014b492a5a899affa4a4a9f6355c28526e1f86daae",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-0.3.1-windows-x64.msi"
       },
       {
-        "name": "texturecraft-cli-0.3.0-macos-universal.zip",
-        "size_bytes": 16077976,
-        "sha256": "c945a2e4e23e01ebf8aca251a3fd964241116a79b0b5da13f0c91b2367119189",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.0/texturecraft-cli-0.3.0-macos-universal.zip"
+        "name": "texturecraft-cli-0.3.1-macos-universal.zip",
+        "size_bytes": 16400799,
+        "sha256": "8cc2cfb0f458dec91e25a9319a494edb1d99bd6b519b1d3d9ee9b84d926ae225",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.3.1/texturecraft-cli-0.3.1-macos-universal.zip"
       }
     ]
   },
@@ -1087,66 +1081,66 @@
     "name": "MaterialCraft",
     "tagline": "Procedural material design",
     "repo": "materialcraft",
-    "upstream_tag": "v0.1.0",
-    "version": "0.1.0",
-    "tag": "materialcraft-v0.1.0",
+    "upstream_tag": "v0.1.1",
+    "version": "0.1.1",
+    "tag": "materialcraft-v0.1.1",
     "debrand_rev": "4",
-    "published_at": "2026-11-03T18:13:24Z",
-    "notes": "## Added\n- MaterialCraft 0.1.0, built from the original release [v0.1.0](https://github.com/storytold/materialcraft/releases/tag/v0.1.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.1.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Cross-app materials: .mcmat portable materials for TextureCraft by @bflatastic in https://github.com/storytold/materialcraft/pull/1\n* Fix the release build: script permissions and FreeBSD on a private repo by @echelon in https://github.com/storytold/materialcraft/pull/2\n\n## New Contributors\n* @bflatastic made their first contribution in https://github.com/storytold/materialcraft/pull/1\n* @echelon made their first contribution in https://github.com/storytold/materialcraft/pull/2\n\n**Full Changelog**: https://github.com/storytold/materialcraft/commits/v0.1.0\n",
+    "published_at": "2026-11-05T00:46:30Z",
+    "notes": "## Added\n- MaterialCraft 0.1.1, built from the original release [v0.1.1](https://github.com/storytold/materialcraft/releases/tag/v0.1.1) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.1.1 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Initial sample SBS with all nodes from reference application by @chasse20 in https://github.com/storytold/materialcraft/pull/16\n* Panorama node hdr samples by @chasse20 in https://github.com/storytold/materialcraft/pull/17\n* 3D view: pan the camera with Alt+drag or middle-drag by @ljkx in https://github.com/storytold/materialcraft/pull/19\n* Fixed ui scaling lag by @PiJellyPin in https://github.com/storytold/materialcraft/pull/21\n* Allow Tab to open the graph node search by @Belligerently in https://github.com/storytold/materialcraft/pull/24\n* ci(release): sign the Linux packages with LINUX_SIGNING_KEY by @dylanmtaylor in https://github.com/storytold/materialcraft/pull/26\n* Start desktop and browser sessions with an empty graph by @Belligerently in https://github.com/storytold/materialcraft/pull/29\n* Load sbs files by @PiJellyPin in https://github.com/storytold/materialcraft/pull/51\n\n## New Contributors\n* @chasse20 made their first contribution in https://github.com/storytold/materialcraft/pull/16\n* @ljkx made their first contribution in https://github.com/storytold/materialcraft/pull/19\n* @PiJellyPin made their first contribution in https://github.com/storytold/materialcraft/pull/21\n* @Belligerently made their first contribution in https://github.com/storytold/materialcraft/pull/24\n* @dylanmtaylor made their first contribution in https://github.com/storytold/materialcraft/pull/26\n\n**Full Changelog**: https://github.com/storytold/materialcraft/compare/v0.1.0...v0.1.1\n",
     "assets": [
       {
-        "name": "materialcraft-0.1.0-linux-x86_64.AppImage",
-        "size_bytes": 15968760,
-        "sha256": "1348974dffd1b4e29d5c8b8ac19f7d2503bf12b460e9d2f435ddcdcd79fd45fb",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.AppImage"
+        "name": "materialcraft-0.1.1-linux-x86_64.AppImage",
+        "size_bytes": 16296440,
+        "sha256": "f3eb91b0a81c19d2e045e30261de9eb4b74cd3cc8ce281ab6b9364422df2b379",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-0.1.1-linux-x86_64.AppImage"
       },
       {
-        "name": "materialcraft-0.1.0-linux-x86_64.AppImage.zsync",
-        "size_bytes": 54839,
-        "sha256": "3b7af1223ab390b3f0c7896f66aa28918cb3e97fa3370976fdbefa13ac03a5e5",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.AppImage.zsync"
+        "name": "materialcraft-0.1.1-linux-x86_64.AppImage.zsync",
+        "size_bytes": 55959,
+        "sha256": "2bc90e3d7716b9d80f51ca20c2b53b3e68079321036aac3ea2542ddf9722b9e1",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-0.1.1-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "materialcraft-0.1.0-linux-x86_64.deb",
-        "size_bytes": 16831006,
-        "sha256": "1671a6d121e895ca065e01ff325905562f3d355f7b06fd9af80c307ad879394c",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.deb"
+        "name": "materialcraft-0.1.1-linux-x86_64.deb",
+        "size_bytes": 17183824,
+        "sha256": "6ea3841fb9fe1fc89bc6d14818a17385022e894976c8c7b84fe67501dc849b81",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-0.1.1-linux-x86_64.deb"
       },
       {
-        "name": "materialcraft-0.1.0-linux-x86_64.rpm",
-        "size_bytes": 17320328,
-        "sha256": "c933d91c2f0ada6c917cb0a3e878f2355fca71995be8f2616654934b2cc31190",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.rpm"
+        "name": "materialcraft-0.1.1-linux-x86_64.rpm",
+        "size_bytes": 17693592,
+        "sha256": "cda4f00b925a8471782f6de22ba762865667ddee3963a2b362341edbe9c0ac8f",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-0.1.1-linux-x86_64.rpm"
       },
       {
-        "name": "materialcraft-0.1.0-linux-x86_64.tar.gz",
-        "size_bytes": 16548560,
-        "sha256": "fb97cd3d8428348d3fcc6cad71c22bebd5d781bc31402c5fcab946ba23b2e9c9",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-linux-x86_64.tar.gz"
+        "name": "materialcraft-0.1.1-linux-x86_64.tar.gz",
+        "size_bytes": 16894456,
+        "sha256": "0e9007c9e2c42fd63cada5f4dc9460c6be1e60b540fbcbe328d44042ea99cd29",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-0.1.1-linux-x86_64.tar.gz"
       },
       {
-        "name": "materialcraft-0.1.0-macos-universal.dmg",
-        "size_bytes": 19875753,
-        "sha256": "6b39a4e928ce6494f9bc207e0ca110536a38b6969738fca7f80fbd4f0c8f3a84",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-macos-universal.dmg"
+        "name": "materialcraft-0.1.1-macos-universal.dmg",
+        "size_bytes": 20263161,
+        "sha256": "185683a13dabe73c5765610ba240d5c153489fd8af8ed52233a79b92493de776",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-0.1.1-macos-universal.dmg"
       },
       {
-        "name": "materialcraft-0.1.0-windows-x64-portable.zip",
-        "size_bytes": 15685945,
-        "sha256": "d6a723793bb637b5b41fbace8fe7769bccb40c4bf80fefa7ad2afe0225f7e57b",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-windows-x64-portable.zip"
+        "name": "materialcraft-0.1.1-windows-x64-portable.zip",
+        "size_bytes": 16066632,
+        "sha256": "0f59ccfcb977f3e67ce9b632448f739e02ecd1298dc77c651e694398cd7690cf",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-0.1.1-windows-x64-portable.zip"
       },
       {
-        "name": "materialcraft-0.1.0-windows-x64.msi",
-        "size_bytes": 11722752,
-        "sha256": "5b239894b147b5f1dc7ca1401898ab20663cae7a3a22ce53d4f8c430fa370f26",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-0.1.0-windows-x64.msi"
+        "name": "materialcraft-0.1.1-windows-x64.msi",
+        "size_bytes": 12005376,
+        "sha256": "200cf721e7890b123f6701872876c385758fb1b83fc0d90dd6d28c114dc13abc",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-0.1.1-windows-x64.msi"
       },
       {
-        "name": "materialcraft-cli-0.1.0-macos-universal.zip",
-        "size_bytes": 9065428,
-        "sha256": "a1b8918a78a18f092191dc98e66aa0e2d3e506145ed5b297ec0f0faec93660f1",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.0/materialcraft-cli-0.1.0-macos-universal.zip"
+        "name": "materialcraft-cli-0.1.1-macos-universal.zip",
+        "size_bytes": 9389343,
+        "sha256": "47527f61e4e0ad41ce73094d81226b4e53c00ca0598bf268bb1c379a158065e8",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.1.1/materialcraft-cli-0.1.1-macos-universal.zip"
       }
     ]
   }
