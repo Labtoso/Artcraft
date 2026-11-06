@@ -1,0 +1,16 @@
+[package]
+name = "fusioncraft-model"
+description = "FusionCraft timeline evaluation: turns a document into bodies"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+fusioncraft-geom = { workspace = true }
+fusioncraft-doc = { workspace = true }
+log = { workspace = true }

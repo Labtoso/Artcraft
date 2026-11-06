@@ -1,0 +1,18 @@
+[package]
+name = "fusioncraft-render"
+description = "FusionCraft software renderer: shaded bodies, edges, grid and picking"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+fusioncraft-geom = { workspace = true }
+fusioncraft-model = { workspace = true }
+
+[dev-dependencies]
+fusioncraft-doc = { workspace = true }
