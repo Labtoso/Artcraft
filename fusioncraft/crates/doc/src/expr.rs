@@ -231,12 +231,11 @@ impl Parser<'_> {
     /// An atom with an optional unit suffix.
     fn postfix(&mut self) -> Result<f64, ExprError> {
         let v = self.atom()?;
-        if let Some(Tok::Ident(n)) = self.t.get(self.i) {
-            if let Some(f) = unit(n) {
+        if let Some(Tok::Ident(n)) = self.t.get(self.i)
+            && let Some(f) = unit(n) {
                 self.i += 1;
                 return Ok(v * f);
             }
-        }
         Ok(v)
     }
     fn atom(&mut self) -> Result<f64, ExprError> {
@@ -305,7 +304,7 @@ mod tests {
         assert_eq!(e("2,5"), Ok(2.5));
         assert_eq!(e("sqrt(16)"), Ok(4.0));
         assert!(matches!(e("nope"), Err(ExprError::Unknown(_))));
-        assert!(matches!(e("1 +"), Err(_)));
+        assert!(e("1 +").is_err());
         assert!(matches!(e("1/0"), Err(ExprError::NotFinite)));
         p.define("a", Expr::new("b"));
         p.define("b", Expr::new("a"));

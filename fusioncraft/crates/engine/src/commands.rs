@@ -99,11 +99,10 @@ fn file_save(e: &mut Engine, p: &Value) -> CmdResult {
         None => e.path.clone().ok_or_else(|| EngineError::BadParams("missing 'path' (the design was never saved)".into()))?,
     };
     let path = if path.extension().is_none() { path.with_extension(fusioncraft_io::EXTENSION) } else { path };
-    if e.doc.name == "Untitled" {
-        if let Some(stem) = path.file_stem() {
+    if e.doc.name == "Untitled"
+        && let Some(stem) = path.file_stem() {
             e.doc.name = stem.to_string_lossy().into_owned();
         }
-    }
     fusioncraft_io::save(&e.doc, &path).map_err(|err| failed(format!("Could not save: {err}")))?;
     e.path = Some(path.clone());
     e.dirty = false;
@@ -465,11 +464,10 @@ fn feature_id(e: &Engine, p: &Value) -> Result<Id, EngineError> {
 fn feature_add(e: &mut Engine, p: &Value) -> CmdResult {
     let kind: FeatureKind = serde_json::from_value(get(p, "kind").cloned().unwrap_or(Value::Null))
         .map_err(|err| EngineError::BadParams(format!("'kind': {err}")))?;
-    if let Some(s) = kind.sketch_id() {
-        if e.doc.sketch(s).is_none() {
+    if let Some(s) = kind.sketch_id()
+        && e.doc.sketch(s).is_none() {
             return Err(EngineError::BadParams(format!("there is no sketch {s}")));
         }
-    }
     if matches!(kind, FeatureKind::Sketch { .. }) {
         return Err(EngineError::BadParams("use sketch.create for sketches".into()));
     }
@@ -647,16 +645,14 @@ fn help_commands(_e: &mut Engine, _p: &Value) -> CmdResult {
 }
 
 #[cfg(test)]
+#[allow(clippy::panic)]
 mod tests {
     use super::*;
 
     fn run(e: &mut Engine, id: &str, p: Value) -> Value {
         match e.execute(id, &p) {
             Ok(v) => v,
-            Err(err) => {
-                assert!(false, "{id} failed: {err}");
-                Value::Null
-            }
+            Err(err) => panic!("{id} failed: {err}"),
         }
     }
 

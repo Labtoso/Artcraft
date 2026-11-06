@@ -39,11 +39,10 @@ pub fn loops(sketch: &Sketch) -> Vec<Vec<Vec2>> {
         }
         if let Some(l) = e.closed_loop() {
             out.push(l);
-        } else if let Some(p) = e.open_path() {
-            if p.len() >= 2 {
+        } else if let Some(p) = e.open_path()
+            && p.len() >= 2 {
                 paths.push(p);
             }
-        }
     }
     out.extend(chain(paths));
     out.into_iter()
@@ -162,7 +161,7 @@ mod tests {
         let (a, b, c) = (Vec2::new(0.0, 0.0), Vec2::new(4.0, 0.0), Vec2::new(0.0, 3.0));
         let s = sketch(vec![
             Entity::Line { a, b, construction: false },
-            Entity::Line { a: a, b: c, construction: false },
+            Entity::Line { a, b: c, construction: false },
             Entity::Line { a: b, b: c, construction: false },
         ]);
         let p = profiles(&s);

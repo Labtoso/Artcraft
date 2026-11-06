@@ -153,15 +153,14 @@ pub fn triangulate(pts: &[Vec2]) -> Result<Vec<[usize; 3]>, GeomError> {
             }
         }
     }
-    if idx.len() >= 3 {
-        if let Some(&first) = idx.first() {
+    if idx.len() >= 3
+        && let Some(&first) = idx.first() {
             for w in idx.windows(2).skip(1) {
                 if let [b, c] = *w {
                     out.push([first, b, c]);
                 }
             }
         }
-    }
     Ok(out)
 }
 

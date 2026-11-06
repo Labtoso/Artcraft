@@ -17,6 +17,9 @@ use fusioncraft_geom::mesh::Edge;
 use fusioncraft_geom::{csg, poly, solid, GeomError, Mesh, Plane, Vec2, Vec3};
 use std::collections::HashMap;
 
+/// A copy transform used by mirror and patterns.
+type Transform = Box<dyn Fn(&Mesh) -> Mesh>;
+
 /// Segments for curved primitives.
 pub const SEGMENTS: usize = 64;
 /// Upper bound for pattern copies.
@@ -199,7 +202,7 @@ impl Evaluator<'_> {
                     return Err(format!("At most {MAX_COPIES} copies"));
                 }
                 let (sx, sy) = (self.num(spacing_x, "Spacing X")?, self.num(spacing_y, "Spacing Y")?);
-                let mut ts: Vec<Box<dyn Fn(&Mesh) -> Mesh>> = Vec::new();
+                let mut ts: Vec<Transform> = Vec::new();
                 for i in 0..cx {
                     for j in 0..cy {
                         if i == 0 && j == 0 {
@@ -217,7 +220,7 @@ impl Evaluator<'_> {
                 let full = (total.abs() - std::f64::consts::TAU).abs() < 1e-6;
                 let step = if full || n == 1 { total / f64::from(n) } else { total / f64::from(n - 1) };
                 let ax = axis.vector();
-                let ts: Vec<Box<dyn Fn(&Mesh) -> Mesh>> = (1..n)
+                let ts: Vec<Transform> = (1..n)
                     .map(|k| {
                         let a = step * f64::from(k);
                         Box::new(move |m: &Mesh| m.rotated(Vec3::ZERO, ax, a)) as Box<dyn Fn(&Mesh) -> Mesh>
@@ -389,7 +392,7 @@ impl Evaluator<'_> {
     }
 
     /// Join transformed copies of every body into it.
-    fn transform_copies(&mut self, transforms: &[Box<dyn Fn(&Mesh) -> Mesh>]) -> Result<(), String> {
+    fn transform_copies(&mut self, transforms: &[Transform]) -> Result<(), String> {
         if self.bodies.is_empty() {
             return Err("There is no body to copy".into());
         }

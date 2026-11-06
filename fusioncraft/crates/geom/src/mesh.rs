@@ -4,6 +4,9 @@ use crate::vec::Vec3;
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
+/// An edge keyed by its two snapped endpoints.
+type EdgeKey = ((i64, i64, i64), (i64, i64, i64));
+
 #[derive(Debug, Clone, Copy, PartialEq, Serialize, Deserialize)]
 pub struct Triangle {
     pub v: [Vec3; 3],
@@ -167,10 +170,10 @@ impl Mesh {
         let grid = VertexGrid::new(&verts, scale / 48.0);
         let cos_limit = crease_deg.to_radians().cos();
         // Split boundary segments of each group, keyed by endpoints, with the group's normal.
-        let mut boundary: HashMap<((i64, i64, i64), (i64, i64, i64)), (Edge, Vec<Vec3>)> = HashMap::new();
+        let mut boundary: HashMap<EdgeKey, (Edge, Vec<Vec3>)> = HashMap::new();
         for tris in groups.values() {
             let normal = self.tris.get(tris.first().copied().unwrap_or(0)).map(Triangle::normal).unwrap_or(Vec3::Z);
-            let mut count: HashMap<((i64, i64, i64), (i64, i64, i64)), (Edge, i32)> = HashMap::new();
+            let mut count: HashMap<EdgeKey, (Edge, i32)> = HashMap::new();
             for &ti in tris {
                 let Some(t) = self.tris.get(ti) else { continue };
                 for e in 0..3 {

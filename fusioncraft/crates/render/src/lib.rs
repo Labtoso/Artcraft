@@ -25,6 +25,7 @@ impl Rgba {
     pub const fn rgb(r: u8, g: u8, b: u8) -> Self {
         Self([r, g, b, 255])
     }
+    #[allow(clippy::self_named_constructors)]
     pub const fn rgba(r: u8, g: u8, b: u8, a: u8) -> Self {
         Self([r, g, b, a])
     }
@@ -296,8 +297,8 @@ fn raster_tri(t: &mut Target, a: Sv, b: Sv, c: Sv, color: [f32; 3], id: u32, tri
             }
             let d = (w0 * a.d + w1 * b.d + w2 * c.d) as f32;
             let i = y * t.w + x;
-            if let Some(slot) = t.depth.get_mut(i) {
-                if d > *slot {
+            if let Some(slot) = t.depth.get_mut(i)
+                && d > *slot {
                     *slot = d;
                     if let Some(px) = t.color.get_mut(i) {
                         *px = color;
@@ -309,15 +310,14 @@ fn raster_tri(t: &mut Target, a: Sv, b: Sv, c: Sv, color: [f32; 3], id: u32, tri
                         *p = tri;
                     }
                 }
-            }
         }
     }
 }
 
 fn blend(dst: &mut [f32; 3], c: Rgba, alpha: f32) {
     let a = f32::from(c.0[3]) / 255.0 * alpha;
-    for k in 0..3 {
-        dst[k] = dst[k] * (1.0 - a) + f32::from(c.0[k]) * a;
+    for (d, s) in dst.iter_mut().zip(c.0) {
+        *d = *d * (1.0 - a) + f32::from(s) * a;
     }
 }
 
