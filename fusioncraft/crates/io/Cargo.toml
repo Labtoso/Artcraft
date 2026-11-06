@@ -1,5 +1,6 @@
 [package]
 name = "fusioncraft-io"
+description = "FusionCraft files: documents (.fcraft), STL and OBJ export"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
@@ -10,3 +11,7 @@ publish = false
 workspace = true
 
 [dependencies]
+fusioncraft-geom = { workspace = true }
+fusioncraft-doc = { workspace = true }
+fusioncraft-model = { workspace = true }
+thiserror = { workspace = true }
