@@ -16,6 +16,7 @@ fusioncraft-doc = { path = "crates/doc" }
 fusioncraft-model = { path = "crates/model" }
 fusioncraft-io = { path = "crates/io" }
 fusioncraft-engine = { path = "crates/engine" }
+fusioncraft-render = { path = "crates/render" }
 fusioncraft-ui-egui = { path = "crates/ui-egui" }
 
 # foundation
