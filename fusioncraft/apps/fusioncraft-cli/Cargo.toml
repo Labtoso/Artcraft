@@ -1,12 +1,22 @@
 [package]
 name = "fusioncraft-cli"
+description = "FusionCraft on the command line: run command scripts, export, render, inspect"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
 rust-version.workspace = true
 publish = false
 
+[[bin]]
+name = "fusioncraft-cli"
+path = "src/main.rs"
+
 [lints]
 workspace = true
 
 [dependencies]
+fusioncraft-engine = { workspace = true }
+fusioncraft-render = { workspace = true }
+fusioncraft-io = { workspace = true }
+serde_json = { workspace = true }
+clap = { workspace = true }

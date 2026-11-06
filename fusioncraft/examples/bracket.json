@@ -1,0 +1,19 @@
+[
+  { "cmd": "doc.rename", "name": "Bracket" },
+  { "cmd": "param.set", "name": "thick", "expr": "6 mm" },
+  { "cmd": "param.set", "name": "hole", "expr": "6.5 mm", "comment": "M6 clearance" },
+  { "cmd": "sketch.create", "plane": "xy" },
+  { "cmd": "sketch.rect", "a": [-30, -40], "b": [30, 0] },
+  { "cmd": "sketch.circle", "center": [-18, -26], "diameter": "hole" },
+  { "cmd": "sketch.circle", "center": [18, -26], "diameter": "hole" },
+  { "cmd": "feature.extrude", "profiles": [0], "distance": "thick", "operation": "new_body" },
+  { "cmd": "sketch.create", "plane": "xz" },
+  { "cmd": "sketch.rect", "a": [-30, 0], "b": [30, 44] },
+  { "cmd": "sketch.circle", "center": [0, 28], "diameter": 16 },
+  { "cmd": "feature.extrude", "profiles": [0], "distance": "thick", "operation": "join" },
+  { "cmd": "sketch.create", "plane": "yz" },
+  { "cmd": "sketch.line", "a": [-6, 6], "b": [-26, 6] },
+  { "cmd": "sketch.line", "a": [-26, 6], "b": [-6, 26] },
+  { "cmd": "sketch.line", "a": [-6, 26], "b": [-6, 6] },
+  { "cmd": "feature.extrude", "distance": 4, "symmetric": true, "operation": "join" }
+]
