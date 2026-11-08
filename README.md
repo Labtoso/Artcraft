@@ -26,7 +26,7 @@ The original apps have buttons and links to Discord and social networks in many 
 <!-- apps:start -->
 | App | What for | Version | Source |
 |---|---|---|---|
-| [ArtCraft Launcher](apps/artcraft-launcher/README.md) | Installs, updates and starts every Craft app | [0.15.5](https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.15.5) | [Original](https://github.com/storytold/craft-launcher) |
+| [ArtCraft Launcher](apps/artcraft-launcher/README.md) | Installs, updates and starts every Craft app | [0.16.5](https://github.com/Labtoso/Artcraft/releases/tag/artcraft-launcher-v0.16.5) | [Original](https://github.com/storytold/craft-launcher) |
 | [CADCraft](apps/cadcraft/README.md) | CAD and technical drawing | [0.18.0](https://github.com/Labtoso/Artcraft/releases/tag/cadcraft-v0.18.0) | [Original](https://github.com/storytold/cadcraft) |
 | [Craft Anything](apps/craft-anything/README.md) | Find out how any software works, then craft your own | [0.5.0](https://github.com/Labtoso/Artcraft/releases/tag/craft-anything-v0.5.0) | [Original](https://github.com/storytold/craft-anything) |
 | [DeckCraft](apps/deckcraft/README.md) | Presentations | [0.16.0](https://github.com/Labtoso/Artcraft/releases/tag/deckcraft-v0.16.0) | [Original](https://github.com/storytold/deckcraft) |
