@@ -3,60 +3,60 @@
     "name": "ArtCraft Launcher",
     "tagline": "Installs and updates the Craft App Suite",
     "repo": "craft-launcher",
-    "upstream_tag": "v0.16.0",
-    "version": "0.16.5",
-    "tag": "artcraft-launcher-v0.16.5",
+    "upstream_tag": "v0.16.1",
+    "version": "0.16.1005",
+    "tag": "artcraft-launcher-v0.16.1005",
     "debrand_rev": "4",
-    "published_at": "2026-11-08T00:21:49Z",
-    "notes": "## Added\n- ArtCraft Launcher 0.16.5, built from the original release [v0.16.0](https://github.com/storytold/craft-launcher/releases/tag/v0.16.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.16.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Add ArtCraft Studio without a publisher badge by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/1290\n\n\n**Full Changelog**: https://github.com/storytold/craft-launcher/compare/v0.15.0...v0.16.0\n",
+    "published_at": "2026-11-09T00:12:03Z",
+    "notes": "## Added\n- ArtCraft Launcher 0.16.1005, built from the original release [v0.16.1](https://github.com/storytold/craft-launcher/releases/tag/v0.16.1) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.16.1 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* chore(catalog): remove ArtCraft Studio from launcher suite by @dylanmtaylor in https://github.com/storytold/craft-launcher/pull/1318\n\n\n**Full Changelog**: https://github.com/storytold/craft-launcher/compare/v0.16.0...v0.16.1\n",
     "assets": [
       {
-        "name": "artcraft-launcher-0.16.5-linux-x86_64.AppImage",
-        "size_bytes": 13404664,
-        "sha256": "dfb586aaeac71eb1c5551d6738b15695e87121c05f387d3123b5292e3fce7d70",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.5/artcraft-launcher-0.16.5-linux-x86_64.AppImage"
+        "name": "artcraft-launcher-0.16.1005-linux-x86_64.AppImage",
+        "size_bytes": 13400568,
+        "sha256": "fcb0fc931176316f6dfa8b87734b18625c8e6f07afeecfe13d53e484ad1ae568",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.1005/artcraft-launcher-0.16.1005-linux-x86_64.AppImage"
       },
       {
-        "name": "artcraft-launcher-0.16.5-linux-x86_64.AppImage.zsync",
-        "size_bytes": 46085,
-        "sha256": "0249e03a786c92d8fff30b8dfa5a8d6dbe50d7c49d6055d8689ad300dece2e19",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.5/artcraft-launcher-0.16.5-linux-x86_64.AppImage.zsync"
+        "name": "artcraft-launcher-0.16.1005-linux-x86_64.AppImage.zsync",
+        "size_bytes": 46077,
+        "sha256": "bf6c648ffa6527fa5abc23fe364bd1f9a5ad78723d518531c48b3a51e5ee4d1e",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.1005/artcraft-launcher-0.16.1005-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "artcraft-launcher-0.16.5-linux-x86_64.deb",
-        "size_bytes": 13756254,
-        "sha256": "d973f3099d6968b822ed7da1cd6d13274e58e3945780e0aa20d77d397b7fcebe",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.5/artcraft-launcher-0.16.5-linux-x86_64.deb"
+        "name": "artcraft-launcher-0.16.1005-linux-x86_64.deb",
+        "size_bytes": 13755700,
+        "sha256": "a75ecfb501ae06fac6c5bae284b5b1e502ff578695d78247f45c8206078ffe48",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.1005/artcraft-launcher-0.16.1005-linux-x86_64.deb"
       },
       {
-        "name": "artcraft-launcher-0.16.5-linux-x86_64.rpm",
-        "size_bytes": 14129057,
-        "sha256": "907f9c450ae9ff78ef80cbd4a61a3e494de01df89a3f75eab4ec825d46225272",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.5/artcraft-launcher-0.16.5-linux-x86_64.rpm"
+        "name": "artcraft-launcher-0.16.1005-linux-x86_64.rpm",
+        "size_bytes": 14140713,
+        "sha256": "b87caad8dbb53da059af552def54d45b6acdecf72009f8a46292d65ce1d9b179",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.1005/artcraft-launcher-0.16.1005-linux-x86_64.rpm"
       },
       {
-        "name": "artcraft-launcher-0.16.5-linux-x86_64.tar.gz",
-        "size_bytes": 13542849,
-        "sha256": "435a7620a05a44ea11f7424fec9d254f940975c392b33288bebae3966a0e91b9",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.5/artcraft-launcher-0.16.5-linux-x86_64.tar.gz"
+        "name": "artcraft-launcher-0.16.1005-linux-x86_64.tar.gz",
+        "size_bytes": 13540949,
+        "sha256": "1bbdc223f4fc5929e4477727bfb46b05ebc42ea1bc0471106c2a800812734854",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.1005/artcraft-launcher-0.16.1005-linux-x86_64.tar.gz"
       },
       {
-        "name": "artcraft-launcher-0.16.5-macos-universal.dmg",
-        "size_bytes": 21431549,
-        "sha256": "3e74380a1eac5871d88b19412e4465f96c6736ba049d41a6f965b5261a08b930",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.5/artcraft-launcher-0.16.5-macos-universal.dmg"
+        "name": "artcraft-launcher-0.16.1005-macos-universal.dmg",
+        "size_bytes": 21431261,
+        "sha256": "a3ac1e4278d3854e0c39b01ec09854ba8ff75d933c611a4e771aad9fe2d6643b",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.1005/artcraft-launcher-0.16.1005-macos-universal.dmg"
       },
       {
-        "name": "artcraft-launcher-0.16.5-windows-x64-portable.zip",
-        "size_bytes": 11102927,
-        "sha256": "22ff375f88737e54d7e4cdeae2c361694d1af2203be57c2181736c14bfbb12e6",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.5/artcraft-launcher-0.16.5-windows-x64-portable.zip"
+        "name": "artcraft-launcher-0.16.1005-windows-x64-portable.zip",
+        "size_bytes": 11102871,
+        "sha256": "4f425f09bdc5b13aed560bc26bfe2f482a5323b1e7fee12ae8986ecf6511b51f",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.1005/artcraft-launcher-0.16.1005-windows-x64-portable.zip"
       },
       {
-        "name": "artcraft-launcher-0.16.5-windows-x64.msi",
+        "name": "artcraft-launcher-0.16.1005-windows-x64.msi",
         "size_bytes": 9969664,
-        "sha256": "662e17a7cc284e3b3e0f5e93611fed76f1ef6fc061f873bec113223062a65dd0",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.5/artcraft-launcher-0.16.5-windows-x64.msi"
+        "sha256": "3460f183d0c002afa493abb34c5595a559b5cd3e2e19d7d0e89751c9e2117938",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.16.1005/artcraft-launcher-0.16.1005-windows-x64.msi"
       }
     ]
   },
