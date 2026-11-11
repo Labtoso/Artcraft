@@ -3,60 +3,60 @@
     "name": "ArtCraft Launcher",
     "tagline": "Installs and updates the Craft App Suite",
     "repo": "craft-launcher",
-    "upstream_tag": "v0.17.0",
-    "version": "0.17.5",
-    "tag": "artcraft-launcher-v0.17.5",
+    "upstream_tag": "v0.18.0",
+    "version": "0.18.5",
+    "tag": "artcraft-launcher-v0.18.5",
     "debrand_rev": "4",
-    "published_at": "2026-11-10T02:42:26Z",
-    "notes": "## Added\n- ArtCraft Launcher 0.17.5, built from the original release [v0.17.0](https://github.com/storytold/craft-launcher/releases/tag/v0.17.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.17.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* fix(macos): respect disabled Gatekeeper assessments by @skylartaylor in https://github.com/storytold/craft-launcher/pull/1091\n* Updates: take craft-update from craft-libs main at 1b34eba41 by @dotCooCoo in https://github.com/storytold/craft-launcher/pull/1346\n* Preview download sizes before installing or updating by @MMexicann in https://github.com/storytold/craft-launcher/pull/352\n\n\n**Full Changelog**: https://github.com/storytold/craft-launcher/compare/v0.16.1...v0.17.0\n",
+    "published_at": "2026-11-11T00:58:11Z",
+    "notes": "## Added\n- ArtCraft Launcher 0.18.5, built from the original release [v0.18.0](https://github.com/storytold/craft-launcher/releases/tag/v0.18.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.18.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Update all apps behind one permission prompt on Linux and Windows by @mergenchik in https://github.com/storytold/craft-launcher/pull/1235\n* Add MailCraft as a community app by @benandez in https://github.com/storytold/craft-launcher/pull/1360\n* Check which Linux package owns an app before running the binary to read its version by @mergenchik in https://github.com/storytold/craft-launcher/pull/1352\n\nMailCraft downloads are verified against its release checksums. On macOS, the launcher can open an existing MailCraft installation but does not install its unsigned builds.\n\nAniCraft is excluded from this release.\n\n**Full Changelog**: https://github.com/storytold/craft-launcher/compare/v0.17.0...v0.18.0\n",
     "assets": [
       {
-        "name": "artcraft-launcher-0.17.5-linux-x86_64.AppImage",
-        "size_bytes": 13437432,
-        "sha256": "bf177c75b9f32b1693969802ef807d7a51fadd062b4992f804addcf9b97a2a78",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.5/artcraft-launcher-0.17.5-linux-x86_64.AppImage"
+        "name": "artcraft-launcher-0.18.5-linux-x86_64.AppImage",
+        "size_bytes": 13462008,
+        "sha256": "4779a090cdc28bce71049d6bcc08b429078b89a006a9f1aa8913631cc7e41c5d",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.5/artcraft-launcher-0.18.5-linux-x86_64.AppImage"
       },
       {
-        "name": "artcraft-launcher-0.17.5-linux-x86_64.AppImage.zsync",
-        "size_bytes": 46197,
-        "sha256": "27087f9ec716f4566bc5be47b599ff25cfda2895c878523da04c7a0b5460cce3",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.5/artcraft-launcher-0.17.5-linux-x86_64.AppImage.zsync"
+        "name": "artcraft-launcher-0.18.5-linux-x86_64.AppImage.zsync",
+        "size_bytes": 46281,
+        "sha256": "74b32d3999ce82203aa1d79827cbcaf7f3acd21664834633ed8b00dbe0e18731",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.5/artcraft-launcher-0.18.5-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "artcraft-launcher-0.17.5-linux-x86_64.deb",
-        "size_bytes": 13799512,
-        "sha256": "82a53b477ba86ba52d8b30a30bc6ecdd7bdf62392321b589b76753edb0757a22",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.5/artcraft-launcher-0.17.5-linux-x86_64.deb"
+        "name": "artcraft-launcher-0.18.5-linux-x86_64.deb",
+        "size_bytes": 13828678,
+        "sha256": "f35e8e845c47ddd4dfb18895d254b59671001b2726387a8114ff58881e63fe46",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.5/artcraft-launcher-0.18.5-linux-x86_64.deb"
       },
       {
-        "name": "artcraft-launcher-0.17.5-linux-x86_64.rpm",
-        "size_bytes": 14171380,
-        "sha256": "925f116984e82774e256c1366aa24a45eacc4d339fe2ae6b7a135bc3178277a0",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.5/artcraft-launcher-0.17.5-linux-x86_64.rpm"
+        "name": "artcraft-launcher-0.18.5-linux-x86_64.rpm",
+        "size_bytes": 14205719,
+        "sha256": "3551468e1c6400d4f05ad490d9e7ea4a2eede88ca3ff0559f1cbf5d4e98f8da0",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.5/artcraft-launcher-0.18.5-linux-x86_64.rpm"
       },
       {
-        "name": "artcraft-launcher-0.17.5-linux-x86_64.tar.gz",
-        "size_bytes": 13584138,
-        "sha256": "6adf814b3b637d4f4d421bdf16de39768176367e98f982e8a9310baea73bcfb6",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.5/artcraft-launcher-0.17.5-linux-x86_64.tar.gz"
+        "name": "artcraft-launcher-0.18.5-linux-x86_64.tar.gz",
+        "size_bytes": 13611990,
+        "sha256": "e2f5e23d2cec981529f97f0d69c3e3ed0ede3679f0da94d853211827341fa174",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.5/artcraft-launcher-0.18.5-linux-x86_64.tar.gz"
       },
       {
-        "name": "artcraft-launcher-0.17.5-macos-universal.dmg",
-        "size_bytes": 21546665,
-        "sha256": "7ba3fe08f374089990f6b94e76bf4f4401d56a3c6a0cbda2938efd0655eb453f",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.5/artcraft-launcher-0.17.5-macos-universal.dmg"
+        "name": "artcraft-launcher-0.18.5-macos-universal.dmg",
+        "size_bytes": 21590543,
+        "sha256": "0bfbdff10284a19f2d506ed4703a048c6582a8e71af6cddf3ef6c3559cfbfe03",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.5/artcraft-launcher-0.18.5-macos-universal.dmg"
       },
       {
-        "name": "artcraft-launcher-0.17.5-windows-x64-portable.zip",
-        "size_bytes": 11115592,
-        "sha256": "986e161d1a518a1a5985e51e080c16dce26a3d0de210a4cd335ec61074589ae6",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.5/artcraft-launcher-0.17.5-windows-x64-portable.zip"
+        "name": "artcraft-launcher-0.18.5-windows-x64-portable.zip",
+        "size_bytes": 11165902,
+        "sha256": "a31a3e23ebd0e54dafc453561b3963fbe3a95e6a8d727069f6b0aa4d4f23d5d4",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.5/artcraft-launcher-0.18.5-windows-x64-portable.zip"
       },
       {
-        "name": "artcraft-launcher-0.17.5-windows-x64.msi",
-        "size_bytes": 9981952,
-        "sha256": "a49d7027898bdd5f470ecbd054abdcef46828f7dfac94597c26e2f05c0e7a900",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.17.5/artcraft-launcher-0.17.5-windows-x64.msi"
+        "name": "artcraft-launcher-0.18.5-windows-x64.msi",
+        "size_bytes": 10027008,
+        "sha256": "b86579fa6a7d7295bf828256b714778827380486c889b8be77043a277ec323ab",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.18.5/artcraft-launcher-0.18.5-windows-x64.msi"
       }
     ]
   },
@@ -265,66 +265,66 @@
     "name": "EffectCraft",
     "tagline": "Motion graphics and visual effects",
     "repo": "effectcraft",
-    "upstream_tag": "v0.23.0",
-    "version": "0.23.0",
-    "tag": "effectcraft-v0.23.0",
+    "upstream_tag": "v0.23.1",
+    "version": "0.23.1",
+    "tag": "effectcraft-v0.23.1",
     "debrand_rev": "4",
-    "published_at": "2026-11-10T02:42:26Z",
-    "notes": "## Added\n- EffectCraft 0.23.0, built from the original release [v0.23.0](https://github.com/storytold/effectcraft/releases/tag/v0.23.0) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.23.0 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Roto Brush: per-split scratch vectors in the parallel distance transform by @vangel76 in https://github.com/storytold/effectcraft/pull/2333\n* Roto Brush: propagate on the band bounding box by @vangel76 in https://github.com/storytold/effectcraft/pull/2335\n* Subspace Warp: a symmetric QR eigen solver and a banded mesh solve make plan() 5x cheaper (#2319) by @vangel76 in https://github.com/storytold/effectcraft/pull/2332\n* opusenc: memoise SILK rate-loop trials, ring buffer for noise feedback by @vangel76 in https://github.com/storytold/effectcraft/pull/2399\n* av1enc: motion search with visited set and early-exit SAD, fixed-size SATD, region-only snapshots by @vangel76 in https://github.com/storytold/effectcraft/pull/2406\n* SAM 2 tracking: prompt frames in frame order, no second fetch for the size check (#3030) by @vangel76 in https://github.com/storytold/effectcraft/pull/3034\n* SAM 2 mask decoder: transposed convolutions as matrix product plus pixel shuffle (#3031) by @vangel76 in https://github.com/storytold/effectcraft/pull/3035\n* CI: run the gate on macOS on pushes to main by @FredApps in https://github.com/storytold/effectcraft/pull/3177\n* 3D rotation order, keyed Orientation, linear-to-eased keyframes and Timewarp behave as in After Effects by @vangel76 in https://github.com/storytold/effectcraft/pull/1876\n* Echo: Blend, Composite In Back and In Front match After Effects by @vangel76 in https://github.com/storytold/effectcraft/pull/3132\n* Image sequences: a gap in the numbering holds the previous frame, as After Effects by @vangel76 in https://github.com/storytold/effectcraft/pull/3137\n* Layer: Un-precompose a selected pre-comp layer back into its parent composition by @vangel76 in https://github.com/storytold/effectcraft/pull/3081\n* .aep import: image sequences without a filename prefix or with Force alphabetical order by @vangel76 in https://github.com/storytold/effectcraft/pull/3213\n* .aep import: effects without definitions borrow them from another instance by @vangel76 in https://github.com/storytold/effectcraft/pull/3223\n* Disk cache: entries keep the files they read, keys from memory (#3184) by @vangel76 in https://github.com/storytold/effectcraft/pull/3191\n* Release: refresh contributor credits for each release (#3189) by @Luis-0508 in https://github.com/storytold/effectcraft/pull/3190\n* Preview: each stall doubles the frames the held sound waits for (#3260) by @FredApps in https://github.com/storytold/effectcraft/pull/3272\n* Preview: the sound plays on through stalls, the picture drops frames (#2473) by @FredApps in https://github.com/storytold/effectcraft/pull/3279\n* Time stretch: hold a loaded or imported stretch to ±1 % to ±9900 % by @vangel76 in https://github.com/storytold/effectcraft/pull/3256\n* Text layers: the name follows the text until the user renames the layer by @vangel76 in https://github.com/storytold/effectcraft/pull/3248\n* .aep import: map CC Color Neutralizer, EXtractoR and IDentifier by @vangel76 in https://github.com/storytold/effectcraft/pull/3120\n* AEP import: Puppet arrives as EffectCraft's Puppet, its meshes and pins are reported by @vangel76 in https://github.com/storytold/effectcraft/pull/3255\n* Keep native control renders responsive by @FredApps in https://github.com/storytold/effectcraft/pull/3306\n* .aep import: map Lumetri Color by @vangel76 in https://github.com/storytold/effectcraft/pull/3129\n* Use descriptive names for effects, renderer and scopes by @FredApps in https://github.com/storytold/effectcraft/pull/3327\n* .aep import: placed .ai/PDF footage framed by its ArtBox, Null anchors at the corner (#3099) by @vangel76 in https://github.com/storytold/effectcraft/pull/3311\n* Updates: take craft-update from craft-libs main at 1b34eba41 by @dotCooCoo in https://github.com/storytold/effectcraft/pull/3340\n* WebAssembly ABI 2: neighbouring frames for effect plug-ins (#2773) by @justanshh in https://github.com/storytold/effectcraft/pull/3329\n\n## New Contributors\n* @Luis-0508 made their first contribution in https://github.com/storytold/effectcraft/pull/3190\n\n**Full Changelog**: https://github.com/storytold/effectcraft/compare/v0.22.0...v0.23.0\n",
+    "published_at": "2026-11-11T00:58:11Z",
+    "notes": "## Added\n- EffectCraft 0.23.1, built from the original release [v0.23.1](https://github.com/storytold/effectcraft/releases/tag/v0.23.1) without community links (Discord, social networks).\n\n## Fixed\n- Everything the original v0.23.1 fixed, see its release notes below.\n\n## Install\n- Easiest: install the **ArtCraft Launcher** from the [suite release](https://github.com/Labtoso/Artcraft/releases/tag/suite); it installs and updates every app.\n- Or download the file for your system below: `windows-x64.msi` (installer) or `windows-x64.zip` (portable) for Windows, `.AppImage`, `.deb`, `.rpm` or `.tar.gz` for Linux, `macos-universal.dmg` for macOS (Apple silicon and Intel). Checksums are in `SHA256SUMS`.\n- macOS: the apps are not notarized by Apple. After the first start, open *System Settings → Privacy & Security* and click *Open Anyway* (or run `xattr -dr com.apple.quarantine /Applications/<App>.app`).\n\n---\n\n### Original release notes\n\n## What's Changed\n* Preview: the window stays smooth while lanes render on the GPU (#3345) by @arnav-hiwarkar in https://github.com/storytold/effectcraft/pull/3355\n* #3357: avoid whole-layer cover for Drop Shadow by @FredApps in https://github.com/storytold/effectcraft/pull/3360\n* GPU render speed: footage uploaded once per frame, single-copy readback, Render Queue picks the faster renderer (2.6× on a 1080p EXR job) by @vangel76 in https://github.com/storytold/effectcraft/pull/3336\n* #3357: release retired GPU resources before CPU fallback by @FredApps in https://github.com/storytold/effectcraft/pull/3363\n* Report unexpected desktop exits with local diagnostics by @FredApps in https://github.com/storytold/effectcraft/pull/3377\n* #1388: 3D text and shapes rasterise only the part the frame shows by @ded-achtung in https://github.com/storytold/effectcraft/pull/1956\n* Preview: render at most two frames on the GPU at once so video memory stays flat (#3028) by @MarekSpodBiedry in https://github.com/storytold/effectcraft/pull/3047\n* Release: EffectCraft v0.23.1 by @FredApps in https://github.com/storytold/effectcraft/pull/3384\n\n\n**Full Changelog**: https://github.com/storytold/effectcraft/compare/v0.23.0...v0.23.1\n",
     "assets": [
       {
-        "name": "effectcraft-0.23.0-linux-x86_64.AppImage",
-        "size_bytes": 74861048,
-        "sha256": "efcdac4c42ae9a245e81362217e354bfc7089e4ee058417c0292932fe2265572",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-0.23.0-linux-x86_64.AppImage"
+        "name": "effectcraft-0.23.1-linux-x86_64.AppImage",
+        "size_bytes": 75016696,
+        "sha256": "0d0dd4623f229830bd31e668435675931b48c08daf5fa81bbd8101bbb8a85bac",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-0.23.1-linux-x86_64.AppImage"
       },
       {
-        "name": "effectcraft-0.23.0-linux-x86_64.AppImage.zsync",
-        "size_bytes": 256129,
-        "sha256": "25e0e878605f6eb261294e594e8a5c30879e3e2a77cefb9bc238bafa8fb68014",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-0.23.0-linux-x86_64.AppImage.zsync"
+        "name": "effectcraft-0.23.1-linux-x86_64.AppImage.zsync",
+        "size_bytes": 256661,
+        "sha256": "d858f5c434cb43c124dda53510623507c6a08bc64c94684b295acb20de079086",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-0.23.1-linux-x86_64.AppImage.zsync"
       },
       {
-        "name": "effectcraft-0.23.0-linux-x86_64.deb",
-        "size_bytes": 82438780,
-        "sha256": "c21af9f995b369ca7f7f866f4829e9e1877c13ff7d89104901af78b6b3b3cfae",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-0.23.0-linux-x86_64.deb"
+        "name": "effectcraft-0.23.1-linux-x86_64.deb",
+        "size_bytes": 82700000,
+        "sha256": "ab609c07f517dac85862a5fe2f2db6bbfa01a2e0befc99fb3a136ce8984c827d",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-0.23.1-linux-x86_64.deb"
       },
       {
-        "name": "effectcraft-0.23.0-linux-x86_64.rpm",
-        "size_bytes": 84713517,
-        "sha256": "ac41351ce25d93fee1254cae0795d8757d51543669c09f87a6ab537c39bee917",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-0.23.0-linux-x86_64.rpm"
+        "name": "effectcraft-0.23.1-linux-x86_64.rpm",
+        "size_bytes": 84950148,
+        "sha256": "d21767031a3b932af01e17069e55b7b0e1897dbaf4eb083b78e57e330bc59579",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-0.23.1-linux-x86_64.rpm"
       },
       {
-        "name": "effectcraft-0.23.0-linux-x86_64.tar.gz",
-        "size_bytes": 81124357,
-        "sha256": "5f6fce880ff10db3db367b06f74208b3293844c06a6be6efd80faa0040b77c91",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-0.23.0-linux-x86_64.tar.gz"
+        "name": "effectcraft-0.23.1-linux-x86_64.tar.gz",
+        "size_bytes": 81374961,
+        "sha256": "5967d7bca1bb77c084d79103b8b2119b0efb929c152691cc3df19591a22b1eee",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-0.23.1-linux-x86_64.tar.gz"
       },
       {
-        "name": "effectcraft-0.23.0-macos-universal.dmg",
-        "size_bytes": 81758590,
-        "sha256": "2823b7a77ddc4e88cecc5fea58cbd5e0f5fe71369c7a6c728576729a044caa6e",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-0.23.0-macos-universal.dmg"
+        "name": "effectcraft-0.23.1-macos-universal.dmg",
+        "size_bytes": 82043959,
+        "sha256": "f495bcf9baa1c3dbfe702d53cf60a4b80c07d7961b7a26d7ab0a2d718d884a40",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-0.23.1-macos-universal.dmg"
       },
       {
-        "name": "effectcraft-0.23.0-windows-x64-portable.zip",
-        "size_bytes": 84088745,
-        "sha256": "a076291215ce2f98ae92671c096049d65e3866e419a27f16c46e3919464dbf86",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-0.23.0-windows-x64-portable.zip"
+        "name": "effectcraft-0.23.1-windows-x64-portable.zip",
+        "size_bytes": 84387847,
+        "sha256": "208c8129c198b62a475a154e31e1a8b79a0df7404ddb2323de8ccd9bbce597f5",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-0.23.1-windows-x64-portable.zip"
       },
       {
-        "name": "effectcraft-0.23.0-windows-x64.msi",
-        "size_bytes": 63356928,
-        "sha256": "06fc2763f8c13d01cc6748b2e18137a56d8986b8f9e585abef01e299a4ee0ecc",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-0.23.0-windows-x64.msi"
+        "name": "effectcraft-0.23.1-windows-x64.msi",
+        "size_bytes": 63610880,
+        "sha256": "116475aa964c69270621794112d600bae03e30d19b00c02efb68e70daed00fb6",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-0.23.1-windows-x64.msi"
       },
       {
-        "name": "effectcraft-cli-0.23.0-macos-universal.zip",
-        "size_bytes": 76578982,
-        "sha256": "f97bd6aab517cb7067f8470a2ba2415ab4f299bfe88725f9bbdb762d96b0ce4e",
-        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.0/effectcraft-cli-0.23.0-macos-universal.zip"
+        "name": "effectcraft-cli-0.23.1-macos-universal.zip",
+        "size_bytes": 76844461,
+        "sha256": "391a27f7f82bf33e65c60aa92933c43ee82c27884f80cde6aef9500cfea4fe5f",
+        "download_url": "https://github.com/Labtoso/Artcraft/releases/download/v0.23.1/effectcraft-cli-0.23.1-macos-universal.zip"
       }
     ]
   },
